@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parent
 
 def source_files():
     files = [p for p in ROOT.iterdir() if p.is_file() and
-             (p.suffix in {'.py', '.md', '.cmd', '.lock', '.ps1'} or p.name in {'.gitignore', '.gitattributes', '.env.example'})]
+             (p.suffix in {'.py', '.md', '.cmd', '.lock', '.ps1'} or p.name in {'.gitignore', '.gitattributes', '.env.example', 'dashboard.html'})]
     for folder in ('evaluation', 'results'):
         files.extend(p for p in (ROOT / folder).rglob('*') if p.is_file() and
                      p.suffix in {'.py', '.json', '.sha256', '.md', '.csv', '.jsonl', '.log'})

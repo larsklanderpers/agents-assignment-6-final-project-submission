@@ -1,5 +1,10 @@
 # Review Ledger — Track 5: Code Review & Refactoring
 
+Optional local [read-only dashboard](DASHBOARD.md): run
+`.venv\Scripts\python.exe dashboard.py` and open `http://127.0.0.1:8765`.
+Approvals remain in the terminal. The pre-dashboard implementation is preserved
+at tag `checkpoint/pre-dashboard-20261103`.
+
 A bounded Python capstone prototype using **Google ADK** for four parallel
 specialists, synthesis and patch authorship, and **LangGraph** for persistent
 human approval and execution state. Git and a pinned offline Docker runner
