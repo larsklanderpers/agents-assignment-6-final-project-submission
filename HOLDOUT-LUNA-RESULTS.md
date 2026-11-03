@@ -121,3 +121,18 @@ The new runner/scorer boundary tests passed (five tests). No frozen reviewer cod
 was changed to accommodate these cases or their outcomes.
 Final hash checks matched all 24,211 earlier evidence files, all 242 frozen source
 files, both preregistered runner/test files and all 49 locked reviewer output files.
+
+## Subsequent human adjudication — 4 November
+
+After the case-by-case walkthrough, Lars accepted all three unmatched filtered
+findings as valid test-coverage gaps: case-01 tenant mismatch, case-05 inactive
+publisher, and case-10 disabled owner. Case-01 has correct production code with
+inadequate visible tests; the other two have already-labelled security defects
+and separate missing regression tests. These are not three additional production
+bugs. The acceptance is project-author adjudication, not blinded external review.
+
+The original key, locked outputs and automatic summary remain unchanged. The
+separate record is `results/holdout-luna-20261104/human-adjudication.json`.
+Earlier references to pending adjudication describe the initial scoring state;
+these three decisions are now resolved. Full independent label/semantic review
+remains outside this adjudication's scope.
