@@ -50,3 +50,23 @@ See HARDENING.md for commands and HARDENING-RESULTS.md for interpretation.
 Next: human-adjudicated labels and a new holdout; controlled repeated comparisons;
 multi-file/dependent repair and forced recovery coverage; live repository patch
 contracts and PR intake. Do not call those remaining milestones completed.
+
+## Blinded holdout milestone — 4 November
+
+A fresh-context Luna agent authored twelve new cases after Gemini commit
+`6d3b314` was frozen. Public reviewer inputs and private labels/reference tests
+were kept separate. All twelve consistency checks passed before model execution;
+one private packaging correction and its draft were retained. All twelve reviews
+completed and outputs were locked before scoring; the input audit found no private
+answer data in the serialized reviewer payloads.
+
+Against the original key, filtered findings matched 8/8 labels with three unmatched
+test-gap findings: micro precision 0.727, macro precision 0.850, recall 1.000.
+Post-score Docker checks supported all three extra coverage findings, exposing
+incomplete labels, so the original scores remain provisional and unchanged.
+Independent human adjudication remains pending. This is review evaluation, not
+repair-success evaluation or completion of PR intake. See HOLDOUT-LUNA-RESULTS.md.
+
+The reflection's guarded Google Docs append was read back: all prior text was
+preserved, with the methodology, scores and label-quality limitation added.
+The established rehearsal/primary-recording scope and paused timer are unchanged.

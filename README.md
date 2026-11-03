@@ -9,6 +9,8 @@ Additional work on `hardening/python-intake-evaluation` is documented in
 [hardening status](HARDENING-STATUS.md). The established rehearsal/primary
 recording remains the bounded baseline; hardening is not silently substituted
 for that evidence. See [repository intake and evaluation](HARDENING.md).
+The [Luna-authored blinded holdout](HOLDOUT-LUNA-RESULTS.md) records the frozen
+review experiment separately, including provisional scores and incomplete labels.
 
 A bounded Python capstone prototype using **Google ADK** for four parallel
 specialists, synthesis and patch authorship, and **LangGraph** for persistent
