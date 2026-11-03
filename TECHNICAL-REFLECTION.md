@@ -194,3 +194,11 @@ now be condensed to the agreed page limit while retaining the measured tradeoffs
 missed expectation, rejected plan, missing initial raw output and cost of repeated
 human review. The final rehearsal's actual duration and outcome should be added
 before submission. See THURSDAY-DEMO-CHECKLIST.md.
+
+## Assessment baseline and additional hardening — 3 November
+
+The rehearsal and primary recording will follow the established rubric-focused demonstration using the checkpointed, bounded implementation and its verified evidence. The read-only dashboard makes that evidence easier to inspect; approvals remain in the terminal. The baseline's limitations and missed precision target will be stated explicitly, rather than presented as resolved.
+
+In parallel, I have started a separate hardening branch to address three additional development objectives: intake of small Python repositories and eventually PRs; end-to-end evaluation of agent-generated plans, patches and recovery; and better finding precision through stronger context and evidence requirements. Assignment 5 will provide a real repository for development and evaluation. Because it has already been inspected, it will not be represented as an unseen holdout. These additions address material limitations of the prototype; describing them as additional work does not establish that they are complete or exempt them from assessment.
+
+The verified baseline, failed runs and original evaluation results are preserved independently. Rehearsal is temporarily paused while hardening starts; the prepared rehearsal clock has not started. If all three additions are implemented and independently verified within the available time, I intend to make a second recording showing the expanded implementation, clearly distinguishing its new results from the first recording. Any supplemental or replacement submission will follow the instructor's rules and the recording time limit. Until that verification exists, the first recording and reflection will make only the claims supported by the baseline evidence.

@@ -5,6 +5,11 @@ Optional local [read-only dashboard](DASHBOARD.md): run
 Approvals remain in the terminal. The pre-dashboard implementation is preserved
 at tag `checkpoint/pre-dashboard-20261103`.
 
+Additional work on `hardening/python-intake-evaluation` is documented in
+[hardening status](HARDENING-STATUS.md). The established rehearsal/primary
+recording remains the bounded baseline; hardening is not silently substituted
+for that evidence. See [repository intake and evaluation](HARDENING.md).
+
 A bounded Python capstone prototype using **Google ADK** for four parallel
 specialists, synthesis and patch authorship, and **LangGraph** for persistent
 human approval and execution state. Git and a pinned offline Docker runner
