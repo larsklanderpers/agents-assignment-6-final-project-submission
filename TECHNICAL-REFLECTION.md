@@ -216,3 +216,19 @@ These results measure review findings, not repair success. They involve one repe
 After reviewing the code, visible tests and isolated diagnostic results, I accepted all three additional findings as valid test-coverage gaps within the supplied files. Case 01 lacks a negative test for another tenant's document; its original production code is correct, but the visible test fails to catch removal of the tenant check. Case 05 lacks an inactive-publisher test, and case 10 lacks a disabled-owner test; in both cases, the missing tests allow an existing security defect to pass the visible suite. The security defects and their missing regression tests are related but distinct findings because the system explicitly evaluates security and test gaps separately. This acceptance does not count them as three additional production bugs.
 
 This is my post-score adjudication as the project author, based on the walkthrough and retained execution evidence, not a blinded external review. The original answer key, locked model outputs and automatic scores remain unchanged, with this decision recorded separately. The three disputed coverage findings are now accepted; this does not establish independent review of every original label, every semantic match, or complete corpus coverage.
+
+## Original and adjudicated holdout scores — 4 November
+
+The comparison below concerns the filtered reviewer output from the same frozen run. No model was rerun or tuned. The original column uses Luna's initial answer key; the adjudicated column adds the three coverage findings I accepted after reviewing their evidence.
+
+| Metric | Original key | Adjudicated |
+|---|---:|---:|
+| Known findings | 8 | 11 |
+| True positives | 8 | 11 |
+| False positives | 3 | 0 |
+| False negatives | 0 | 0 |
+| Overall precision | 72.7% | 100% |
+| Macro precision | 85.0% | 100% |
+| Recall (overall / macro) | 100% / 100% | 100% / 100% |
+
+The adjudicated results meet the 0.80 precision and recall targets on this set. Original macro precision already exceeded 0.80; original overall precision did not. This remains twelve synthetic cases with one repetition. My adjudication was post-score and as project author, not a blinded external review; it resolved only the three disputed coverage findings, not an independent audit of every original label or semantic match. Recall is measured against eleven known findings and does not prove that no other issues were missed. These findings include missing tests, not eleven production bugs. Neither general repository accuracy nor repair success is established. The original answer key, locked outputs and automatic scores remain unchanged; the adjudicated comparison is a separate record.

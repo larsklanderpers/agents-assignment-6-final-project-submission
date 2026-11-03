@@ -136,3 +136,21 @@ separate record is `results/holdout-luna-20261104/human-adjudication.json`.
 Earlier references to pending adjudication describe the initial scoring state;
 these three decisions are now resolved. Full independent label/semantic review
 remains outside this adjudication's scope.
+
+## Original and adjudicated holdout scores — 4 November
+
+The comparison below concerns the filtered reviewer output from the same frozen run. No model was rerun or tuned. The original column uses Luna's initial answer key; the adjudicated column adds the three coverage findings I accepted after reviewing their evidence.
+
+| Metric | Original key | Adjudicated |
+|---|---:|---:|
+| Known findings | 8 | 11 |
+| True positives | 8 | 11 |
+| False positives | 3 | 0 |
+| False negatives | 0 | 0 |
+| Overall precision | 72.7% | 100% |
+| Macro precision | 85.0% | 100% |
+| Recall (overall / macro) | 100% / 100% | 100% / 100% |
+
+The adjudicated results meet the 0.80 precision and recall targets on this set. Original macro precision already exceeded 0.80; original overall precision did not. This remains twelve synthetic cases with one repetition. My adjudication was post-score and as project author, not a blinded external review; it resolved only the three disputed coverage findings, not an independent audit of every original label or semantic match. Recall is measured against eleven known findings and does not prove that no other issues were missed. These findings include missing tests, not eleven production bugs. Neither general repository accuracy nor repair success is established. The original answer key, locked outputs and automatic scores remain unchanged; the adjudicated comparison is a separate record.
+
+Machine-readable comparison: `results/holdout-luna-20261104/adjudicated-comparison.json`. The earlier `summary.json` is retained unchanged.
