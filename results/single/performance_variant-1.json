@@ -1,0 +1,76 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def overlap_variant(left, right):\n    \"\"\"Both arguments are lists of integers; preserve left order and duplicates.\"\"\"\n    return [value for value in left if value in right]\n",
+  "source_sha256": "dbb0b72cc60fe8e2a9a7b70f1cf96930143e568fc993c0639b8eb259aa87013b",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "Static analysis only; no runtime execution or vulnerability scanner tools were used."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 3,
+          "evidence": "    return [value for value in left if value in right]",
+          "summary": "Linear search `value in right` inside list comprehension results in O(N * M) time complexity when right is a list.",
+          "suggested_action": "Convert `right` to a set before the list comprehension (e.g., `right_set = set(right)`) to achieve O(N + M) average time complexity."
+        }
+      ],
+      "limitations": [
+        "Benchmark tools and runtime profiling were not executed; time complexity analysis is theoretical."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No explicit style guide or linter configuration was provided."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 1,
+          "evidence": "def overlap_variant(left, right):",
+          "summary": "Tests do not verify cases where elements in `left` are entirely absent from `right`, or non-empty disjoint inputs.",
+          "suggested_action": "Add unit tests verifying behavior when left and right share no elements (e.g., `overlap_variant([1, 3], [2, 4]) == []`)."
+        }
+      ],
+      "limitations": [
+        "Test coverage tools were not executed; test gap identification is based on manual inspection of supplied tests."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 488,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 255,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 255
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 743,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

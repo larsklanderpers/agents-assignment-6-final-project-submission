@@ -1,4 +1,28 @@
-# Current-state handoff — 30 October 2026
+# Current-state handoff — 2 November 2026
+
+**Latest new-context handoff:** [REHEARSAL-HANDOFF-2026-11-03.md](REHEARSAL-HANDOFF-2026-11-03.md).
+The dress rehearsal is ready, but the timer has NOT started. Its characterization
+approval is already VERIFIED; do not ask for it again. Next is physical readiness,
+then the 0:00 speaking cue and deliberate fault approval at 2:20. Older pending
+states below are chronological history.
+
+
+**Current demo status:** the fresh repair is VERIFIED and saved evidence audited.
+Read [THURSDAY-DEMO-CHECKLIST.md](THURSDAY-DEMO-CHECKLIST.md) and
+[FRESH-REHEARSAL-RESULT.md](FRESH-REHEARSAL-RESULT.md) for the current state.
+
+**Authoritative continuation:** read [CONTINUATION-RESULT-2026-11-02.md](CONTINUATION-RESULT-2026-11-02.md), then [DEVELOPMENT-HANDOFF-2026-11-02.md](DEVELOPMENT-HANDOFF-2026-11-02.md) for preserved historical context.
+It supersedes the initial design-only status below. Real human-approved test,
+optimization and failure/replanning/repair operations have been VERIFIED.
+
+Current continuation completed frozen finding evaluation, source-only packaging
+and a detailed presenter/operator runbook; see the new continuation results for
+remaining human approval and rehearsal gates. Presentation: **Thursday 5 November 2026**
+(Australia/Sydney). See [DEMO-RUNBOOK.md](DEMO-RUNBOOK.md); full spoken rehearsal remains unmeasured.
+Preserve all local ignored evidence and historical runs. Do not restart them or
+claim that reopening a completed historical launcher is a fresh live run.
+
+## Archived initial handoff — 30 October (historical, not current status)
 
 Repository: larsklanderpers/agents-assignment-6-final-project-submission | Branch: main
 Track 5: Code Review & Refactoring

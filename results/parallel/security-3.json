@@ -1,0 +1,173 @@
+{
+  "model": "gemini-3.8-flash",
+  "source_sha256": "bed20cb04dd85cbb67d46bab155adf3b152073b87048e86ee268be6afc03fe8f",
+  "source": "def lookup(connection, name):\n    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()\n",
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 205,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 333,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 333
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 538,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 303,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 327,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 327
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 630,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 192,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 327,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 327
+        }
+      ],
+      "thoughts_token_count": 279,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 798,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 126,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 327,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 327
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 453,
+      "traffic_type": null
+    }
+  ],
+  "reviews": {
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "Existing test suite does not verify behavior when the name contains characters like a single quote (e.g. O'Connor) or when no matching user exists.",
+          "suggested_action": "Add unit tests verifying handling of names with quotes (e.g., \"O'Connor\") and non-existent users returning an empty list."
+        }
+      ],
+      "limitations": [
+        "No coverage tools or test runner execution available to verify runtime test coverage directly.",
+        "Only tests included in the provided prompt snapshot were evaluated."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "def lookup(connection, name):",
+          "summary": "The function definition lacks type hints and a docstring detailing arguments and return types.",
+          "suggested_action": "Add type annotations (e.g., connection: sqlite3.Connection, name: str) -> list[tuple[typing.Any, ...]] and a descriptive docstring per PEP 257."
+        },
+        {
+          "category": "style",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "String concatenation is used to build a query string instead of parameterized execution or formatted strings.",
+          "suggested_action": "Pass parameters using DB-API placeholder syntax (e.g., connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,))) to conform to standard database idioms."
+        }
+      ],
+      "limitations": [
+        "No project-specific style guide, linter configuration, or formatting tools (e.g., Flake8, Black) were provided."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "String concatenation in SQL queries bypasses prepared statement reuse and query plan caching.",
+          "suggested_action": "Use parameterized queries (e.g., execute(\"SELECT name FROM users WHERE name = ?\", (name,))) to allow the database engine to cache and reuse the prepared execution plan."
+        }
+      ],
+      "limitations": [
+        "No runtime execution profiling or query plan benchmarks were provided.",
+        "The production database engine, table size, and indexing strategy are unknown."
+      ]
+    },
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "SQL injection vulnerability due to string concatenation in database query construction.",
+          "suggested_action": "Use parameterized queries (e.g., connection.execute('SELECT name FROM users WHERE name = ?', (name,))) instead of string formatting or concatenation."
+        }
+      ],
+      "limitations": [
+        "Analysis based strictly on provided source and visible test code without access to execution environments or broader project context."
+      ]
+    }
+  },
+  "spans": {
+    "security": {
+      "start": 92282.859,
+      "end": 92296.0
+    },
+    "performance": {
+      "start": 92282.937,
+      "end": 92289.328
+    },
+    "style": {
+      "start": 92283.015,
+      "end": 92288.64
+    },
+    "test_gap": {
+      "start": 92283.078,
+      "end": 92288.265
+    }
+  },
+  "overlap": true
+}

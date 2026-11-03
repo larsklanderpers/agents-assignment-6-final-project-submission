@@ -1,0 +1,158 @@
+{
+  "model": "gemini-3.8-flash",
+  "source_sha256": "dbb0b72cc60fe8e2a9a7b70f1cf96930143e568fc993c0639b8eb259aa87013b",
+  "source": "def overlap_variant(left, right):\n    \"\"\"Both arguments are lists of integers; preserve left order and duplicates.\"\"\"\n    return [value for value in left if value in right]\n",
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 179,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 268,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 268
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 447,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 225,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 274,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 274
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 499,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 124,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 268,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 268
+        }
+      ],
+      "thoughts_token_count": 173,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 565,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 76,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 268,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 268
+        }
+      ],
+      "thoughts_token_count": 145,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 489,
+      "traffic_type": null
+    }
+  ],
+  "reviews": {
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 3,
+          "evidence": "    return [value for value in left if value in right]",
+          "summary": "Linear search 'value in right' inside the list comprehension results in O(N * M) overall time complexity.",
+          "suggested_action": "Convert 'right' to a set (e.g., 'right_set = set(right)') before filtering to achieve O(N + M) average time complexity."
+        }
+      ],
+      "limitations": [
+        "No runtime profiling measurements or benchmarks were provided in the snapshot.",
+        "Input size distributions were not specified."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 3,
+          "evidence": "    return [value for value in left if value in right]",
+          "summary": "Existing tests only cover empty inputs and an input where left matches elements present in right; there is no test verifying that right contains items not present in left, or that one list is empty while the other is non-empty.",
+          "suggested_action": "Add unit tests covering cases where left has no overlap with right (e.g. overlap_variant([1, 3], [2, 4])), and asymmetric empty cases such as overlap_variant([1, 2], []) and overlap_variant([], [1, 2])."
+        }
+      ],
+      "limitations": [
+        "Only visible tests were evaluated; additional test suites or execution coverage data were not provided."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "def overlap_variant(left, right):",
+          "summary": "Function definition lacks type annotations for parameters and return value.",
+          "suggested_action": "Add type hints to the function signature (e.g., `def overlap_variant(left: list[int], right: list[int]) -> list[int]:`)."
+        }
+      ],
+      "limitations": [
+        "No repository-level style guides, linter configurations, or formatting tools (e.g., flake8, black, ruff) were provided."
+      ]
+    },
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No execution environment or dynamic analysis tools available to test untrusted input handling at runtime.",
+        "No external call sites or network attack surfaces are exposed in the provided code snippet."
+      ]
+    }
+  },
+  "spans": {
+    "security": {
+      "start": 92513.859,
+      "end": 92519.234
+    },
+    "performance": {
+      "start": 92513.937,
+      "end": 92518.828
+    },
+    "style": {
+      "start": 92514.046,
+      "end": 92519.14
+    },
+    "test_gap": {
+      "start": 92514.156,
+      "end": 92518.937
+    }
+  },
+  "overlap": true
+}

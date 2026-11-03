@@ -1,0 +1,84 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "cache = {}\ndef cached(tenant, key, fetch):\n    \"\"\"Different tenants may have different values for the same key.\"\"\"\n    if key not in cache:\n        cache[key] = fetch(tenant, key)\n    return cache[key]\n",
+  "source_sha256": "8c8c7f8d9a0ca3898de073c4e2efb16adde25560131d9fc8b9dc102735a53664",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 4,
+          "evidence": "    if key not in cache:",
+          "summary": "Multi-tenant data leakage / cross-tenant cache pollution vulnerability due to omitting tenant in cache key.",
+          "suggested_action": "Incorporate the tenant into the cache key (e.g., `(tenant, key)`) so tenants cannot access each other's cached values."
+        }
+      ],
+      "limitations": [
+        "No dynamic execution environment or tools available."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 1,
+          "evidence": "cache = {}",
+          "summary": "Global unbounded cache dictionary may grow indefinitely, posing an out-of-memory risk over time.",
+          "suggested_action": "Use a bounded cache mechanism like an LRU cache or time-to-live eviction strategy."
+        }
+      ],
+      "limitations": [
+        "No memory profile or scale metrics available."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No style configuration or repository guidelines supplied."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "def cached(tenant, key, fetch):",
+          "summary": "Existing unit test verifies cross-tenant isolation and will fail against this implementation; tests covering cache hits and unhashable key scenarios are missing.",
+          "suggested_action": "Add tests verifying that cached results are returned on subsequent calls for the same tenant and key, and test behavior with distinct tenants and keys."
+        }
+      ],
+      "limitations": [
+        "Cannot execute test runner to verify test failures dynamically."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 524,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 280,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 280
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 804,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

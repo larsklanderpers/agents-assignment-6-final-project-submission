@@ -1,0 +1,160 @@
+{
+  "model": "gemini-3.8-flash",
+  "source_sha256": "879f464d65addcef8ae9430c990640563239e6477912e91fc9b1774b4a6c82f0",
+  "source": "def checked_variant(items, allowed):\n    \"\"\"Membership accepts nested lists; preserve their equality behavior.\"\"\"\n    return [item for item in items if item in allowed]\n",
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 165,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 209,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 209
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 374,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 229,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 203,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 203
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 432,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 183,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 203,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 203
+        }
+      ],
+      "thoughts_token_count": 175,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 561,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 67,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 203,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 203
+        }
+      ],
+      "thoughts_token_count": 183,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 453,
+      "traffic_type": null
+    }
+  ],
+  "reviews": {
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 3,
+          "evidence": "    return [item for item in items if item in allowed]",
+          "summary": "No test coverage is provided to verify membership filtering or nested list equality behavior.",
+          "suggested_action": "Add unit tests verifying checked_variant with various inputs, including nested lists within allowed collections and non-matching elements."
+        }
+      ],
+      "limitations": [
+        "No tests or test configuration were provided in the snapshot.",
+        "Cannot execute tests or observe test coverage metrics directly."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 3,
+          "evidence": "    return [item for item in items if item in allowed]",
+          "summary": "Linear membership lookup across 'allowed' results in O(len(items) * len(allowed)) time complexity when 'allowed' is a sequence.",
+          "suggested_action": "If elements within 'allowed' are hashable, convert 'allowed' to a set or dict for O(1) average lookup time; if nested unhashable collections must be supported as indicated by the docstring, consider building a lookup structure tailored to unhashable types or converting them to hashable representations (like tuples) if feasible."
+        }
+      ],
+      "limitations": [
+        "No runtime performance measurements or benchmarks were provided.",
+        "No tests or caller contexts were supplied to verify actual collection sizes or hashability constraints of items."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "def checked_variant(items, allowed):",
+          "summary": "Function signature lacks type annotations recommended by modern PEP 8 and PEP 484 guidelines.",
+          "suggested_action": "Add type annotations to function parameters and return type (e.g., using collections.abc.Iterable or Sequence, depending on expected input types)."
+        }
+      ],
+      "limitations": [
+        "No repository configuration files or style linters (e.g., flake8, black, ruff) were provided in the snapshot.",
+        "No test files were provided in the snapshot."
+      ]
+    },
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No external caller context or type constraints provided for items and allowed.",
+        "No tests or runtime configuration were included in the snapshot."
+      ]
+    }
+  },
+  "spans": {
+    "security": {
+      "start": 92620.39,
+      "end": 92626.593
+    },
+    "performance": {
+      "start": 92620.453,
+      "end": 92625.359
+    },
+    "style": {
+      "start": 92620.5,
+      "end": 92626.203
+    },
+    "test_gap": {
+      "start": 92620.562,
+      "end": 92624.218
+    }
+  },
+  "overlap": true
+}

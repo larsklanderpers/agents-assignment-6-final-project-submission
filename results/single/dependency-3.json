@@ -1,0 +1,84 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def checked(items, allowed):\n    \"\"\"Membership accepts nested lists; preserve their equality behavior.\"\"\"\n    return [item for item in items if item in allowed]\n",
+  "source_sha256": "eeb074ec8ee2d2831a7b9bc9365f8379ff00193f94eb607591c92f69b41deb74",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "Static review conducted without runtime execution or context on how `items` and `allowed` are sourced."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 3,
+          "evidence": "    return [item for item in items if item in allowed]",
+          "summary": "Membership test `item in allowed` performs an O(N) scan per element if `allowed` is a list or tuple, leading to O(M*N) time complexity.",
+          "suggested_action": "If elements in `allowed` are hashable, convert `allowed` to a set beforehand; if nested unhashable structures must be supported as per the docstring, consider whether indexing or keeping a set of hashable representations is feasible to avoid quadratic time complexity."
+        }
+      ],
+      "limitations": [
+        "Data types and typical sizes of `items` and `allowed` were not provided."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "def checked(items, allowed):",
+          "summary": "Function signature lacks type annotations.",
+          "suggested_action": "Add type annotations (e.g. `def checked(items: Iterable[Any], allowed: Collection[Any]) -> list[Any]:`) to improve readability and tooling support if typing is used across the codebase."
+        }
+      ],
+      "limitations": [
+        "No style configuration or repository guidelines were supplied."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 1,
+          "evidence": "def checked(items, allowed):",
+          "summary": "No test suite is supplied for `checked`, leaving filtering behavior, empty input handling, and nested list equality unverified.",
+          "suggested_action": "Add unit tests validating filtering with flat collections, nested lists (as specified in docstring), empty inputs, and non-matching elements."
+        }
+      ],
+      "limitations": [
+        "No test files were included in the provided snapshot."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 602,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 188,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 188
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 790,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

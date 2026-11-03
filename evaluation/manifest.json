@@ -1,0 +1,275 @@
+{
+  "schema": 1,
+  "seed": 505,
+  "freeze_note": "Frozen before first model evaluation; no held-out tuning.",
+  "cases": [
+    {
+      "id": "security",
+      "split": "development",
+      "family": "security",
+      "source": "def lookup(connection, name):\n    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()\n",
+      "visible_tests": "import sqlite3, unittest\nfrom collection_ops import lookup\nclass Behavior(unittest.TestCase):\n def test_normal(self):\n  c=sqlite3.connect(':memory:'); c.execute('CREATE TABLE users(name TEXT)'); c.execute(\"INSERT INTO users VALUES ('Alice')\")\n  self.assertEqual(lookup(c,'Alice'), [('Alice',)])\n def test_attack(self):\n  c=sqlite3.connect(':memory:'); c.execute('CREATE TABLE users(name TEXT)'); c.execute(\"INSERT INTO users VALUES ('Alice')\")\n  self.assertEqual(lookup(c,\"' OR 1=1 --\"), [])\n",
+      "corrected": "def lookup(connection, name):\n    return connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()\n",
+      "hidden_tests": "import sqlite3, unittest\nfrom collection_ops import lookup\nclass Behavior(unittest.TestCase):\n def test_normal(self):\n  c=sqlite3.connect(':memory:'); c.execute('CREATE TABLE users(name TEXT)'); c.execute(\"INSERT INTO users VALUES ('Alice')\")\n  self.assertEqual(lookup(c,'Alice'), [('Alice',)])\n def test_attack(self):\n  c=sqlite3.connect(':memory:'); c.execute('CREATE TABLE users(name TEXT)'); c.execute(\"INSERT INTO users VALUES ('Alice')\")\n  self.assertEqual(lookup(c,\"' OR 1=1 --\"), [])\n",
+      "labels": [
+        {
+          "category": "security",
+          "symbol": "lookup"
+        }
+      ],
+      "rationale": "SQL input must remain data; preserve legitimate query results.",
+      "change_kind": "intentional_fix",
+      "required_dependency": null
+    },
+    {
+      "id": "performance",
+      "split": "development",
+      "family": "performance",
+      "source": "def overlap(left, right):\n    \"\"\"Both arguments are lists of integers; preserve left order and duplicates.\"\"\"\n    return [value for value in left if value in right]\n",
+      "visible_tests": "import unittest\nfrom collection_ops import overlap\nclass Behavior(unittest.TestCase):\n def test_values(self): self.assertEqual(overlap([2,1,2,3],[2,2]), [2,2])\n def test_empty(self): self.assertEqual(overlap([],[]), [])\n",
+      "corrected": "def overlap(left, right):\n    \"\"\"Both arguments are lists of integers; preserve left order and duplicates.\"\"\"\n    members = set(right)\n    return [value for value in left if value in members]\n",
+      "hidden_tests": "import unittest\nfrom collection_ops import overlap\nclass Behavior(unittest.TestCase):\n def test_values(self): self.assertEqual(overlap([2,1,2,3],[2,2]), [2,2])\n def test_empty(self): self.assertEqual(overlap([],[]), [])\n",
+      "labels": [
+        {
+          "category": "performance",
+          "symbol": "overlap"
+        }
+      ],
+      "rationale": "Build membership set once under explicit integer-only contract; preserve order/duplicates.",
+      "change_kind": "behavior_preserving",
+      "required_dependency": null
+    },
+    {
+      "id": "style",
+      "split": "development",
+      "family": "style",
+      "source": "def format(list):\n    Final_Result = \",\".join(list)\n    return Final_Result\n",
+      "visible_tests": "import unittest\nfrom collection_ops import format\nclass Behavior(unittest.TestCase):\n def test_values(self): self.assertEqual(format([\"a\",\"b\"]), \"a,b\")\n",
+      "corrected": "def format(values):\n    result = \",\".join(values)\n    return result\n",
+      "hidden_tests": "import unittest\nfrom collection_ops import format\nclass Behavior(unittest.TestCase):\n def test_values(self): self.assertEqual(format([\"a\",\"b\"]), \"a,b\")\n",
+      "labels": [
+        {
+          "category": "style",
+          "symbol": "format"
+        }
+      ],
+      "rationale": "Human convention rubric: avoid shadowing builtin list and use snake_case local names; public rename needs direction.",
+      "change_kind": "behavior_preserving",
+      "required_dependency": null
+    },
+    {
+      "id": "test_gap",
+      "split": "development",
+      "family": "test_gap",
+      "source": "def first(values):\n    \"\"\"Return None for empty input; otherwise the first element.\"\"\"\n    return values[0] if values else None\n",
+      "visible_tests": "import unittest\nfrom collection_ops import first\nclass Behavior(unittest.TestCase):\n def test_nonempty(self): self.assertEqual(first([3,4]),3)\n",
+      "corrected": "def first(values):\n    \"\"\"Return None for empty input; otherwise the first element.\"\"\"\n    return values[0] if values else None\n",
+      "hidden_tests": "import unittest\nfrom collection_ops import first\nclass Behavior(unittest.TestCase):\n def test_nonempty(self): self.assertEqual(first([3,4]),3)\n def test_empty(self): self.assertIsNone(first([]))\n",
+      "labels": [
+        {
+          "category": "test_gap",
+          "symbol": "first"
+        }
+      ],
+      "rationale": "Add explicit empty-input characterization; seeded mutant returns 0 instead of None.",
+      "change_kind": "behavior_preserving",
+      "required_dependency": null
+    },
+    {
+      "id": "dependency",
+      "split": "development",
+      "family": "dependency",
+      "source": "def checked(items, allowed):\n    \"\"\"Membership accepts nested lists; preserve their equality behavior.\"\"\"\n    return [item for item in items if item in allowed]\n",
+      "visible_tests": "# No tests supplied in this bounded snapshot.\n",
+      "corrected": "def checked(items, allowed):\n    \"\"\"Membership accepts nested lists; preserve their equality behavior.\"\"\"\n    return [item for item in items if item in allowed]\n",
+      "hidden_tests": "import unittest\nfrom collection_ops import checked\nclass Behavior(unittest.TestCase):\n def test_nested(self): self.assertEqual(checked([[1]],[[1]]), [[1]])\n",
+      "labels": [
+        {
+          "category": "test_gap",
+          "symbol": "checked"
+        }
+      ],
+      "rationale": "Characterize nested-list behavior before any set refactor; do not assume hashability.",
+      "change_kind": "behavior_preserving",
+      "required_dependency": "characterize_before_refactor"
+    },
+    {
+      "id": "conflict",
+      "split": "development",
+      "family": "conflict",
+      "source": "cache = {}\ndef cached(tenant, key, fetch):\n    \"\"\"Different tenants may have different values for the same key.\"\"\"\n    if key not in cache:\n        cache[key] = fetch(tenant, key)\n    return cache[key]\n",
+      "visible_tests": "import unittest\nfrom collection_ops import cached, cache\nclass Behavior(unittest.TestCase):\n def test_tenants(self):\n  cache.clear(); fetch=lambda tenant,key:tenant\n  self.assertEqual(cached(\"a\",1,fetch),\"a\")\n  self.assertEqual(cached(\"b\",1,fetch),\"b\")\n",
+      "corrected": "cache = {}\ndef cached(tenant, key, fetch):\n    \"\"\"Different tenants may have different values for the same key.\"\"\"\n    identity = (tenant, key)\n    if identity not in cache:\n        cache[identity] = fetch(tenant, key)\n    return cache[identity]\n",
+      "hidden_tests": "import unittest\nfrom collection_ops import cached, cache\nclass Behavior(unittest.TestCase):\n def test_tenants(self):\n  cache.clear(); fetch=lambda tenant,key:tenant\n  self.assertEqual(cached(\"a\",1,fetch),\"a\")\n  self.assertEqual(cached(\"b\",1,fetch),\"b\")\n",
+      "labels": [
+        {
+          "category": "security",
+          "symbol": "cached"
+        }
+      ],
+      "rationale": "Tenant isolation overrides cache speed; scope cache key to tenant.",
+      "change_kind": "intentional_fix",
+      "required_dependency": null
+    },
+    {
+      "id": "security_variant",
+      "split": "held_out",
+      "family": "security",
+      "source": "def lookup_variant(connection, requested):\n    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()\n",
+      "visible_tests": "import sqlite3, unittest\nfrom collection_ops import lookup_variant\nclass Behavior(unittest.TestCase):\n def test_normal(self):\n  c=sqlite3.connect(':memory:'); c.execute('CREATE TABLE users(name TEXT)'); c.execute(\"INSERT INTO users VALUES ('Alice')\")\n  self.assertEqual(lookup_variant(c,'Alice'), [('Alice',)])\n def test_attack(self):\n  c=sqlite3.connect(':memory:'); c.execute('CREATE TABLE users(name TEXT)'); c.execute(\"INSERT INTO users VALUES ('Alice')\")\n  self.assertEqual(lookup_variant(c,\"' OR 1=1 --\"), [])\n",
+      "corrected": "def lookup_variant(connection, requested):\n    return connection.execute(\"SELECT name FROM users WHERE name = ?\", (requested,)).fetchall()\n",
+      "hidden_tests": "import sqlite3, unittest\nfrom collection_ops import lookup_variant\nclass Behavior(unittest.TestCase):\n def test_normal(self):\n  c=sqlite3.connect(':memory:'); c.execute('CREATE TABLE users(name TEXT)'); c.execute(\"INSERT INTO users VALUES ('Alice')\")\n  self.assertEqual(lookup_variant(c,'Alice'), [('Alice',)])\n def test_attack(self):\n  c=sqlite3.connect(':memory:'); c.execute('CREATE TABLE users(name TEXT)'); c.execute(\"INSERT INTO users VALUES ('Alice')\")\n  self.assertEqual(lookup_variant(c,\"' OR 1=1 --\"), [])\n",
+      "labels": [
+        {
+          "category": "security",
+          "symbol": "lookup_variant"
+        }
+      ],
+      "rationale": "SQL input must remain data; preserve legitimate query results.",
+      "change_kind": "intentional_fix",
+      "required_dependency": null
+    },
+    {
+      "id": "performance_variant",
+      "split": "held_out",
+      "family": "performance",
+      "source": "def overlap_variant(left, right):\n    \"\"\"Both arguments are lists of integers; preserve left order and duplicates.\"\"\"\n    return [value for value in left if value in right]\n",
+      "visible_tests": "import unittest\nfrom collection_ops import overlap_variant\nclass Behavior(unittest.TestCase):\n def test_values(self): self.assertEqual(overlap_variant([2,1,2,3],[2,2]), [2,2])\n def test_empty(self): self.assertEqual(overlap_variant([],[]), [])\n",
+      "corrected": "def overlap_variant(left, right):\n    \"\"\"Both arguments are lists of integers; preserve left order and duplicates.\"\"\"\n    members = set(right)\n    return [value for value in left if value in members]\n",
+      "hidden_tests": "import unittest\nfrom collection_ops import overlap_variant\nclass Behavior(unittest.TestCase):\n def test_values(self): self.assertEqual(overlap_variant([2,1,2,3],[2,2]), [2,2])\n def test_empty(self): self.assertEqual(overlap_variant([],[]), [])\n",
+      "labels": [
+        {
+          "category": "performance",
+          "symbol": "overlap_variant"
+        }
+      ],
+      "rationale": "Build membership set once under explicit integer-only contract; preserve order/duplicates.",
+      "change_kind": "behavior_preserving",
+      "required_dependency": null
+    },
+    {
+      "id": "style_variant",
+      "split": "held_out",
+      "family": "style",
+      "source": "def format_variant(list):\n    Final_Result = \",\".join(list)\n    return Final_Result\n",
+      "visible_tests": "import unittest\nfrom collection_ops import format_variant\nclass Behavior(unittest.TestCase):\n def test_values(self): self.assertEqual(format_variant([\"a\",\"b\"]), \"a,b\")\n",
+      "corrected": "def format_variant(values):\n    result = \",\".join(values)\n    return result\n",
+      "hidden_tests": "import unittest\nfrom collection_ops import format_variant\nclass Behavior(unittest.TestCase):\n def test_values(self): self.assertEqual(format_variant([\"a\",\"b\"]), \"a,b\")\n",
+      "labels": [
+        {
+          "category": "style",
+          "symbol": "format_variant"
+        }
+      ],
+      "rationale": "Human convention rubric: avoid shadowing builtin list and use snake_case local names; public rename needs direction.",
+      "change_kind": "behavior_preserving",
+      "required_dependency": null
+    },
+    {
+      "id": "test_gap_variant",
+      "split": "held_out",
+      "family": "test_gap",
+      "source": "def first_variant(values):\n    \"\"\"Return None for empty input; otherwise the first element.\"\"\"\n    return values[0] if values else None\n",
+      "visible_tests": "import unittest\nfrom collection_ops import first_variant\nclass Behavior(unittest.TestCase):\n def test_nonempty(self): self.assertEqual(first_variant([3,4]),3)\n",
+      "corrected": "def first_variant(values):\n    \"\"\"Return None for empty input; otherwise the first element.\"\"\"\n    return values[0] if values else None\n",
+      "hidden_tests": "import unittest\nfrom collection_ops import first_variant\nclass Behavior(unittest.TestCase):\n def test_nonempty(self): self.assertEqual(first_variant([3,4]),3)\n def test_empty(self): self.assertIsNone(first_variant([]))\n",
+      "labels": [
+        {
+          "category": "test_gap",
+          "symbol": "first_variant"
+        }
+      ],
+      "rationale": "Add explicit empty-input characterization; seeded mutant returns 0 instead of None.",
+      "change_kind": "behavior_preserving",
+      "required_dependency": null
+    },
+    {
+      "id": "dependency_variant",
+      "split": "held_out",
+      "family": "dependency",
+      "source": "def checked_variant(items, allowed):\n    \"\"\"Membership accepts nested lists; preserve their equality behavior.\"\"\"\n    return [item for item in items if item in allowed]\n",
+      "visible_tests": "# No tests supplied in this bounded snapshot.\n",
+      "corrected": "def checked_variant(items, allowed):\n    \"\"\"Membership accepts nested lists; preserve their equality behavior.\"\"\"\n    return [item for item in items if item in allowed]\n",
+      "hidden_tests": "import unittest\nfrom collection_ops import checked_variant\nclass Behavior(unittest.TestCase):\n def test_nested(self): self.assertEqual(checked_variant([[1]],[[1]]), [[1]])\n",
+      "labels": [
+        {
+          "category": "test_gap",
+          "symbol": "checked_variant"
+        }
+      ],
+      "rationale": "Characterize nested-list behavior before any set refactor; do not assume hashability.",
+      "change_kind": "behavior_preserving",
+      "required_dependency": "characterize_before_refactor"
+    },
+    {
+      "id": "conflict_variant",
+      "split": "held_out",
+      "family": "conflict",
+      "source": "cache = {}\ndef cached_variant(tenant, key, fetch):\n    \"\"\"Different tenants may have different values for the same key.\"\"\"\n    if key not in cache:\n        cache[key] = fetch(tenant, key)\n    return cache[key]\n",
+      "visible_tests": "import unittest\nfrom collection_ops import cached_variant, cache\nclass Behavior(unittest.TestCase):\n def test_tenants(self):\n  cache.clear(); fetch=lambda tenant,key:tenant\n  self.assertEqual(cached_variant(\"a\",1,fetch),\"a\")\n  self.assertEqual(cached_variant(\"b\",1,fetch),\"b\")\n",
+      "corrected": "cache = {}\ndef cached_variant(tenant, key, fetch):\n    \"\"\"Different tenants may have different values for the same key.\"\"\"\n    identity = (tenant, key)\n    if identity not in cache:\n        cache[identity] = fetch(tenant, key)\n    return cache[identity]\n",
+      "hidden_tests": "import unittest\nfrom collection_ops import cached_variant, cache\nclass Behavior(unittest.TestCase):\n def test_tenants(self):\n  cache.clear(); fetch=lambda tenant,key:tenant\n  self.assertEqual(cached_variant(\"a\",1,fetch),\"a\")\n  self.assertEqual(cached_variant(\"b\",1,fetch),\"b\")\n",
+      "labels": [
+        {
+          "category": "security",
+          "symbol": "cached_variant"
+        }
+      ],
+      "rationale": "Tenant isolation overrides cache speed; scope cache key to tenant.",
+      "change_kind": "intentional_fix",
+      "required_dependency": null
+    },
+    {
+      "id": "clean_sql",
+      "split": "control",
+      "family": "control",
+      "source": "def lookup(connection, name):\n    return connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()\n",
+      "visible_tests": "import sqlite3, unittest\nfrom collection_ops import lookup\nclass Behavior(unittest.TestCase):\n def test_normal(self):\n  c=sqlite3.connect(':memory:'); c.execute('CREATE TABLE users(name TEXT)'); c.execute(\"INSERT INTO users VALUES ('Alice')\")\n  self.assertEqual(lookup(c,'Alice'), [('Alice',)])\n def test_attack(self):\n  c=sqlite3.connect(':memory:'); c.execute('CREATE TABLE users(name TEXT)'); c.execute(\"INSERT INTO users VALUES ('Alice')\")\n  self.assertEqual(lookup(c,\"' OR 1=1 --\"), [])\n",
+      "corrected": "def lookup(connection, name):\n    return connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()\n",
+      "hidden_tests": "import sqlite3, unittest\nfrom collection_ops import lookup\nclass Behavior(unittest.TestCase):\n def test_normal(self):\n  c=sqlite3.connect(':memory:'); c.execute('CREATE TABLE users(name TEXT)'); c.execute(\"INSERT INTO users VALUES ('Alice')\")\n  self.assertEqual(lookup(c,'Alice'), [('Alice',)])\n def test_attack(self):\n  c=sqlite3.connect(':memory:'); c.execute('CREATE TABLE users(name TEXT)'); c.execute(\"INSERT INTO users VALUES ('Alice')\")\n  self.assertEqual(lookup(c,\"' OR 1=1 --\"), [])\n",
+      "labels": [],
+      "rationale": "Clean negative control under the stated bounded contract.",
+      "change_kind": "behavior_preserving",
+      "required_dependency": null
+    },
+    {
+      "id": "clean_lookup",
+      "split": "control",
+      "family": "control",
+      "source": "def overlap(left, right):\n    \"\"\"Inputs are integer lists.\"\"\"\n    members = set(right)\n    return [value for value in left if value in members]\n",
+      "visible_tests": "import unittest\nfrom collection_ops import overlap\nclass Behavior(unittest.TestCase):\n def test_values(self): self.assertEqual(overlap([2,1,2],[2]), [2,2])\n def test_empty(self): self.assertEqual(overlap([],[]), [])\n",
+      "corrected": "def overlap(left, right):\n    \"\"\"Inputs are integer lists.\"\"\"\n    members = set(right)\n    return [value for value in left if value in members]\n",
+      "hidden_tests": "import unittest\nfrom collection_ops import overlap\nclass Behavior(unittest.TestCase):\n def test_values(self): self.assertEqual(overlap([2,1,2],[2]), [2,2])\n def test_empty(self): self.assertEqual(overlap([],[]), [])\n",
+      "labels": [],
+      "rationale": "Clean negative control under the stated bounded contract.",
+      "change_kind": "behavior_preserving",
+      "required_dependency": null
+    },
+    {
+      "id": "clean_style",
+      "split": "control",
+      "family": "control",
+      "source": "def join_names(names):\n    return \",\".join(names)\n",
+      "visible_tests": "import unittest\nfrom collection_ops import join_names\nclass Behavior(unittest.TestCase):\n def test_values(self): self.assertEqual(join_names([\"a\",\"b\"]), \"a,b\")\n def test_empty(self): self.assertEqual(join_names([]), \"\")\n",
+      "corrected": "def join_names(names):\n    return \",\".join(names)\n",
+      "hidden_tests": "import unittest\nfrom collection_ops import join_names\nclass Behavior(unittest.TestCase):\n def test_values(self): self.assertEqual(join_names([\"a\",\"b\"]), \"a,b\")\n def test_empty(self): self.assertEqual(join_names([]), \"\")\n",
+      "labels": [],
+      "rationale": "Clean negative control under the stated bounded contract.",
+      "change_kind": "behavior_preserving",
+      "required_dependency": null
+    },
+    {
+      "id": "clean_boundary",
+      "split": "control",
+      "family": "control",
+      "source": "def first(values):\n    return values[0] if values else None\n",
+      "visible_tests": "import unittest\nfrom collection_ops import first\nclass Behavior(unittest.TestCase):\n def test_nonempty(self): self.assertEqual(first([3,4]),3)\n def test_empty(self): self.assertIsNone(first([]))\n",
+      "corrected": "def first(values):\n    return values[0] if values else None\n",
+      "hidden_tests": "import unittest\nfrom collection_ops import first\nclass Behavior(unittest.TestCase):\n def test_nonempty(self): self.assertEqual(first([3,4]),3)\n def test_empty(self): self.assertIsNone(first([]))\n",
+      "labels": [],
+      "rationale": "Clean negative control under the stated bounded contract.",
+      "change_kind": "behavior_preserving",
+      "required_dependency": null
+    }
+  ]
+}

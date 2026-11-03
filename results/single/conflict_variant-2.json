@@ -1,0 +1,84 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "cache = {}\ndef cached_variant(tenant, key, fetch):\n    \"\"\"Different tenants may have different values for the same key.\"\"\"\n    if key not in cache:\n        cache[key] = fetch(tenant, key)\n    return cache[key]\n",
+  "source_sha256": "0b4b1fb429e20c9a101fe2638650547fbb6f9bac113a3decaddf24397ca54c53",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 4,
+          "evidence": "    if key not in cache:",
+          "summary": "Cache key does not partition by tenant, leading to cross-tenant data leakage.",
+          "suggested_action": "Include tenant identifier in the cache key, e.g., cache[(tenant, key)] = fetch(tenant, key)."
+        }
+      ],
+      "limitations": [
+        "Static code review without dynamic runtime analysis or penetration testing."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 1,
+          "evidence": "cache = {}",
+          "summary": "Global unbounded dictionary cache may grow indefinitely, leading to memory exhaustion.",
+          "suggested_action": "Use a bounded cache structure like an LRU cache or set eviction policies to limit memory consumption."
+        }
+      ],
+      "limitations": [
+        "No execution profiling tools or memory benchmarking available."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No repository style guide or linter configuration provided."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "def cached_variant(tenant, key, fetch):",
+          "summary": "No test exists verifying cache hits return cached values for repeated calls by the same tenant with the same key without re-calling fetch.",
+          "suggested_action": "Add a unit test confirming that subsequent calls for the same tenant and key return the cached value and do not invoke fetch again."
+        }
+      ],
+      "limitations": [
+        "Evaluated only against the single provided visible test case."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 513,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 288,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 288
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 801,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

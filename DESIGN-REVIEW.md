@@ -1,5 +1,18 @@
 # Track 5 design review — 27 October 2026
 
+> Current implementation status — 2 November 2026: ADK 2.13.0 + LangGraph 1.2.18
+> and SQLite checkpointer 3.1.2 are exercised under Python 3.12.14. Four historical
+> human-approved operations are preserved (test/optimization/failure/repair).
+> New demos have isolated run manifests and exact-patch gates. The frozen 16-fixture
+> finding evaluation and single-reviewer comparison are executed; see
+> [observed results](results/COMPARISON.md), [setup](README.md),
+> [packaging proof](PACKAGING-VALIDATION.md) and [Thursday runbook](DEMO-RUNBOOK.md).
+> Statements below using “proposed” or “unverified” describe the original design
+> unless explicitly reconciled by these observed results. Arbitrary PR intake,
+> corpus patch evaluation, human adjudication, publication and full spoken rehearsal
+> remain open; no production-safety or completed-submission claim is made.
+
+
 Reviewed against [CAPSTONE-REQUIREMENTS.md](CAPSTONE-REQUIREMENTS.md), the repository's shared requirement baseline. Scope: design readiness; no implementation, runtime compatibility, benchmark or security certification is implied. The prior official-document feasibility citations remain in ARCHITECTURE.md; this review adds application-policy decisions, not new framework API claims.
 
 ## Result

@@ -1,0 +1,76 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def lookup(connection, name):\n    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()\n",
+  "source_sha256": "bed20cb04dd85cbb67d46bab155adf3b152073b87048e86ee268be6afc03fe8f",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "SQL query is constructed via string concatenation of user-supplied input, leading to SQL injection.",
+          "suggested_action": "Use parameterized queries instead of string concatenation, e.g., connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,))."
+        }
+      ],
+      "limitations": [
+        "Static analysis conducted without runtime verification tools."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No profiling or execution metrics available."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No style configuration or repository conventions supplied."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "The test suite lacks a test case verifying lookup behavior when querying for a nonexistent user without SQL injection syntax.",
+          "suggested_action": "Add a unit test checking that querying for a non-matching name returns an empty list."
+        }
+      ],
+      "limitations": [
+        "Tests are inspected statically without coverage measurement tools."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 285,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 314,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 314
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 599,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

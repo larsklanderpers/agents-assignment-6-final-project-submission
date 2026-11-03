@@ -1,0 +1,92 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "cache = {}\ndef cached_variant(tenant, key, fetch):\n    \"\"\"Different tenants may have different values for the same key.\"\"\"\n    if key not in cache:\n        cache[key] = fetch(tenant, key)\n    return cache[key]\n",
+  "source_sha256": "0b4b1fb429e20c9a101fe2638650547fbb6f9bac113a3decaddf24397ca54c53",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 4,
+          "evidence": "    if key not in cache:",
+          "summary": "Cache lookup does not include tenant in the key, causing cross-tenant data leakage.",
+          "suggested_action": "Incorporate tenant into the cache key, such as using a composite tuple `(tenant, key)`."
+        }
+      ],
+      "limitations": [
+        "Static analysis only; no runtime execution environment available."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 1,
+          "evidence": "cache = {}",
+          "summary": "Global dictionary cache grows without bounds and has no eviction policy.",
+          "suggested_action": "Use a bounded cache implementation such as `functools.lru_cache` or a dictionary with max size eviction."
+        }
+      ],
+      "limitations": [
+        "No profiling data or workload volume measurements provided."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "cache = {}",
+          "summary": "Global mutable variable `cache` is exposed at module level without encapsulation.",
+          "suggested_action": "Encapsulate cache state within a class or closure instead of exposing module-level mutable state."
+        }
+      ],
+      "limitations": [
+        "No repository style guide or configuration provided."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "def cached_variant(tenant, key, fetch):",
+          "summary": "Missing test coverage for cache hits on identical tenant and key combinations, as well as fetch error handling.",
+          "suggested_action": "Add unit tests verifying that `fetch` is called only once for repeated queries with the same `(tenant, key)` pair."
+        }
+      ],
+      "limitations": [
+        "Tests are static source text; cannot run the test suite directly."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 590,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 288,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 288
+        }
+      ],
+      "thoughts_token_count": 229,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 1107,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

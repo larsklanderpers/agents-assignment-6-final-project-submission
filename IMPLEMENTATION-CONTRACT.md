@@ -1,5 +1,18 @@
 # Implementation contract
 
+> Current implementation status — 2 November 2026: ADK 2.13.0 + LangGraph 1.2.18
+> and SQLite checkpointer 3.1.2 are exercised under Python 3.12.14. Four historical
+> human-approved operations are preserved (test/optimization/failure/repair).
+> New demos have isolated run manifests and exact-patch gates. The frozen 16-fixture
+> finding evaluation and single-reviewer comparison are executed; see
+> [observed results](results/COMPARISON.md), [setup](README.md),
+> [packaging proof](PACKAGING-VALIDATION.md) and [Thursday runbook](DEMO-RUNBOOK.md).
+> Statements below using “proposed” or “unverified” describe the original design
+> unless explicitly reconciled by these observed results. Arbitrary PR intake,
+> corpus patch evaluation, human adjudication, publication and full spoken rehearsal
+> remain open; no production-safety or completed-submission claim is made.
+
+
 Design decisions tightened on 27 October 2026. These are proposed application contracts, not verified framework APIs. Implement them before adding optional features. They supplement [ARCHITECTURE.md](ARCHITECTURE.md) without expanding its submission narrative.
 
 ## Intake and complete review
@@ -9,6 +22,32 @@ Accept exactly one mode: local repository + pinned revision; GitHub PR + pinned 
 All four specialists receive the same bounded snapshot, configuration, baseline evidence and scope. They return `complete`, `failed` or `unavailable`, plus reviewed paths and limitations. Empty findings with `complete` differs from no response. Complete status means the assigned bounded review finished, not that the code is safe. Wait for all terminal outputs before synthesis. In the MVP any missing specialist blocks executable changes; a human can retry, end read-only, or select a smaller scope and rerun all four. Human acknowledgment cannot turn a failed review into a completed one.
 
 ADK hosts all six reasoning agents. LangGraph calls the parallel specialist adapter, then the synthesis/planner, then the patch author. The application owns schema validation, stable IDs, reducers, persistence and gate enforcement. Only the coordinator can update authoritative state; agents return proposals. Repository conventions are evidence, not permission to execute arbitrary repository commands.
+
+## Action classification decision — 30 October
+
+Synthesis/planning includes structured action classification; no separate
+classification model call is added. Each proposal identifies action type
+(investigate, characterize with tests, fix defect, refactor or defer), behavior
+impact, evidence strength, risk with reason, impact, proposed readiness and typed
+acceptance checks. Every finding must have a disposition. Classifications are
+model proposals, not verified facts or permissions; confidence is not a priority
+input. Tool-verified claims require actual tool evidence.
+
+Application code checks unique IDs, references and acyclicity, derives readiness
+from verified prerequisite outcomes and human direction, and ranks only after
+those constraints. Conflicts identify affected actions and block their descendants;
+independent investigation and characterization can remain eligible for proposal.
+The initial advisory score is impact*3 + evidence weight + dependent-action count
+- risk penalty. Expose the inputs; weights are an initial policy, not calibrated
+probabilities of success. High scores never bypass blockers. In the current
+bounded prototype, code changes require a characterization-test ancestor and
+behavioral acceptance; uncertain or intentional behavior changes additionally
+require recorded human direction. Direction does not grant patch approval.
+
+Readiness means eligible to propose the next step. Every exact code/test patch
+still requires its own bound approval. The current classification spike has no
+executor and marks every action `execution_authorized=false`. Trusted passed-step
+and human-direction state must come from the coordinator, never planner output.
 
 ## Human interface and authorization
 

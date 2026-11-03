@@ -1,0 +1,68 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def lookup(connection, name):\n    return connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()\n",
+  "source_sha256": "24927852db70f513260da1eb3d0461f05246620e7e2d9e8c4fbf5fe65c19fa42",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "Static analysis only; runtime environment and database driver characteristics were not executed."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No database schema indexes or benchmark metrics were provided."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No style configuration or linter rules were supplied."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()",
+          "summary": "Tests do not verify behavior when name is None or when multiple records match.",
+          "suggested_action": "Add unit tests covering querying for non-existent users, multiple rows matching the same name, and None values."
+        }
+      ],
+      "limitations": [
+        "Evaluated only against the provided visible test suite."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 234,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 313,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 313
+        }
+      ],
+      "thoughts_token_count": 299,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 846,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

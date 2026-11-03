@@ -1,8 +1,31 @@
 # Delivery plan and requirement coverage
 
-Status: design only. Milestones are exit-criterion based; confirm actual Canvas date before assigning calendar dates.
+> Current implementation status — 2 November 2026: ADK 2.13.0 + LangGraph 1.2.18
+> and SQLite checkpointer 3.1.2 are exercised under Python 3.12.14. Four historical
+> human-approved operations are preserved (test/optimization/failure/repair).
+> New demos have isolated run manifests and exact-patch gates. The frozen 16-fixture
+> finding evaluation and single-reviewer comparison are executed; see
+> [observed results](results/COMPARISON.md), [setup](README.md),
+> [packaging proof](PACKAGING-VALIDATION.md) and [Thursday runbook](DEMO-RUNBOOK.md).
+> Statements below using “proposed” or “unverified” describe the original design
+> unless explicitly reconciled by these observed results. Arbitrary PR intake,
+> corpus patch evaluation, human adjudication, publication and full spoken rehearsal
+> remain open; no production-safety or completed-submission claim is made.
 
-## Milestones
+
+Status: bounded runtime implemented; finding evaluation executed; packaging locally tested. Full rehearsal, recording and remote publication remain pending. Presentation is Thursday 5 November 2026; Canvas deadline remains unconfirmed.
+
+## Observed milestone status
+
+| Gate | Observed status |
+|---|---|
+| M0/M1 | Design and pinned compatibility checks complete for the bounded prototype |
+| M2 | Synthetic local Git snapshot supported; arbitrary repository/PR/diff adapters incomplete |
+| M3/M4 | Historical and fresh human-approved test/optimization/failure/replanning/repair chains verified; fresh saved bindings/logs/checkpoints/resulting files audited |
+| M5 | Frozen finding corpus and single-reviewer comparison measured; precision target missed; semantic adjudication, corpus repairs and fixed-order baseline pending |
+| M6 | Source-only locked install and local clone proof; full spoken rehearsal, page counts, recording, accessible remote and submission pending |
+
+## Original milestone exit criteria
 
 | Milestone | Deliverable and exit criterion |
 |---|---|
@@ -28,13 +51,13 @@ M1 is a go/no-go gate: if the bridge fails, document a smaller adapter or a just
 | Dependency-aware planning beyond tool chaining | Goal hierarchy, DAG and evidence-triggered replanning | Prerequisite test plus revised descendants after failure |
 | Generate refactored code for review | In-memory candidate + reviewed workspace diff bundle | Human-readable patch and acceptance evidence |
 | Human approval before every refactoring step | Exact-patch gate, single-use approval, stale checks | Zero unapproved mutations, rejection/redirection demo |
-| >=2 external APIs/data/tools | GitHub REST/Git; pytest/coverage/Ruff/benchmark runner | Recorded adapter inputs, versions and outcomes |
+| >=2 external APIs/data/tools | Implemented local Git snapshots + pinned Docker/unittest/reference/timing runner; Gemini through ADK | Four historical operations and container tests; GitHub REST intake, pytest/coverage/Ruff integration are unimplemented |
 | Inspectable tracing | Mandatory local ledger; optional LangSmith | Complete decision/evidence chains |
 | Graceful degradation and replanning | Retry budgets, partial status, reconstruction, DAG invalidation | Fault suite F1–F12 |
 | Known-smell test corpus | Frozen labeled original Python fixtures | Per-category metrics and held-out results |
 | Root ARCHITECTURE.md + diagram | Dedicated project root design | This directory exported as submission repo if needed |
 | Technical analysis/reflection | TECHNICAL-REFLECTION.md | Planning, alternatives, limitations and future work |
-| Runnable GitHub repo + setup README | Future M6 packaging | Fresh-clone install/run instructions, instructor access, Canvas repository link |
+| Runnable GitHub repo + setup README | Local source packaging and locked install tested | README/PACKAGING-VALIDATION; remote implementation publication and instructor access pending |
 | Single presentation + live-demo recording <=10 min with failure | Script below | Final recording link in README; Canvas upload or unlisted YouTube/Loom |
 | Due end Week 5, late penalty 50 points/day | Instructor/Canvas confirmation | Actual deadline recorded; Week 6 title not used to infer date |
 | AI assistance permitted; explain every line | Original logic + explicit adaptation citations | README/comments attribute sources; student walkthrough |
@@ -42,7 +65,7 @@ M1 is a go/no-go gate: if the bridge fails, document a smaller adapter or a just
 
 Optional bonuses, capped at +100 / 600 total: reusable documented permissively licensed public component (+40; public repo alone insufficient), Docker Compose single command with health checks/env configuration (+25), reproducible automated evaluation with summary report (+20), justified novel integration (+15). Proposed priorities are evaluation first, then packaging. Public release/licensing and novel-integration claims require later review; nothing is published by this design task.
 
-## Demo: one presentation plus live demonstration, 9:30 total
+## Original draft schedule (superseded by DEMO-RUNBOOK.md)
 
 | Time | Action and evidence |
 |---|---|

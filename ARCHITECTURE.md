@@ -1,6 +1,19 @@
 # Review Ledger — Track 5 architecture
 
-Status: original design proposal, 26 October 2026. No implementation or runtime compatibility test has been completed. Scope: Python codebase or GitHub PR review and small, dependency-aware refactoring patches. All behavior below is proposed unless marked **verified documentation**. Submission requirements derive from [shared requirements](CAPSTONE-REQUIREMENTS.md), whose [assignment source](https://docs.google.com/document/d/1FPDr1uDqUHj9IdHaRiUd_yI9lq4REdOScZRjcE7vP5k/edit) was transcribed there; this design does not claim an independent reading of the source document.
+> Current implementation status — 2 November 2026: ADK 2.13.0 + LangGraph 1.2.18
+> and SQLite checkpointer 3.1.2 are exercised under Python 3.12.14. Four historical
+> human-approved operations are preserved (test/optimization/failure/repair).
+> New demos have isolated run manifests and exact-patch gates. The frozen 16-fixture
+> finding evaluation and single-reviewer comparison are executed; see
+> [observed results](results/COMPARISON.md), [setup](README.md),
+> [packaging proof](PACKAGING-VALIDATION.md) and [Thursday runbook](DEMO-RUNBOOK.md).
+> Statements below using “proposed” or “unverified” describe the original design
+> unless explicitly reconciled by these observed results. Arbitrary PR intake,
+> corpus patch evaluation, human adjudication, publication and full spoken rehearsal
+> remain open; no production-safety or completed-submission claim is made.
+
+
+Status: bounded implementation and runtime compatibility verified on 2 November 2026; wider intake remains proposed. Original design: 26 October. Scope: Python codebase or GitHub PR review and small, dependency-aware refactoring patches. The following describes the target architecture; the status notice and linked result documents identify the implemented subset. Submission requirements derive from [shared requirements](CAPSTONE-REQUIREMENTS.md), whose [assignment source](https://docs.google.com/document/d/1FPDr1uDqUHj9IdHaRiUd_yI9lq4REdOScZRjcE7vP5k/edit) was transcribed there; this design does not claim an independent reading of the source document.
 
 Reading budget: this main design targets 2–4 typeset pages; [technical reflection](TECHNICAL-REFLECTION.md) targets another 1–2 pages. Markdown has no fixed page count. Confirm whether reflection counts within the architecture total; consolidate and typeset before submission. This file is at the dedicated project root. If the instructor expects a standalone repository root, export this directory as that repository without moving or editing the shared project root.
 
@@ -108,13 +121,13 @@ Every event has event_id, run_id, parent_event_id, agent/component, UTC timestam
 
 ## 7. Framework decision and feasibility boundary
 
-Select **Google ADK + LangGraph with HITL**, satisfying two mandatory technologies. **Verified documentation:** ADK documents concurrent `ParallelAgent` workflows [official guide](https://adk.dev/agents/workflow-agents/parallel-agents/) and structured agent output with model-dependent tool/schema caveats [agent reference](https://adk.dev/agents/llm-agents/). Proposal: collect tool evidence before schema-only review calls, externally validate all outputs, and avoid concurrent writes to shared ADK state. The exact Python/model/checkpointer version combination remains unverified until the spike pins and exercises it.
+Select **Google ADK + LangGraph with HITL**, satisfying two mandatory technologies. **Verified documentation:** ADK documents concurrent `ParallelAgent` workflows [official guide](https://adk.dev/agents/workflow-agents/parallel-agents/) and structured agent output with model-dependent tool/schema caveats [agent reference](https://adk.dev/agents/llm-agents/). Proposal: collect tool evidence before schema-only review calls, externally validate all outputs, and avoid concurrent writes to shared ADK state. The pinned Python/model/checkpointer combination passed the compatibility spike and local execution checks; see the current status above.
 
 ADK supplies specialist boundaries and reusable model/tool interaction; LangGraph supplies explicit transitions, persisted waits and conditional replanning. Cost: duplicated state concepts and an adapter to maintain. ADK-only would reduce integration overhead but would not satisfy two-framework requirements alone. LangGraph-only has the same compliance issue. CrewAI plus LangGraph is a credible alternative, but adds a different delegation abstraction without a demonstrated advantage for fixed specialists. n8n could route notifications yet is unnecessary for this local review loop. A2A becomes useful for independently deployed reviewers; a network protocol adds avoidable failure modes in the MVP. See [technical reflection](TECHNICAL-REFLECTION.md) for deeper tradeoffs.
 
 ## 8. Review and delivery
 
-[Evaluation and scenarios](EVALUATION.md) define reproducible known-smell fixtures, fault injections, metrics and release gates. [Delivery plan](DELIVERY-PLAN.md) maps every requirement to components and evidence, sets milestones and provides a 9:30 demo including a failure. No runtime, corpus, metrics or recording is claimed complete.
+[Evaluation and scenarios](EVALUATION.md) define reproducible known-smell fixtures, fault injections, metrics and release gates. [Delivery plan](DELIVERY-PLAN.md) maps every requirement to components and evidence, sets milestones and provides a 9:30 demo including a failure. The bounded runtime and finding corpus have measured results linked above; corpus repair evaluation and the final recording remain incomplete.
 
-Unresolved: instructor's architecture/reflection page counting, actual Canvas deadline (assignment says end of Week 5 despite Week 6 title), submission of two tracks versus the instruction to select one, model availability/cost, container availability on the demo host, persistent-checkpointer compatibility and final repository destination. These do not block this design. Source attribution for adapted code and the student's ability to explain every line remain mandatory.
+Unresolved: instructor's architecture/reflection page counting, actual Canvas deadline (assignment says end of Week 5 despite Week 6 title), submission of two tracks versus the instruction to select one, future model availability/cost, demo-day container availability and instructor access to the implementation repository. These do not block this design. Source attribution for adapted code and the student's ability to explain every line remain mandatory.
 

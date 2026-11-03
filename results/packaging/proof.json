@@ -1,0 +1,56 @@
+{
+  "clone": "C:\\vc-personal-projects\\continuing-education\\agents-assignment-6-final-project-submission\\artifacts\\c3",
+  "dependency_environment": "C:\\vc-personal-projects\\continuing-education\\agents-assignment-6-final-project-submission\\artifacts\\packaging\\fresh-clone-2\\.venv\\Scripts\\python.exe",
+  "credential_files_copied": false,
+  "checks": [
+    {
+      "label": "exported_hashes",
+      "exit_code": 0,
+      "elapsed_seconds": 2.75
+    },
+    {
+      "label": "unconfigured_doctor",
+      "exit_code": 1,
+      "elapsed_seconds": 5.218
+    },
+    {
+      "label": "regression_34",
+      "exit_code": 0,
+      "elapsed_seconds": 50.047
+    },
+    {
+      "label": "saved_evidence_absent_honestly",
+      "exit_code": 0,
+      "elapsed_seconds": 0.235
+    },
+    {
+      "label": "new",
+      "exit_code": 0,
+      "elapsed_seconds": 0.25
+    },
+    {
+      "label": "reviews",
+      "exit_code": 0,
+      "elapsed_seconds": 14.906
+    },
+    {
+      "label": "plan",
+      "exit_code": 0,
+      "elapsed_seconds": 17.437
+    },
+    {
+      "label": "propose_tests",
+      "exit_code": 0,
+      "elapsed_seconds": 20.047
+    },
+    {
+      "label": "pending_status",
+      "exit_code": 0,
+      "elapsed_seconds": 0.266
+    }
+  ],
+  "unconfigured_doctor_blocked": true,
+  "fresh_clone_gate_pending": true,
+  "archive_sha256": "b65347533e7c025659e35ac02ac533cf7cfdb966089f7dbf6fe5c8f310f93b6e",
+  "clone_revision": "3af44f687a290c53cc73a9244620e1c817d3e8e2"
+}

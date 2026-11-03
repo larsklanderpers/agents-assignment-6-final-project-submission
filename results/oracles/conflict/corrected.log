@@ -1,0 +1,7 @@
+test_tenants (test_collection_ops.Behavior.test_tenants) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+LEDGER_RESULT:{"tests": 1, "failures": 0, "errors": 0, "skipped": 0}

@@ -1,0 +1,173 @@
+{
+  "model": "gemini-3.8-flash",
+  "source_sha256": "19383c087adc2e18fb4a086f42345daf83c093c24fae3785b5c8d4b5e54935ff",
+  "source": "def lookup_variant(connection, requested):\n    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()\n",
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 201,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 335,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 335
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 536,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 286,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 335,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 335
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 621,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 186,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 341,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 341
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 527,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 142,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 335,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 335
+        }
+      ],
+      "thoughts_token_count": 167,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 644,
+      "traffic_type": null
+    }
+  ],
+  "reviews": {
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()",
+          "summary": "String concatenation prevents SQLite prepared statement caching and reuse across different parameter values.",
+          "suggested_action": "Use parameterized queries (e.g., execute(\"SELECT name FROM users WHERE name = ?\", (requested,))) to enable query plan caching and avoid re-parsing SQL statements."
+        }
+      ],
+      "limitations": [
+        "No runtime benchmarks or query plan profiling data were provided.",
+        "Database schema details, such as indexes on the 'name' column in production, were not provided beyond the memory test table."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "def lookup_variant(connection, requested):",
+          "summary": "Function signature lacks PEP 484 type annotations and a docstring.",
+          "suggested_action": "Add type annotations for `connection` and `requested`, along with a return type hint and a descriptive docstring adhering to PEP 257."
+        },
+        {
+          "category": "style",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()",
+          "summary": "String concatenation is used to construct a SQL query string instead of parameterized query formatting or structured formatting.",
+          "suggested_action": "Pass parameters to `execute` as a tuple parameter substitution rather than concatenating strings directly."
+        }
+      ],
+      "limitations": [
+        "No repository-specific styling guides or lint configuration (e.g., flake8, black, ruff) were provided.",
+        "Inspection is limited to static analysis without running linter tools."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()",
+          "summary": "Existing tests only cover exact match and injection attempt, leaving non-matching queries and special character handling untested.",
+          "suggested_action": "Add tests verifying that queries for non-existent users return an empty list and test handling of input containing single quotes such as \"O'Connor\"."
+        }
+      ],
+      "limitations": [
+        "Only visible test cases from the prompt snapshot were evaluated; full test suite configuration was not provided."
+      ]
+    },
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()",
+          "summary": "Direct string concatenation into the SQL query string introduces a SQL injection vulnerability.",
+          "suggested_action": "Use parameterized queries, for example: connection.execute(\"SELECT name FROM users WHERE name = ?\", (requested,)).fetchall()"
+        }
+      ],
+      "limitations": [
+        "Only static analysis of the provided function was performed; underlying database driver and caller contexts outside of the snippet were not evaluated."
+      ]
+    }
+  },
+  "spans": {
+    "security": {
+      "start": 92489.265,
+      "end": 92499.406
+    },
+    "performance": {
+      "start": 92489.437,
+      "end": 92494.218
+    },
+    "style": {
+      "start": 92489.609,
+      "end": 92495.406
+    },
+    "test_gap": {
+      "start": 92489.75,
+      "end": 92496.078
+    }
+  },
+  "overlap": true
+}

@@ -1,6 +1,46 @@
 # Evaluation specification
 
-Status: proposed corpus and harness specification. No fixture code or results exists yet. All thresholds below are acceptance targets, not observed scores.
+Status on 2 November 2026: **finding evaluation implemented and executed**, with
+frozen original corpus, corrected variants, hidden assertions and a single-reviewer
+comparison. [Observed results and all limitations](results/COMPARISON.md).
+
+- 16 distinct fixtures (6 development, 6 renamed held-out variants, 4 clean controls),
+  3 repeats, 2 modes: 96/96 reviews complete; 240 model-call responses with usage.
+- Held-out macro precision/recall: parallel 0.411/1.000; single 0.510/1.000.
+  The >=0.80 precision target is **not met**. These are automatic category/symbol
+  matches, not human-adjudicated substantive accuracy. Original labels remain frozen.
+- 16/16 original/corrected oracle contracts verified in Docker; 2/2 authored mutants
+  detected. These are authored-fixture checks, not agent-generated patch results.
+- Agent corpus patches attempted: 0. Corpus behavior/approval/recovery/trace metrics
+  are N/A. Full corpus planning, fixed-order non-replanning baseline, independent
+  human label review and blinded finding adjudication remain open.
+- Baseline comparison uses the same model/snapshots/temperature and aggregate
+  maximum output tokens, with different prompts and call counts. No calibrated
+  monetary cost or matched-cost superiority claim is made.
+
+Executable commands (each output directory must be new):
+
+```powershell
+.venv\Scripts\python.exe -m evaluation.verify_fixtures --output artifacts/evaluation/new-oracle-check
+.venv\Scripts\python.exe -m evaluation.run --manifest evaluation/manifest.json --seed 505 --repeats 3 --output artifacts/evaluation/new-parallel
+.venv\Scripts\python.exe -m evaluation.run --manifest evaluation/manifest.json --seed 505 --repeats 3 --mode single --output artifacts/evaluation/new-single
+```
+
+`evaluation/manifest.sha256` freezes labels before model execution. Only source and
+visible tests are sent to reviewers; labels/corrections/hidden assertions stay in
+the harness. Per-case Git commits/trees and actual oracle logs are published under
+`results/oracles/`. Environment/model/lock/prompt/harness hashes, all raw synthetic
+responses, token metadata, per-run counts/CSV, variability and failures are in
+`results/parallel/` and `results/single/`. Original artifacts remain locally retained.
+All attempts are included; no labels or held-out prompts were tuned after results.
+
+## Original evaluation specification and remaining targets
+
+The following is the original specification. Items not covered by the observed
+results above remain requirements or future work, not achieved scores. The frozen
+corpus uses renamed held-out variants rather than every richer variant described
+below; style uses an explicit human convention rubric rather than a claimed Ruff
+execution. Human label review is pending.
 
 ## Reproducible corpus
 
@@ -23,7 +63,7 @@ Match findings one-to-one to labels before scoring; duplicate reports do not inc
 
 ## Harness protocol
 
-Proposed command after implementation: `python -m evaluation.run --manifest evaluation/manifest.json --seed 505 --repeats 3 --output artifacts/evaluation`. This is a target interface, not a runnable command today.
+The finding-only harness now implements this interface; choose a fresh output directory. The broader patch/approval protocol below remains a target beyond finding evaluation.
 
 1. Record OS, CPU, Python, framework/tool/model identifiers, lockfile and prompt hashes, configuration, seed, corpus manifest and Git revisions. Fix sampling settings where supported; model responses may still vary.
 2. Establish baseline tests, lint and benchmark counts before invoking agents. Failed baseline is a labeled condition, never silently attributed to a patch.

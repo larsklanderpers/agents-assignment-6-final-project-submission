@@ -1,0 +1,76 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def checked_variant(items, allowed):\n    \"\"\"Membership accepts nested lists; preserve their equality behavior.\"\"\"\n    return [item for item in items if item in allowed]\n",
+  "source_sha256": "879f464d65addcef8ae9430c990640563239e6477912e91fc9b1774b4a6c82f0",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No execution environment or static analysis security tools were available."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 3,
+          "evidence": "    return [item for item in items if item in allowed]",
+          "summary": "Linear scan membership check 'item in allowed' incurs O(len(items) * len(allowed)) time complexity if allowed is a sequence.",
+          "suggested_action": "If allowed items are hashable or can be converted to a set without breaking nested list equality, consider using a set lookup or specialized structure; otherwise keep in mind the quadratic complexity on large inputs."
+        }
+      ],
+      "limitations": [
+        "Actual runtime performance depends on the types and sizes of items and allowed."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No style configuration or linter was supplied."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 1,
+          "evidence": "def checked_variant(items, allowed):",
+          "summary": "The function checked_variant lacks unit test coverage in the provided snapshot.",
+          "suggested_action": "Add unit tests verifying membership filtering, including cases with nested lists to validate equality behavior as noted in the docstring."
+        }
+      ],
+      "limitations": [
+        "Visible test snapshot contained no tests."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 449,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 190,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 190
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 639,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

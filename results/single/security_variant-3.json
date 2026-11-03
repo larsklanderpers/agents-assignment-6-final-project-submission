@@ -1,0 +1,76 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def lookup_variant(connection, requested):\n    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()\n",
+  "source_sha256": "19383c087adc2e18fb4a086f42345daf83c093c24fae3785b5c8d4b5e54935ff",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()",
+          "summary": "SQL query is constructed using string concatenation with untrusted input, creating an SQL injection vulnerability.",
+          "suggested_action": "Use parameterized queries, for example: `connection.execute(\"SELECT name FROM users WHERE name = ?\", (requested,)).fetchall()`."
+        }
+      ],
+      "limitations": [
+        "Static analysis only; runtime tools and environment configuration not available."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "Execution profiling and benchmarking measurements are not available."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No explicit style guide or linter configuration was supplied."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()",
+          "summary": "The existing test `test_attack` fails to verify prevention of injection and does not test parameterized execution or behavior with characters like single quotes.",
+          "suggested_action": "Add tests that verify safe handling of inputs containing quotes and verify that malicious inputs cannot bypass WHERE clause conditions."
+        }
+      ],
+      "limitations": [
+        "Test suite could not be executed directly in the current environment."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 470,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 322,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 322
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 792,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

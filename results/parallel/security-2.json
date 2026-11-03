@@ -1,0 +1,181 @@
+{
+  "model": "gemini-3.8-flash",
+  "source_sha256": "bed20cb04dd85cbb67d46bab155adf3b152073b87048e86ee268be6afc03fe8f",
+  "source": "def lookup(connection, name):\n    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()\n",
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 273,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 327,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 327
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 600,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 198,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 327,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 327
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 525,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 293,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 333,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 333
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 626,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 151,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 327,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 327
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 478,
+      "traffic_type": null
+    }
+  ],
+  "reviews": {
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "def lookup(connection, name):",
+          "summary": "Missing type annotations and docstring on public function definition.",
+          "suggested_action": "Add type hints and a docstring describing parameters and return value according to PEP 8 / PEP 257 conventions."
+        },
+        {
+          "category": "style",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "String concatenation used to construct query instead of standardized formatting or parameterized query conventions.",
+          "suggested_action": "Use parameterized queries or structured query string formatting instead of raw binary '+' string concatenation."
+        }
+      ],
+      "limitations": [
+        "No linter, style guide, or formatting configuration file (e.g., flake8, black, ruff) was provided.",
+        "Only production code style was reviewed; external test file style was excluded."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "String concatenation prevents query plan caching and prepared statement reuse in databases.",
+          "suggested_action": "Use parameterized queries (e.g., connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()) to allow database engines to cache execution plans."
+        }
+      ],
+      "limitations": [
+        "No execution metrics, profiling data, or database schema indices are available to measure query latency impact.",
+        "Database engine specifics and scale of the 'users' table were not provided."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "Existing test suite does not cover empty or non-matching lookup results.",
+          "suggested_action": "Add a test case that queries for a non-existent name to ensure lookup returns an empty list without error under normal, non-matching input."
+        },
+        {
+          "category": "test_gap",
+          "line": 1,
+          "evidence": "def lookup(connection, name):",
+          "summary": "Existing tests do not verify behavior when names contain legitimate single quotes (e.g. O'Connor).",
+          "suggested_action": "Add a test case with names containing apostrophes/single quotes to check how the function handles legitimate escaped or unescaped characters."
+        }
+      ],
+      "limitations": [
+        "No execution environment or coverage tools available; test gap analysis is based on static inspection of the provided tests.",
+        "Only visible tests provided in the snapshot were reviewed."
+      ]
+    },
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "Direct concatenation of untrusted input into a SQL query string leads to SQL injection vulnerability.",
+          "suggested_action": "Use parameterized queries with placeholder syntax (e.g., `execute('SELECT name FROM users WHERE name = ?', (name,))`) instead of string concatenation."
+        }
+      ],
+      "limitations": [
+        "Only analyzed the provided code snippet and test cases; full database schema, caller context, and connection sanitization wrappers were not provided."
+      ]
+    }
+  },
+  "spans": {
+    "security": {
+      "start": 92272.703,
+      "end": 92282.859
+    },
+    "performance": {
+      "start": 92272.843,
+      "end": 92278.515
+    },
+    "style": {
+      "start": 92272.968,
+      "end": 92277.593
+    },
+    "test_gap": {
+      "start": 92273.125,
+      "end": 92280.015
+    }
+  },
+  "overlap": true
+}

@@ -1,0 +1,84 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def lookup(connection, name):\n    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()\n",
+  "source_sha256": "bed20cb04dd85cbb67d46bab155adf3b152073b87048e86ee268be6afc03fe8f",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "SQL injection vulnerability due to direct string concatenation of untrusted input into the SQL query string.",
+          "suggested_action": "Use parameterized queries by passing parameters as a tuple: connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()"
+        }
+      ],
+      "limitations": [
+        "Static analysis without live execution or dynamic tainted data tracing."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No profiling metrics or query execution plans available."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "String concatenation used for SQL construction instead of parameterized queries or formatted strings adhering to standard conventions.",
+          "suggested_action": "Refactor query construction to use standard DB-API parameter substitution."
+        }
+      ],
+      "limitations": [
+        "No style guide or linter configuration provided."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "The test suite's test_attack expects an empty result for an injection payload, which currently fails against this implementation. Missing tests for non-existent users, empty input, and names containing escaped quotes.",
+          "suggested_action": "Add unit tests verifying behavior when the user is not found, when input contains apostrophes (e.g. O'Connor), and ensure test_attack properly validates injection prevention after parameterization."
+        }
+      ],
+      "limitations": [
+        "Tests are inspected statically without runtime execution."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 406,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 314,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 314
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 720,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

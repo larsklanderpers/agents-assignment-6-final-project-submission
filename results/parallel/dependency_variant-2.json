@@ -1,0 +1,160 @@
+{
+  "model": "gemini-3.8-flash",
+  "source_sha256": "879f464d65addcef8ae9430c990640563239e6477912e91fc9b1774b4a6c82f0",
+  "source": "def checked_variant(items, allowed):\n    \"\"\"Membership accepts nested lists; preserve their equality behavior.\"\"\"\n    return [item for item in items if item in allowed]\n",
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 160,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 209,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 209
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 369,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 178,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 203,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 203
+        }
+      ],
+      "thoughts_token_count": 166,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 547,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 210,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 203,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 203
+        }
+      ],
+      "thoughts_token_count": 206,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 619,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 79,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 203,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 203
+        }
+      ],
+      "thoughts_token_count": 114,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 396,
+      "traffic_type": null
+    }
+  ],
+  "reviews": {
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 3,
+          "evidence": "    return [item for item in items if item in allowed]",
+          "summary": "No test coverage is provided for filtering items or verifying equality behavior with nested lists.",
+          "suggested_action": "Add unit tests verifying membership checks with nested lists, missing elements, and empty input sequences."
+        }
+      ],
+      "limitations": [
+        "No test files or configuration were provided in the snapshot.",
+        "Cannot execute tests or measure code coverage dynamically."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "def checked_variant(items, allowed):",
+          "summary": "Function signature lacks type annotations for parameters and return value.",
+          "suggested_action": "Add type hints (e.g., using typing.Iterable or typing.Sequence) to clarify expected input and return types per PEP 484 and PEP 8 conventions."
+        }
+      ],
+      "limitations": [
+        "No repository style guide or configuration files (such as flake8, black, or ruff configs) were provided.",
+        "No tests were supplied in this bounded snapshot."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 3,
+          "evidence": "    return [item for item in items if item in allowed]",
+          "summary": "Linear membership testing `item in allowed` results in O(len(items) * len(allowed)) overall complexity if `allowed` is a sequence.",
+          "suggested_action": "If elements or an adapted representation of them can be hashed or pre-indexed without breaking equality semantics for nested lists, consider converting `allowed` into an appropriate lookup structure to avoid repeated O(N) scans."
+        }
+      ],
+      "limitations": [
+        "No runtime benchmarks or input size distributions were provided.",
+        "The docstring specifies that nested lists must be supported, which precludes directly using a standard Python set without custom hashing or transformations."
+      ]
+    },
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No tests or caller context were provided in the snapshot.",
+        "Unable to evaluate whether inputs to checked_variant originate from untrusted sources or could cause denial of service via deeply nested structures."
+      ]
+    }
+  },
+  "spans": {
+    "security": {
+      "start": 92609.953,
+      "end": 92620.39
+    },
+    "performance": {
+      "start": 92610.015,
+      "end": 92616.453
+    },
+    "style": {
+      "start": 92610.062,
+      "end": 92614.796
+    },
+    "test_gap": {
+      "start": 92610.125,
+      "end": 92613.687
+    }
+  },
+  "overlap": true
+}

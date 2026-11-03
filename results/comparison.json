@@ -1,0 +1,36 @@
+{
+  "parallel": {
+    "completed": 48,
+    "failed": 0,
+    "actual_call_responses_with_usage": 192,
+    "usage_totals": {
+      "prompt_token_count": 49956,
+      "candidates_token_count": 29391,
+      "thoughts_token_count": 22361,
+      "total_token_count": 101708
+    },
+    "p50_seconds": 9.852,
+    "p95_seconds": 15.75,
+    "held_out_macro_precision": 0.41068181818181815,
+    "held_out_macro_recall": 1.0,
+    "control_unmatched_findings": 31,
+    "total_active_seconds": 500.86
+  },
+  "single": {
+    "completed": 48,
+    "failed": 0,
+    "actual_call_responses_with_usage": 48,
+    "usage_totals": {
+      "prompt_token_count": 11793,
+      "candidates_token_count": 20360,
+      "thoughts_token_count": 2792,
+      "total_token_count": 34945
+    },
+    "p50_seconds": 6.406000000000001,
+    "p95_seconds": 15.11,
+    "held_out_macro_precision": 0.5104166666666666,
+    "held_out_macro_recall": 1.0,
+    "control_unmatched_findings": 15,
+    "total_active_seconds": 351.767
+  }
+}

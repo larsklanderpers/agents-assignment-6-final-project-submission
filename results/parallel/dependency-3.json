@@ -1,0 +1,159 @@
+{
+  "model": "gemini-3.8-flash",
+  "source_sha256": "eeb074ec8ee2d2831a7b9bc9365f8379ff00193f94eb607591c92f69b41deb74",
+  "source": "def checked(items, allowed):\n    \"\"\"Membership accepts nested lists; preserve their equality behavior.\"\"\"\n    return [item for item in items if item in allowed]\n",
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 158,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 201,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 201
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 359,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 102,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 207,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 207
+        }
+      ],
+      "thoughts_token_count": 212,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 521,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 225,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 201,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 201
+        }
+      ],
+      "thoughts_token_count": 269,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 695,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 79,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 201,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 201
+        }
+      ],
+      "thoughts_token_count": 244,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 524,
+      "traffic_type": null
+    }
+  ],
+  "reviews": {
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "def checked(items, allowed):",
+          "summary": "Function signature lacks PEP 484 type annotations.",
+          "suggested_action": "Add type annotations to function parameters and return type, for example: `def checked(items: list, allowed: container) -> list:`."
+        }
+      ],
+      "limitations": [
+        "No configuration files or style guidelines were provided in the snapshot.",
+        "No tests were supplied in this bounded snapshot."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 3,
+          "evidence": "    return [item for item in items if item in allowed]",
+          "summary": "No tests are provided to verify filtering behavior or equality handling for nested lists as documented.",
+          "suggested_action": "Add test cases covering typical item membership, empty iterables, and nested list equality matching."
+        }
+      ],
+      "limitations": [
+        "No tests or test configuration were included in the provided snapshot."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 3,
+          "evidence": "    return [item for item in items if item in allowed]",
+          "summary": "Membership test 'item in allowed' incurs O(M) lookup time per element if 'allowed' is a sequence, resulting in O(N * M) overall time complexity.",
+          "suggested_action": "If 'allowed' contains unhashable elements like lists, evaluate whether elements can be normalized to hashable equivalents (e.g., tuples) for O(1) set lookups, or document the quadratic scaling constraint."
+        }
+      ],
+      "limitations": [
+        "No tests or runtime benchmarks were provided to measure actual dataset sizes or execution times.",
+        "The docstring specifies handling nested lists, which prevents a naive conversion of 'allowed' to a set due to unhashability."
+      ]
+    },
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No external execution environment or call sites provided to assess input sources, untrusted data flow, or denial of service risks.",
+        "No tests or runtime configuration were provided in this bounded snapshot."
+      ]
+    }
+  },
+  "spans": {
+    "security": {
+      "start": 92402.609,
+      "end": 92415.343
+    },
+    "performance": {
+      "start": 92402.671,
+      "end": 92409.093
+    },
+    "style": {
+      "start": 92402.718,
+      "end": 92405.687
+    },
+    "test_gap": {
+      "start": 92402.781,
+      "end": 92408.234
+    }
+  },
+  "overlap": true
+}

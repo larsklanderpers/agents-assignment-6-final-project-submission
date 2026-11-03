@@ -1,0 +1,92 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "cache = {}\ndef cached_variant(tenant, key, fetch):\n    \"\"\"Different tenants may have different values for the same key.\"\"\"\n    if key not in cache:\n        cache[key] = fetch(tenant, key)\n    return cache[key]\n",
+  "source_sha256": "0b4b1fb429e20c9a101fe2638650547fbb6f9bac113a3decaddf24397ca54c53",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 4,
+          "evidence": "    if key not in cache:",
+          "summary": "Cache indexing ignores the tenant parameter, causing cross-tenant data leakage when multiple tenants query the same key.",
+          "suggested_action": "Include tenant in the cache key, for example using a tuple such as (tenant, key)."
+        }
+      ],
+      "limitations": [
+        "Dynamic execution and security scanning tools were not run."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 1,
+          "evidence": "cache = {}",
+          "summary": "Global dictionary cache grows without bound and lacks eviction, which may lead to excessive memory consumption over time.",
+          "suggested_action": "Implement a bounded caching strategy, such as an LRU cache with a maximum size limit."
+        }
+      ],
+      "limitations": [
+        "No runtime profiling or memory usage measurements were conducted."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "cache = {}",
+          "summary": "Module-level mutable state is used directly rather than encapsulating cache state inside a class or scoped container.",
+          "suggested_action": "Encapsulate the cache state within a class or function closure."
+        }
+      ],
+      "limitations": [
+        "No repository-specific style configuration or linter was provided."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 5,
+          "evidence": "        cache[key] = fetch(tenant, key)",
+          "summary": "No tests verify handling when fetch raises an exception or returns None.",
+          "suggested_action": "Add unit tests covering fetch errors and diverse return values."
+        }
+      ],
+      "limitations": [
+        "Only the provided unit test suite was inspected without running coverage instrumentation."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 578,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 288,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 288
+        }
+      ],
+      "thoughts_token_count": 353,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 1219,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}
