@@ -70,3 +70,25 @@ repair-success evaluation or completion of PR intake. See HOLDOUT-LUNA-RESULTS.m
 The reflection's guarded Google Docs append was read back: all prior text was
 preserved, with the methodology, scores and label-quality limitation added.
 The established rehearsal/primary-recording scope and paused timer are unchanged.
+
+## Repository workflow milestone — 4 November, subsequent work
+
+The three extra holdout coverage findings were subsequently accepted by Lars;
+the original and adjudicated results remain separate (see HOLDOUT-LUNA-RESULTS.md).
+The earlier pending-adjudication text above records the historical state.
+
+Public PR intake now pins base/head and rejects changes before live execution.
+Assignment 5's closed PR was retrieved successfully as historical evidence.
+Bounded repository repairs now support multiple files and dependent steps,
+personal terminal approval, simulated evaluation, quarantine and fresh retries.
+An additional correctness reviewer addresses the scope gap found in the broader
+development corpus. Four related cases, two repeats: original four-role workflow
+2/8 complete outcomes; expanded workflow 8/8, including 6/6 repairs, 2/2 unchanged
+controls and 2/2 injected-failure recoveries. These are development outcomes,
+not a new unseen precision/recall score. All original results remain unchanged.
+
+The seeded Assignment 5 local candidate awaits personal approval; no live
+repository repair is claimed complete. Full regression 68/68 and subsequent
+focused safety checks 10/10 passed. All 24,211 checkpointed evidence files match.
+See REPOSITORY-HARDENING-RESULTS.md and REPOSITORY-WORKFLOW.md for scope, evidence,
+remaining limits and the separate approval command. Rehearsal remains paused.

@@ -1,0 +1,15 @@
+{
+  "state": "VERIFIED",
+  "operation_id": "a73f853f1d7a4e56bda2441e2ec269ed",
+  "tests": {
+    "status": "passed",
+    "exit_code": 0,
+    "tests": 12,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "log_sha256": "c948df125e19a1d56308a279fc37ca4f35b3b518b37922681e3bab9368fadf1e"
+  },
+  "mode": "simulated",
+  "original_repository_unchanged": true
+}

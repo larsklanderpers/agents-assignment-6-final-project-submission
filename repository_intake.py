@@ -76,7 +76,8 @@ def freeze(repo, revision='HEAD', paths=None, base=None):
                 'commit': commit, 'tree': tree, 'base_commit': base_commit,
                 'changed_paths': [p for p in changed if p], 'files': files,
                 'coverage': 'selected_files_only', 'excluded_file_count': len(entries) - len(files),
-                'working_tree_changes_excluded': bool(git(repo, 'status', '--porcelain')),
+                'working_tree_changes_excluded': (False if git(repo, 'rev-parse', '--is-bare-repository').strip() == b'true'
+                                                 else bool(git(repo, 'status', '--porcelain'))),
                 'limits': {'max_files': MAX_FILES, 'max_file_bytes': MAX_FILE_BYTES, 'max_total_bytes': MAX_TOTAL_BYTES},
                 'limitations': ['Committed revision only; uncommitted changes are excluded.',
                     'No dependency installation, imports, hooks, tests, or repository commands executed.',

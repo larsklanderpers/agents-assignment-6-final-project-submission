@@ -232,3 +232,32 @@ The comparison below concerns the filtered reviewer output from the same frozen 
 | Recall (overall / macro) | 100% / 100% | 100% / 100% |
 
 The adjudicated results meet the 0.80 precision and recall targets on this set. Original macro precision already exceeded 0.80; original overall precision did not. This remains twelve synthetic cases with one repetition. My adjudication was post-score and as project author, not a blinded external review; it resolved only the three disputed coverage findings, not an independent audit of every original label or semantic match. Recall is measured against eleven known findings and does not prove that no other issues were missed. These findings include missing tests, not eleven production bugs. Neither general repository accuracy nor repair success is established. The original answer key, locked outputs and automatic scores remain unchanged; the adjudicated comparison is a separate record.
+
+## Additional repository hardening — 4 November 2026
+
+After preserving the rubric-focused demonstration, I extended the experimental
+path to pinned public GitHub PR intake and bounded Python repository repair with
+dependent steps, personal terminal approval, isolated verification and retained
+failures. Assignment 5's existing PR was retrieved at exact base/head commits;
+because it is already merged, this demonstrates historical intake rather than
+a live PR repair. A seeded disposable Assignment 5 copy now has a prepared
+repair awaiting my personal approval. The original assignment is unchanged.
+
+The broader end-to-end development corpus exposed a responsibility gap: security,
+performance, style and test-gap specialists did not own ordinary logic correctness.
+They achieved 2/8 complete outcomes on four related synthetic cases run twice.
+Adding a separate correctness reviewer produced 8/8 outcomes: 6/6 repairs, 2/2
+clean controls preserved, and recovery in both deliberately failed runs. The
+two-module cases completed dependent repair steps and passed final independent
+acceptance checks. Failures were injected by the harness to test recovery, not
+spontaneous model failures. Benchmark approvals were simulated and the failed
+proposals were retained. Both versions' results are preserved.
+
+This is a tuned development comparison, not eight independent problems or a new
+unseen accuracy claim. It measures complete repair outcomes, not precision or
+recall, and leaves the original/adjudicated Luna scores intact. Support remains
+bounded Python with stdlib tests, selected context and no dependency installation;
+arbitrary repositories and private Git hosts remain outside demonstrated scope.
+The primary rehearsal and recording will still follow the established rubric
+path. These are additional capabilities; a secondary recording is conditional
+on completed verification and submission rules. See REPOSITORY-HARDENING-RESULTS.md.

@@ -1,0 +1,17 @@
+{
+  "split": "development",
+  "repeats": 2,
+  "corpus_sha256": "995b693d9c9afb4c6c789263045224c10e9abf12b14355d720f4d679ae87900d",
+  "approval_mode": "simulated",
+  "max_attempts_per_step": 2,
+  "hidden_tests_disclosed_to_model": false,
+  "limitations": [
+    "Author-known synthetic development cases; not unseen accuracy.",
+    "Forced failures are harness injections, not model failures."
+  ],
+  "code_sha256": {
+    "repository_repair.py": "9fb0913b8e50a8fc83a5f2387c0dd3b1bf44a12eb194acd8cf3146e190731bf3",
+    "evaluation/repository_end_to_end.py": "b4477db33b17b7c1b7ea33e383a2b82b3d165ee8c10be7714f17a2cd2ad25116",
+    "hardening_review.py": "be3d9f19b526584657c3bf5bd623a43dff88b11fe2ddfeb4efb82bfb107ab2a2"
+  }
+}
