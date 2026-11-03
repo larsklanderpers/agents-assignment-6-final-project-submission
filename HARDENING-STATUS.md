@@ -92,3 +92,12 @@ repository repair is claimed complete. Full regression 68/68 and subsequent
 focused safety checks 10/10 passed. All 24,211 checkpointed evidence files match.
 See REPOSITORY-HARDENING-RESULTS.md and REPOSITORY-WORKFLOW.md for scope, evidence,
 remaining limits and the separate approval command. Rehearsal remains paused.
+
+Dashboard continuity update: Review Ledger now presents original rubric scope
+and additional hardening scope side by side. Its additional section separates
+original/adjudicated Luna accuracy from the v1/v2 development repair outcomes,
+shows PR provenance, and reads current repository decisions, findings, plans,
+diffs and outcomes without serving private acceptance assertions. All six
+dashboard boundary tests pass; browser verification confirmed the scope cards,
+scores and pending personal candidate. Future scope changes must update this
+view as part of the work (see AGENTS.md and DASHBOARD.md).

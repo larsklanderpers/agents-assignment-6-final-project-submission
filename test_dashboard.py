@@ -70,6 +70,8 @@ class DashboardTests(unittest.TestCase):
         try:
             with urlopen(url + '/api/run?id=example') as r:
                 self.assertEqual(r.status, 200)
+            with urlopen(url + '/api/scope') as r:
+                self.assertEqual(json.load(r)['candidates'], [])
             for path, method, host in [('/.env','GET',None), ('/api/run?id=example','POST',None), ('/api/runs','GET','foreign.example')]:
                 request = Request(url + path, method=method, headers={'Host': host} if host else {})
                 with self.assertRaises(HTTPError) as caught: urlopen(request)
@@ -77,6 +79,31 @@ class DashboardTests(unittest.TestCase):
             self.assertEqual(before, self.hashes())
         finally:
             server.shutdown(); server.server_close(); thread.join()
+
+    def test_additional_scope_reads_current_ledger_without_private_answers(self):
+        directory = self.root / 'artifacts/hardening/example/candidate'
+        directory.mkdir(parents=True)
+        patch = b'example change'
+        (directory / 'candidate.patch').write_bytes(patch)
+        (directory / 'manifest.json').write_text(json.dumps({'kind':'bounded_repository_repair',
+            'candidate_id':'new', 'mode':'interactive', 'patch_sha256':hashlib.sha256(patch).hexdigest()}))
+        (directory / 'bundle.json').write_text('{"acceptance":"PRIVATE_ANSWER"}')
+        before = self.hashes()
+        result = dashboard.scope_snapshot(self.root)
+        self.assertEqual(result['candidates'][0]['operations'], [])
+        self.assertNotIn('PRIVATE_ANSWER', json.dumps(result))
+        self.assertEqual(before, self.hashes())
+        with sqlite3.connect(directory / 'ledger.sqlite') as db:
+            db.executescript('CREATE TABLE decisions(id,mode); CREATE TABLE operations(id,approval,state,result);')
+            db.execute("INSERT INTO decisions VALUES('human','interactive')")
+            db.execute("INSERT INTO operations VALUES('op','human','VERIFIED','{}')")
+        db.close()
+        before = self.hashes()
+        updated = dashboard.scope_snapshot(self.root)['candidates'][0]
+        self.assertFalse(updated['simulated'])
+        self.assertEqual(updated['operations'][0]['state'], 'VERIFIED')
+        self.assertEqual(updated['operations'][0]['mode'], 'interactive')
+        self.assertEqual(before, self.hashes())
 
 
 if __name__ == '__main__':

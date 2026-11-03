@@ -90,6 +90,61 @@ def snapshot(root, identity):
             'comparison': read_json(root / 'results/comparison.json', {})}
 
 
+def scope_snapshot(root):
+    """Scope and additional evidence; no executor imports, private oracles or writes."""
+    warnings = []
+    def optional(name):
+        path = root / name
+        try:
+            if root.resolve() not in path.resolve().parents:
+                raise ValueError('Evidence outside project')
+            return read_json(path, {})
+        except (OSError, ValueError):
+            warnings.append(f'{name}: unavailable or being updated.')
+            return {}
+    candidates = []
+    base = root / 'artifacts/hardening'
+    for path in sorted(base.glob('**/manifest.json')):
+        try:
+            if base.resolve() not in path.resolve().parents:
+                continue
+            manifest = read_json(path)
+            if manifest.get('kind') != 'bounded_repository_repair':
+                continue
+            directory = path.parent
+            patch_path, db = directory / 'candidate.patch', directory / 'ledger.sqlite'
+            if any(base.resolve() not in p.resolve().parents for p in (patch_path, db)):
+                raise ValueError('Evidence outside hardening directory')
+            decisions, operations = [], []
+            if db.exists():
+                with closing(sqlite3.connect(db.resolve().as_uri() + '?mode=ro', uri=True, timeout=1)) as connection:
+                    connection.row_factory = sqlite3.Row
+                    decisions = [dict(r) for r in connection.execute('SELECT * FROM decisions')]
+                    operations = [dict(r) for r in connection.execute('SELECT * FROM operations')]
+                for operation in operations:
+                    operation['result'] = json.loads(operation['result']) if operation.get('result') else None
+                    operation['mode'] = next((d['mode'] for d in decisions if d['id'] == operation['approval']), 'unknown')
+            patch = patch_path.read_bytes()
+            bundle_path = directory / 'bundle.json'
+            if base.resolve() not in bundle_path.resolve().parents:
+                raise ValueError('Bundle outside hardening directory')
+            bundle = read_json(bundle_path, {})
+            candidates.append({'path': directory.relative_to(root).as_posix(), 'manifest': manifest,
+                'patch': patch.decode('utf-8'), 'patch_matches': hashlib.sha256(patch).hexdigest() == manifest['patch_sha256'],
+                'plan': bundle.get('plan', {}), 'step_id': bundle.get('step_id'),
+                'findings': bundle.get('review', {}).get('accepted_defects', []),
+                'rationale': bundle.get('proposal', {}).get('rationale'),
+                'decisions': decisions, 'operations': operations, 'simulated': manifest['mode'] == 'simulated'})
+        except (OSError, ValueError, KeyError, sqlite3.Error):
+            warnings.append(f'{path.parent.relative_to(root)}: evidence unavailable; refresh to retry.')
+    return {'scope': optional('dashboard-scope.json'), 'candidates': candidates,
+            'development_original': optional('results/repository-hardening-20261104/v1-summary.json'),
+            'development_expanded': optional('results/repository-hardening-20261104/v2-summary.json'),
+            'holdout': optional('results/holdout-luna-20261104/adjudicated-comparison.json'),
+            'pr': optional('results/repository-hardening-20261104/pr-origin.json'),
+            'warnings': warnings}
+
+
 def handler(root):
     class Handler(BaseHTTPRequestHandler):
         def do_GET(self):
@@ -109,6 +164,9 @@ def handler(root):
                     mime = 'application/json'
                 elif url.path == '/api/run':
                     body = json.dumps(snapshot(root, parse_qs(url.query).get('id', [''])[0])).encode()
+                    mime = 'application/json'
+                elif url.path == '/api/scope':
+                    body = json.dumps(scope_snapshot(root)).encode()
                     mime = 'application/json'
                 elif url.path == '/api/comparison':
                     body = json.dumps({'text': (root / 'results/COMPARISON.md').read_text(encoding='utf-8')}).encode()

@@ -42,3 +42,20 @@ place. Google Docs edits are independent and are not synchronized or changed.
 Before rehearsal: open the selected run and terminal, keep the timer stopped,
 then tell the coach you are ready. Characterization is already VERIFIED. The
 next real decision remains the disclosed fault at 2:20; do not repeat setup.
+# Scope tracking — ongoing requirement
+
+Keep the dashboard aligned whenever scope, results or readiness change. The
+original rubric demonstration and additional development are distinct tracks.
+`dashboard-scope.json` owns their descriptions and recording status; update it
+when those facts change, without changing historical run records. The original
+run selector remains limited to original demonstration runs.
+
+The additional section reads preserved v1/v2 repair summaries, original and
+adjudicated Luna scores, PR provenance, and repository candidate ledgers. Live
+candidate states are reread on refresh (or every five seconds when enabled).
+Simulations never substitute for personal decisions. Failed candidates remain
+visible. Private bundles, hidden acceptance assertions and answer keys are not
+served. New bounded repository candidates under `artifacts/hardening` appear
+automatically; register new experiment summaries explicitly in the scope API
+and label their corpus, methodology and limitations. Do not silently replace a
+prior experiment's score with a later result.
