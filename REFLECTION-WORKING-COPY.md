@@ -17,3 +17,12 @@ Google Docs and the local Markdown are **not automatically synchronized**.
 Preserve edits made in Drive; do not overwrite the document from the local file
 without reading and reconciling the user's changes. No public sharing permission
 was added.
+
+## Submission trim — 5 November 2026
+The same Google Doc now contains the reviewed 834-word, two-page reflection,
+including the personally approved Assignment 5 VERIFIED outcome. PDF export was
+checked for page count and visual fit. TECHNICAL-REFLECTION.md mirrors this trim.
+Full pre-trim user-edited native archive:
+https://docs.google.com/document/d/11hqH_wRObaZzbFRsGxsEHHkoIWWfOA0Uncp5ad_nG-4/edit
+The earlier long-draft description is historical. Future edits still require
+reconciliation: Google Docs and Markdown do not synchronize automatically.

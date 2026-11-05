@@ -101,3 +101,13 @@ diffs and outcomes without serving private acceptance assertions. All six
 dashboard boundary tests pass; browser verification confirmed the scope cards,
 scores and pending personal candidate. Future scope changes must update this
 view as part of the work (see AGENTS.md and DASHBOARD.md).
+
+## 5 November: personal verification and submission preparation
+The earlier pending-approval entry is historical. Lars personally approved the
+seeded Assignment 5 local repair; operation 4354e13524e14850b253dcc5dbd6c0f3 is
+VERIFIED with three visible tests passing. The separate 12-test preflight was
+simulated. Original checkout, historical runs and original scores are preserved.
+The Google Docs reflection is now 834 words / two rendered pages. Its complete
+pre-trim native copy preserves user edits. An eight-slide visual deck provides
+five opening slides and three appendix slides. Review these before code; fit the
+opening within the existing ten-minute recording budget. Rehearsal remains paused.

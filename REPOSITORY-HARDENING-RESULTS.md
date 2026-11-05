@@ -115,3 +115,11 @@ larger repeated study would be required for broader reliability claims.
 See REPOSITORY-WORKFLOW.md for commands. Review/edit the reflection and complete
 the established rehearsal/recording before describing these additions as a
 second completed submission attempt.
+
+## Personal verification — 5 November follow-up
+The earlier pending personal approval status is superseded by recorded operation
+4354e13524e14850b253dcc5dbd6c0f3: VERIFIED, interactive approval by LARSKLANDER,
+three visible tests passed. This is the deliberately seeded disposable local
+Assignment 5 copy, not a live PR repair. The separate 12-test simulated preflight
+is additional test evidence, not human permission. Original results above remain
+unchanged. The reflection and dashboard distinguish these evidence categories.

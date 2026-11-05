@@ -8,9 +8,9 @@
   },
   "additional": {
     "title": "Additional scope · repository hardening",
-    "status": "Development evidence · separate from the primary recording",
+    "status": "Local repair human-approved and VERIFIED · additional scope",
     "description": "Read-only dashboard, bounded Python repository and public GitHub PR intake, five reviewers including correctness, dependent repair steps, and complete repair-outcome evaluation.",
     "checkpoint": "c42712b · repository hardening milestone",
-    "boundary": "Known development cases with simulated approvals. Public GitHub and stdlib Python tests only; private hosts, arbitrary dependencies and a personally approved live PR repair remain outside demonstrated scope. A secondary recording is conditional on verification and submission rules."
+    "boundary": "Known development benchmark cases used simulated approvals. A separate seeded Assignment 5 local repair was personally approved and VERIFIED with three visible tests; its 12-test preflight was simulated. Public GitHub and stdlib Python tests only; private hosts, arbitrary dependencies and a personally approved live PR repair remain outside demonstrated scope. Reflection trimmed to two pages and visual deck prepared; rehearsal and recording remain pending."
   }
 }
