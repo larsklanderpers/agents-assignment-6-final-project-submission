@@ -2,12 +2,14 @@
 
 ## Submission files
 
+- [Architecture](ARCHITECTURE.md)
+- [Application prompt templates and usage context](prompts.md)
 - [Current presentation](Review-Ledger-Project-Flow-v2.pptx)
 - [Technical reflection PDF](<Review Ledger — Capstone Technical Reflection — Working Draft — Lars Klander.pdf>)
 - [Saved dashboard example](dashboard-sample.pdf) — static export, not a live execution.
 - [Original corpus comparison](results/COMPARISON.md)
 
-Working Markdown documents are kept locally in `docs/` and are intentionally excluded from this repository publication and source ZIP. Commands below run from the repository root.
+Other working Markdown documents are kept locally in `docs/` and are intentionally excluded from this repository publication and source ZIP. Commands below run from the repository root.
 
 The 7 November untimed walkthrough completed real human-approved characterization, deliberate failure and separate repair. The repair passed seven tests and thirteen comparison checks; the failed workspace remains preserved locally. A complete timed recording remains pending.
 
