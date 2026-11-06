@@ -8,3 +8,9 @@ __pycache__/
 .coverage
 htmlcov/
 artifacts/
+
+# Office temporary lock files
+~$*
+
+# Local working documentation
+docs/

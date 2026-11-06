@@ -1,15 +1,27 @@
 # Review Ledger — Track 5: Code Review & Refactoring
 
-Optional local [read-only dashboard](DASHBOARD.md): run
+## Submission files
+
+- [Current presentation](Review-Ledger-Project-Flow-v2.pptx)
+- [Technical reflection PDF](<Review Ledger — Capstone Technical Reflection — Working Draft — Lars Klander.pdf>)
+- [Saved dashboard example](dashboard-sample.pdf) — static export, not a live execution.
+- [Original corpus comparison](results/COMPARISON.md)
+
+Working Markdown documents are kept locally in `docs/` and are intentionally excluded from this repository publication and source ZIP. Commands below run from the repository root.
+
+The 7 November untimed walkthrough completed real human-approved characterization, deliberate failure and separate repair. The repair passed seven tests and thirteen comparison checks; the failed workspace remains preserved locally. A complete timed recording remains pending.
+
+
+Optional local read-only dashboard (local documentation): run
 `.venv\Scripts\python.exe dashboard.py` and open `http://127.0.0.1:8765`.
 Approvals remain in the terminal. The pre-dashboard implementation is preserved
 at tag `checkpoint/pre-dashboard-20261103`.
 
 Additional work on `hardening/python-intake-evaluation` is documented in
-[hardening status](HARDENING-STATUS.md). The established rehearsal/primary
+hardening status (local documentation). The established rehearsal/primary
 recording remains the bounded baseline; hardening is not silently substituted
-for that evidence. See [repository intake and evaluation](HARDENING.md).
-The [Luna-authored blinded holdout](HOLDOUT-LUNA-RESULTS.md) records the frozen
+for that evidence. See repository intake and evaluation (local documentation).
+The Luna-authored blinded holdout (local documentation) records the frozen
 review experiment separately, including provisional scores and incomplete labels.
 
 A bounded Python capstone prototype using **Google ADK** for four parallel
@@ -19,9 +31,9 @@ provide the local tool integrations. Arbitrary repository/PR intake is unfinishe
 
 Four real human-approved historical operations are preserved: test prerequisite
 VERIFIED, optimization VERIFIED, disclosed negative case FAILED, and separate
-repair VERIFIED. See [first operation](FIRST-APPROVED-RESULT.md),
-[optimization](OPTIMIZATION-RESULT.md), [failure](FAILURE-REPLANNING-RESULT.md),
-and [repair](RECOVERY-RESULT.md). Reopening them does not create a live run.
+repair VERIFIED. See first operation (local documentation),
+optimization (local documentation), failure (local documentation),
+and repair (local documentation). Reopening them does not create a live run.
 
 New demonstrations use independent run directories and unique candidates.
 Historical approvals, SQLite ledgers, checkpoints, quarantines and logs are
@@ -40,9 +52,9 @@ adjudication; no corpus patch-success score is claimed. All 16 original/correcte
 oracle pairs passed their declared contracts in Docker; two authored test mutants
 were detected. These oracle tests are separate from agent-authored patch success.
 
-[Evaluation specification](EVALUATION.md) distinguishes implemented measures from
-remaining targets. [Packaging validation](PACKAGING-VALIDATION.md) records checks
-and their limits. The combined local regression suite has 42 passing tests.
+Evaluation specification (local documentation) distinguishes implemented measures from
+remaining targets. Packaging validation (local documentation) records checks
+and their limits. On 7 November, 70 of 72 regression tests passed initially; the two Docker-dependent tests passed on rerun after starting Docker. All 72 tests have passed.
 
 ## Setup (tested Windows / Python 3.12)
 
@@ -123,13 +135,13 @@ The initial fixture and collection-specific policies are intentionally bounded;
 this is not a general refactoring service. Failed model output can block a run.
 The first new human-approved attempt exposed a Windows path failure and was
 quarantined as AMBIGUOUS. The replacement then FAILED on an incorrect model-generated expected order.
-[Corrected tests](TEST-EXPECTATION-CORRECTION.md) passed 7/7 in a separate simulated
+Corrected tests (local documentation) passed 7/7 in a separate simulated
 Docker verification and subsequently passed its real human-approved run.
 The optimization also reached real human-approved VERIFIED. The disclosed
 negative case then FAILED as expected and live replanning produced plan 4.
 The separately approved repair is now VERIFIED; all four real stages have
 matching saved bindings, logs, checkpoints and resulting files. No repair approval
-is pending in the completed run; see [fresh progress](FRESH-REHEARSAL-RESULT.md).
+is pending in the completed run; see fresh progress (local documentation).
 Its full fresh chain still needs a human dress rehearsal. Original human-approved history remains separately verified.
 
 ## Testing and reproducibility
@@ -157,7 +169,7 @@ For read-only local historical evidence:
 
 It checks recorded bindings/log hashes and labels everything SAVED. A fresh
 package has no historical ignored ledgers and reports their absence honestly.
-The old `approve-*.cmd` launchers explicitly target historical gates.
+The historical approval launchers have been removed. Use the explicit `review_ledger.py` commands above with the intended run ID.
 
 ## Packaging, presentation and submission
 
@@ -168,22 +180,22 @@ The old `approve-*.cmd` launchers explicitly target historical gates.
 This exports allowlisted source, documents and synthetic corpus results with a
 SHA256 file manifest. It excludes `.env`, `.venv`, `.git`, all `artifacts/` and
 historical private evidence. LF normalization plus `.gitattributes` keeps corpus
-hashes stable through Windows Git checkouts. See [packaging proof](PACKAGING-VALIDATION.md).
+hashes stable through Windows Git checkouts. See packaging proof (local documentation).
 A local source-only Git clone was used for validation; no remote publication or
 instructor access is implied by that test.
 
-[Thursday checklist](THURSDAY-DEMO-CHECKLIST.md) lists what remains.
-[Thursday 5 November runbook](DEMO-RUNBOOK.md) gives commands, prompts, screen
+Thursday checklist (local documentation) lists what remains.
+Thursday 5 November runbook (local documentation) gives commands, prompts, screen
 locations, live/prepared/saved labels, a 9:30 schedule and recovery routes. A full
 spoken <=10-minute rehearsal and final recording are **pending**. Recording link:
 **not yet available**. Confirm Canvas deadline, instructor access, page limits
 and two-track handling before submission.
 
-Design and delivery: [architecture](ARCHITECTURE.md),
-[implementation contract](IMPLEMENTATION-CONTRACT.md),
-[reflection](TECHNICAL-REFLECTION.md), [delivery plan](DELIVERY-PLAN.md),
-[requirements](CAPSTONE-REQUIREMENTS.md), [current handoff](CURRENT-STATE-HANDOFF.md).
-The architecture/reflection still need typesetting and page-count checks.
+Design and delivery: architecture (local documentation),
+implementation contract (local documentation),
+reflection (local documentation), delivery plan (local documentation),
+requirements (local documentation), current handoff (local documentation).
+Confirm final submission page limits against the supplied reflection PDF; recording remains pending.
 
 AI implementation assistance is permitted; the student must explain every line.
 Original prototype code uses documented ADK structured-output and LangGraph

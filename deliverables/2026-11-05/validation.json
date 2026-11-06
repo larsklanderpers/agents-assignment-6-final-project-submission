@@ -76,8 +76,8 @@
     "passed": true,
     "slideCount": 8,
     "sha256": "3d7a7fb2037d6dfc0210046eed9cf6b2500f6aa8872859ad8a66e12161fc28d9",
-    "runtimeNodeModules": "C:/Users/LARSKLANDER/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
-    "nodeExecutable": "C:\\Users\\LARSKLANDER\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe"
+    "runtimeNodeModules": "Machine-specific runtime path omitted from published receipt",
+    "nodeExecutable": "Machine-specific runtime path omitted from published receipt"
   },
   "nativeTableArithmetic": {
     "performed": true,

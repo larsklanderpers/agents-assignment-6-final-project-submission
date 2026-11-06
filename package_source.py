@@ -10,10 +10,12 @@ ROOT = Path(__file__).resolve().parent
 
 def source_files():
     files = [p for p in ROOT.iterdir() if p.is_file() and
-             (p.suffix in {'.py', '.md', '.cmd', '.lock', '.ps1'} or p.name in {'.gitignore', '.gitattributes', '.env.example', 'dashboard.html'})]
-    for folder in ('evaluation', 'results'):
+             not p.name.startswith('~$') and
+             (p.suffix in {'.py', '.md', '.cmd', '.lock', '.ps1', '.pdf', '.pptx'} or p.name in {'.gitignore', '.gitattributes', '.env.example', 'dashboard.html', 'dashboard-scope.json'})]
+    for folder in ('evaluation', 'results', 'deliverables'):
         files.extend(p for p in (ROOT / folder).rglob('*') if p.is_file() and
-                     p.suffix in {'.py', '.json', '.sha256', '.md', '.csv', '.jsonl', '.log'})
+                     not p.name.startswith('~$') and
+                     p.suffix in {'.py', '.json', '.sha256', '.md', '.csv', '.jsonl', '.log', '.pdf', '.pptx'})
     return sorted(files)
 
 
@@ -28,7 +30,9 @@ def main():
         manifest = {}
         for path in files:
             name = path.relative_to(ROOT).as_posix()
-            raw = path.read_bytes().replace(b'\r\n', b'\n')  # Same bytes as LF Git checkouts.
+            raw = path.read_bytes()
+            if path.suffix not in {'.pdf', '.pptx'}:
+                raw = raw.replace(b'\r\n', b'\n')  # Same bytes as LF Git checkouts.
             manifest[name] = hashlib.sha256(raw).hexdigest()
             archive.writestr(name, raw)
         archive.writestr('SOURCE-MANIFEST.json', json.dumps(manifest, indent=2))
