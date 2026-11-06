@@ -1,0 +1,529 @@
+{
+  "split": "development",
+  "cases": 8,
+  "successes": 8,
+  "end_to_end_success_rate": 1.0,
+  "unchanged_baseline_successes": 2,
+  "repair_cases": 6,
+  "repair_successes": 6,
+  "clean_controls": 2,
+  "clean_controls_preserved": 2,
+  "forced_recovery_cases": 2,
+  "forced_recovery_successes": 2,
+  "results": [
+    {
+      "case": "clean-multimodule",
+      "expected": "no_change",
+      "success": true,
+      "attempts": [],
+      "mode": "simulated",
+      "forced_failure": false,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "32a2c8018afa82c417e861307252ab167055d4adec5c931eef048aaedc7659ca"
+      },
+      "baseline_acceptance": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "98b16dc0ab3cb806efe2e3642d9c0f50afede664ce1276262768e46bfafde07e"
+      },
+      "unchanged_baseline_success": true,
+      "findings": 0,
+      "status": "no_change",
+      "elapsed_seconds": 14.407,
+      "repeat": 1
+    },
+    {
+      "case": "discount-defect",
+      "expected": "repair",
+      "success": true,
+      "attempts": [
+        {
+          "state": "VERIFIED",
+          "operation_id": "ccd33a2444274a41b1d4e5401849ff86",
+          "tests": {
+            "status": "passed",
+            "exit_code": 0,
+            "tests": 8,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0,
+            "log_sha256": "4ee50a44a16219b61a993bb04bd59df65a55dc15ebe3743a1667c5c9effba893"
+          },
+          "mode": "simulated",
+          "original_repository_unchanged": true,
+          "step": "fix_discount_rate",
+          "attempt": 1,
+          "harness_injected": false
+        }
+      ],
+      "mode": "simulated",
+      "forced_failure": false,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "12c7d2060f2489ebf85fd44bba089be3d0e542027da2697a4e64178348d668c8"
+      },
+      "baseline_acceptance": {
+        "status": "failed",
+        "exit_code": 1,
+        "tests": 8,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "caac1ca6e2f5d14a2ff4e6c48fcd2da1420d9b2add0096d01f74a548161b90dc"
+      },
+      "unchanged_baseline_success": false,
+      "findings": 1,
+      "planned_steps": 1,
+      "changed_paths": [
+        "pricing/rules.py"
+      ],
+      "status": "repaired",
+      "final_acceptance": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "007129c1c26ff32eba44429ee0debc5f126f68c6c8c9bec793797576f9ad3071"
+      },
+      "elapsed_seconds": 29.109,
+      "repeat": 1
+    },
+    {
+      "case": "two-module-defects",
+      "expected": "repair",
+      "success": true,
+      "attempts": [
+        {
+          "state": "VERIFIED",
+          "operation_id": "57a932b2239940a88696b7d68ab8ff7b",
+          "tests": {
+            "status": "passed",
+            "exit_code": 0,
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0,
+            "log_sha256": "12c7d2060f2489ebf85fd44bba089be3d0e542027da2697a4e64178348d668c8"
+          },
+          "mode": "simulated",
+          "original_repository_unchanged": true,
+          "step": "step_1",
+          "attempt": 1,
+          "harness_injected": false
+        },
+        {
+          "state": "VERIFIED",
+          "operation_id": "051a67c0e4ae41f0b1ec687cc527617a",
+          "tests": {
+            "status": "passed",
+            "exit_code": 0,
+            "tests": 8,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0,
+            "log_sha256": "007129c1c26ff32eba44429ee0debc5f126f68c6c8c9bec793797576f9ad3071"
+          },
+          "mode": "simulated",
+          "original_repository_unchanged": true,
+          "step": "step_2",
+          "attempt": 1,
+          "harness_injected": false
+        }
+      ],
+      "mode": "simulated",
+      "forced_failure": false,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "32a2c8018afa82c417e861307252ab167055d4adec5c931eef048aaedc7659ca"
+      },
+      "baseline_acceptance": {
+        "status": "failed",
+        "exit_code": 1,
+        "tests": 8,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "bfef2ba44f6c7c504b9ed1a0af5a93bb8073eb257b76567dd7f050dcfc004e76"
+      },
+      "unchanged_baseline_success": false,
+      "findings": 2,
+      "planned_steps": 2,
+      "changed_paths": [
+        "pricing/rules.py",
+        "pricing/service.py"
+      ],
+      "status": "repaired",
+      "final_acceptance": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "007129c1c26ff32eba44429ee0debc5f126f68c6c8c9bec793797576f9ad3071"
+      },
+      "elapsed_seconds": 35.343,
+      "repeat": 1
+    },
+    {
+      "case": "forced-recovery",
+      "expected": "repair",
+      "success": true,
+      "attempts": [
+        {
+          "state": "FAILED",
+          "operation_id": "ce9dd46c0df04b18a9f2acda9e55004b",
+          "tests": {
+            "status": "failed",
+            "exit_code": 1,
+            "tests": 2,
+            "failures": 0,
+            "errors": 2,
+            "skipped": 0,
+            "log_sha256": "e2417fdb5b86475d9e8677ec55f0b38928be33d670407af9ae901a9dbdaac264"
+          },
+          "mode": "simulated",
+          "original_repository_unchanged": true,
+          "step": "step_1",
+          "attempt": 1,
+          "harness_injected": true
+        },
+        {
+          "state": "VERIFIED",
+          "operation_id": "490052e8711f4ae6bd01cfc57b88669f",
+          "tests": {
+            "status": "passed",
+            "exit_code": 0,
+            "tests": 8,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0,
+            "log_sha256": "007129c1c26ff32eba44429ee0debc5f126f68c6c8c9bec793797576f9ad3071"
+          },
+          "mode": "simulated",
+          "original_repository_unchanged": true,
+          "step": "step_1",
+          "attempt": 2,
+          "harness_injected": false
+        }
+      ],
+      "mode": "simulated",
+      "forced_failure": true,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "32a2c8018afa82c417e861307252ab167055d4adec5c931eef048aaedc7659ca"
+      },
+      "baseline_acceptance": {
+        "status": "failed",
+        "exit_code": 1,
+        "tests": 8,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "360c3676c0df8da528a84e02ed0f09afd1e3d3ad71692345aedb687b2ed0d1c0"
+      },
+      "unchanged_baseline_success": false,
+      "findings": 1,
+      "planned_steps": 1,
+      "changed_paths": [
+        "pricing/service.py"
+      ],
+      "status": "repaired",
+      "final_acceptance": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "007129c1c26ff32eba44429ee0debc5f126f68c6c8c9bec793797576f9ad3071"
+      },
+      "elapsed_seconds": 33.859,
+      "repeat": 1
+    },
+    {
+      "case": "clean-multimodule",
+      "expected": "no_change",
+      "success": true,
+      "attempts": [],
+      "mode": "simulated",
+      "forced_failure": false,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "12c7d2060f2489ebf85fd44bba089be3d0e542027da2697a4e64178348d668c8"
+      },
+      "baseline_acceptance": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "007129c1c26ff32eba44429ee0debc5f126f68c6c8c9bec793797576f9ad3071"
+      },
+      "unchanged_baseline_success": true,
+      "findings": 0,
+      "status": "no_change",
+      "elapsed_seconds": 14.766,
+      "repeat": 2
+    },
+    {
+      "case": "discount-defect",
+      "expected": "repair",
+      "success": true,
+      "attempts": [
+        {
+          "state": "VERIFIED",
+          "operation_id": "19717034821e4f93bc837f197d812a68",
+          "tests": {
+            "status": "passed",
+            "exit_code": 0,
+            "tests": 8,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0,
+            "log_sha256": "007129c1c26ff32eba44429ee0debc5f126f68c6c8c9bec793797576f9ad3071"
+          },
+          "mode": "simulated",
+          "original_repository_unchanged": true,
+          "step": "step_1",
+          "attempt": 1,
+          "harness_injected": false
+        }
+      ],
+      "mode": "simulated",
+      "forced_failure": false,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "32a2c8018afa82c417e861307252ab167055d4adec5c931eef048aaedc7659ca"
+      },
+      "baseline_acceptance": {
+        "status": "failed",
+        "exit_code": 1,
+        "tests": 8,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "4628fc2f53c7d8c00c7ffad52ed81c47953b04d7e5e3046e8be3467e3c8dc9dc"
+      },
+      "unchanged_baseline_success": false,
+      "findings": 1,
+      "planned_steps": 1,
+      "changed_paths": [
+        "pricing/rules.py"
+      ],
+      "status": "repaired",
+      "final_acceptance": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "007129c1c26ff32eba44429ee0debc5f126f68c6c8c9bec793797576f9ad3071"
+      },
+      "elapsed_seconds": 26.687,
+      "repeat": 2
+    },
+    {
+      "case": "two-module-defects",
+      "expected": "repair",
+      "success": true,
+      "attempts": [
+        {
+          "state": "VERIFIED",
+          "operation_id": "3993ddefd4c64503a0a006f3452f9cf0",
+          "tests": {
+            "status": "passed",
+            "exit_code": 0,
+            "tests": 2,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0,
+            "log_sha256": "12c7d2060f2489ebf85fd44bba089be3d0e542027da2697a4e64178348d668c8"
+          },
+          "mode": "simulated",
+          "original_repository_unchanged": true,
+          "step": "step_1_fix_discount_rule",
+          "attempt": 1,
+          "harness_injected": false
+        },
+        {
+          "state": "VERIFIED",
+          "operation_id": "f51019f0d6af440586cec0f35cd193cd",
+          "tests": {
+            "status": "passed",
+            "exit_code": 0,
+            "tests": 8,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0,
+            "log_sha256": "d43e4925a62bd27352d6c590f8de21db952d6b8a891b0c48a2048a8056640fd7"
+          },
+          "mode": "simulated",
+          "original_repository_unchanged": true,
+          "step": "step_2_fix_total_service",
+          "attempt": 1,
+          "harness_injected": false
+        }
+      ],
+      "mode": "simulated",
+      "forced_failure": false,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "12c7d2060f2489ebf85fd44bba089be3d0e542027da2697a4e64178348d668c8"
+      },
+      "baseline_acceptance": {
+        "status": "failed",
+        "exit_code": 1,
+        "tests": 8,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "e57597050148fc4d6cbf6a5eb3873a9a61e797b226291a5de3d0ff5530097129"
+      },
+      "unchanged_baseline_success": false,
+      "findings": 2,
+      "planned_steps": 2,
+      "changed_paths": [
+        "pricing/rules.py",
+        "pricing/service.py"
+      ],
+      "status": "repaired",
+      "final_acceptance": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "007129c1c26ff32eba44429ee0debc5f126f68c6c8c9bec793797576f9ad3071"
+      },
+      "elapsed_seconds": 35.891,
+      "repeat": 2
+    },
+    {
+      "case": "forced-recovery",
+      "expected": "repair",
+      "success": true,
+      "attempts": [
+        {
+          "state": "FAILED",
+          "operation_id": "21520cb50c984dab94e8610c53c78be8",
+          "tests": {
+            "status": "failed",
+            "exit_code": 1,
+            "tests": 2,
+            "failures": 0,
+            "errors": 2,
+            "skipped": 0,
+            "log_sha256": "e2417fdb5b86475d9e8677ec55f0b38928be33d670407af9ae901a9dbdaac264"
+          },
+          "mode": "simulated",
+          "original_repository_unchanged": true,
+          "step": "repair_total_calculation",
+          "attempt": 1,
+          "harness_injected": true
+        },
+        {
+          "state": "VERIFIED",
+          "operation_id": "0dea95f5d90e438aad3f567d9b05fd9d",
+          "tests": {
+            "status": "passed",
+            "exit_code": 0,
+            "tests": 8,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0,
+            "log_sha256": "007129c1c26ff32eba44429ee0debc5f126f68c6c8c9bec793797576f9ad3071"
+          },
+          "mode": "simulated",
+          "original_repository_unchanged": true,
+          "step": "repair_total_calculation",
+          "attempt": 2,
+          "harness_injected": false
+        }
+      ],
+      "mode": "simulated",
+      "forced_failure": true,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "32a2c8018afa82c417e861307252ab167055d4adec5c931eef048aaedc7659ca"
+      },
+      "baseline_acceptance": {
+        "status": "failed",
+        "exit_code": 1,
+        "tests": 8,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "c28b5d5e02e43fbe9fd54d441ac64709b0ae10c39a1005913110f7f1accbd450"
+      },
+      "unchanged_baseline_success": false,
+      "findings": 1,
+      "planned_steps": 1,
+      "changed_paths": [
+        "pricing/service.py"
+      ],
+      "status": "repaired",
+      "final_acceptance": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "007129c1c26ff32eba44429ee0debc5f126f68c6c8c9bec793797576f9ad3071"
+      },
+      "elapsed_seconds": 32.25,
+      "repeat": 2
+    }
+  ]
+}

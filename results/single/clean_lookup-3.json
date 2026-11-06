@@ -1,0 +1,72 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def overlap(left, right):\n    \"\"\"Inputs are integer lists.\"\"\"\n    members = set(right)\n    return [value for value in left if value in members]\n",
+  "source_sha256": "d21701ad28b4c34b39bd10240164c3d940da7a48a23c105d8db773f7a476fa45",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No dynamic analysis or fuzzing tools were executed.",
+        "Analysis is limited to the provided Python snippet."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No runtime profiling or benchmarking tools were executed.",
+        "Performance characteristics are based on standard Python set and list comprehension complexity."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No style configuration or linter was supplied.",
+        "Code adheres to standard PEP 8 formatting conventions."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 1,
+          "evidence": "def overlap(left, right):",
+          "summary": "Tests do not cover cases where left contains elements with no intersection in right, or where right is non-empty while left is empty.",
+          "suggested_action": "Add test cases covering non-overlapping elements (e.g., overlap([1, 3], [2, 4]) == []) and asymmetric empty inputs (e.g., overlap([], [1, 2]) == [] and overlap([1, 2], []) == [])."
+        }
+      ],
+      "limitations": [
+        "Test execution and coverage tools were not run.",
+        "Evaluation is based solely on visual inspection of the provided visible test suite."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 424,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 245,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 245
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 669,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

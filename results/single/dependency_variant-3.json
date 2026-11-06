@@ -1,0 +1,76 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def checked_variant(items, allowed):\n    \"\"\"Membership accepts nested lists; preserve their equality behavior.\"\"\"\n    return [item for item in items if item in allowed]\n",
+  "source_sha256": "879f464d65addcef8ae9430c990640563239e6477912e91fc9b1774b4a6c82f0",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No execution environment or dynamic analysis tools available to test runtime security vulnerabilities."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 3,
+          "evidence": "    return [item for item in items if item in allowed]",
+          "summary": "Linear membership testing inside list comprehension yields O(N * M) overall time complexity if allowed is a list.",
+          "suggested_action": "If elements within allowed are hashable, convert allowed to a set or dict for O(1) membership lookups. If nested lists must be supported as described in the docstring, consider converting nested sequences to tuples to enable set lookup if mutability preservation during equality check is not strictly required."
+        }
+      ],
+      "limitations": [
+        "Concrete input sizes and types (e.g. whether allowed elements are strictly unhashable nested lists) cannot be determined without runtime profiling."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No style configuration or linter rules were supplied."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 1,
+          "evidence": "def checked_variant(items, allowed):",
+          "summary": "No unit tests are supplied to verify checked_variant functionality or edge cases.",
+          "suggested_action": "Add unit tests verifying behavior with nested lists, empty collections, and unhashable or mixed types to confirm equality semantics work as documented."
+        }
+      ],
+      "limitations": [
+        "Test suite files outside the provided snapshot were not accessible."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 490,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 190,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 190
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 680,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

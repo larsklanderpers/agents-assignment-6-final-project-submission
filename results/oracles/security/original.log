@@ -1,0 +1,23 @@
+test_attack (test_collection_ops.Behavior.test_attack) ... FAIL
+test_normal (test_collection_ops.Behavior.test_normal) ... ok
+
+======================================================================
+FAIL: test_attack (test_collection_ops.Behavior.test_attack)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/tests/test_collection_ops.py", line 9, in test_attack
+    self.assertEqual(lookup(c,"' OR 1=1 --"), [])
+AssertionError: Lists differ: [('Alice',)] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+('Alice',)
+
+- [('Alice',)]
++ []
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.003s
+
+FAILED (failures=1)
+LEDGER_RESULT:{"tests": 2, "failures": 1, "errors": 0, "skipped": 0}

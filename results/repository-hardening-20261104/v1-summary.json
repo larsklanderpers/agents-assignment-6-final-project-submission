@@ -1,0 +1,263 @@
+{
+  "split": "development",
+  "cases": 8,
+  "successes": 2,
+  "end_to_end_success_rate": 0.25,
+  "unchanged_baseline_successes": 2,
+  "repair_cases": 6,
+  "repair_successes": 0,
+  "clean_controls": 2,
+  "clean_controls_preserved": 2,
+  "forced_recovery_cases": 2,
+  "forced_recovery_successes": 0,
+  "results": [
+    {
+      "case": "clean-multimodule",
+      "expected": "no_change",
+      "success": true,
+      "attempts": [],
+      "mode": "simulated",
+      "forced_failure": false,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "b02c9dacd1505863adfa804f07776a89e75ad99f5b642a816fc4c5db15db3742"
+      },
+      "baseline_acceptance": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "007129c1c26ff32eba44429ee0debc5f126f68c6c8c9bec793797576f9ad3071"
+      },
+      "unchanged_baseline_success": true,
+      "findings": 0,
+      "status": "no_change",
+      "elapsed_seconds": 22.797,
+      "repeat": 1
+    },
+    {
+      "case": "discount-defect",
+      "expected": "repair",
+      "success": false,
+      "attempts": [],
+      "mode": "simulated",
+      "forced_failure": false,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "12c7d2060f2489ebf85fd44bba089be3d0e542027da2697a4e64178348d668c8"
+      },
+      "baseline_acceptance": {
+        "status": "failed",
+        "exit_code": 1,
+        "tests": 8,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "caac1ca6e2f5d14a2ff4e6c48fcd2da1420d9b2add0096d01f74a548161b90dc"
+      },
+      "unchanged_baseline_success": false,
+      "findings": 0,
+      "status": "no_change",
+      "elapsed_seconds": 9.625,
+      "repeat": 1
+    },
+    {
+      "case": "two-module-defects",
+      "expected": "repair",
+      "success": false,
+      "attempts": [],
+      "mode": "simulated",
+      "forced_failure": false,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "32a2c8018afa82c417e861307252ab167055d4adec5c931eef048aaedc7659ca"
+      },
+      "baseline_acceptance": {
+        "status": "failed",
+        "exit_code": 1,
+        "tests": 8,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "bfef2ba44f6c7c504b9ed1a0af5a93bb8073eb257b76567dd7f050dcfc004e76"
+      },
+      "unchanged_baseline_success": false,
+      "findings": 0,
+      "status": "no_change",
+      "elapsed_seconds": 9.547,
+      "repeat": 1
+    },
+    {
+      "case": "forced-recovery",
+      "expected": "repair",
+      "success": false,
+      "attempts": [],
+      "mode": "simulated",
+      "forced_failure": true,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "32a2c8018afa82c417e861307252ab167055d4adec5c931eef048aaedc7659ca"
+      },
+      "baseline_acceptance": {
+        "status": "failed",
+        "exit_code": 1,
+        "tests": 8,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "204d10849ee7cefe36d7c65877abca4d0d44700476ab6a9ef09f4c05da312e26"
+      },
+      "unchanged_baseline_success": false,
+      "findings": 0,
+      "status": "no_change",
+      "elapsed_seconds": 11.11,
+      "repeat": 1
+    },
+    {
+      "case": "clean-multimodule",
+      "expected": "no_change",
+      "success": true,
+      "attempts": [],
+      "mode": "simulated",
+      "forced_failure": false,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "32a2c8018afa82c417e861307252ab167055d4adec5c931eef048aaedc7659ca"
+      },
+      "baseline_acceptance": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "007129c1c26ff32eba44429ee0debc5f126f68c6c8c9bec793797576f9ad3071"
+      },
+      "unchanged_baseline_success": true,
+      "findings": 0,
+      "status": "no_change",
+      "elapsed_seconds": 10.671,
+      "repeat": 2
+    },
+    {
+      "case": "discount-defect",
+      "expected": "repair",
+      "success": false,
+      "attempts": [],
+      "mode": "simulated",
+      "forced_failure": false,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "32a2c8018afa82c417e861307252ab167055d4adec5c931eef048aaedc7659ca"
+      },
+      "baseline_acceptance": {
+        "status": "failed",
+        "exit_code": 1,
+        "tests": 8,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "caac1ca6e2f5d14a2ff4e6c48fcd2da1420d9b2add0096d01f74a548161b90dc"
+      },
+      "unchanged_baseline_success": false,
+      "findings": 0,
+      "status": "no_change",
+      "elapsed_seconds": 9.141,
+      "repeat": 2
+    },
+    {
+      "case": "two-module-defects",
+      "expected": "repair",
+      "success": false,
+      "attempts": [],
+      "mode": "simulated",
+      "forced_failure": false,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "32a2c8018afa82c417e861307252ab167055d4adec5c931eef048aaedc7659ca"
+      },
+      "baseline_acceptance": {
+        "status": "failed",
+        "exit_code": 1,
+        "tests": 8,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "bfef2ba44f6c7c504b9ed1a0af5a93bb8073eb257b76567dd7f050dcfc004e76"
+      },
+      "unchanged_baseline_success": false,
+      "findings": 0,
+      "status": "no_change",
+      "elapsed_seconds": 9.281,
+      "repeat": 2
+    },
+    {
+      "case": "forced-recovery",
+      "expected": "repair",
+      "success": false,
+      "attempts": [],
+      "mode": "simulated",
+      "forced_failure": true,
+      "baseline_visible": {
+        "status": "passed",
+        "exit_code": 0,
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "32a2c8018afa82c417e861307252ab167055d4adec5c931eef048aaedc7659ca"
+      },
+      "baseline_acceptance": {
+        "status": "failed",
+        "exit_code": 1,
+        "tests": 8,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0,
+        "log_sha256": "c28b5d5e02e43fbe9fd54d441ac64709b0ae10c39a1005913110f7f1accbd450"
+      },
+      "unchanged_baseline_success": false,
+      "findings": 0,
+      "status": "no_change",
+      "elapsed_seconds": 9.578,
+      "repeat": 2
+    }
+  ]
+}

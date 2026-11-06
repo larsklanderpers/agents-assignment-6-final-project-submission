@@ -1,0 +1,18 @@
+test_tenants (test_collection_ops.Behavior.test_tenants) ... FAIL
+
+======================================================================
+FAIL: test_tenants (test_collection_ops.Behavior.test_tenants)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/tests/test_collection_ops.py", line 7, in test_tenants
+    self.assertEqual(cached_variant("b",1,fetch),"b")
+AssertionError: 'a' != 'b'
+- a
++ b
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)
+LEDGER_RESULT:{"tests": 1, "failures": 1, "errors": 0, "skipped": 0}

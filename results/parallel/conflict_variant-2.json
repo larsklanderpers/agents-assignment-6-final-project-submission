@@ -1,0 +1,174 @@
+{
+  "model": "gemini-3.8-flash",
+  "source_sha256": "0b4b1fb429e20c9a101fe2638650547fbb6f9bac113a3decaddf24397ca54c53",
+  "source": "cache = {}\ndef cached_variant(tenant, key, fetch):\n    \"\"\"Different tenants may have different values for the same key.\"\"\"\n    if key not in cache:\n        cache[key] = fetch(tenant, key)\n    return cache[key]\n",
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 183,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 307,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 307
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 490,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 286,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 301,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 301
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 587,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 139,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 301,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 301
+        }
+      ],
+      "thoughts_token_count": 382,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 822,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 108,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 301,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 301
+        }
+      ],
+      "thoughts_token_count": 434,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 843,
+      "traffic_type": null
+    }
+  ],
+  "reviews": {
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 4,
+          "evidence": "    if key not in cache:",
+          "summary": "Existing test exercises multiple tenants under the same key and will fail because cache keys do not partition by tenant, but there is no test verifying behavior across distinct keys or cache eviction/invalidation.",
+          "suggested_action": "Add tests verifying multi-tenant caching behavior where cache keys include the tenant identifier, and test scenarios with multiple distinct keys."
+        }
+      ],
+      "limitations": [
+        "Only visible test provided in the snapshot was inspected.",
+        "No dynamic execution environment is available to run tests directly."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 2,
+          "evidence": "def cached_variant(tenant, key, fetch):",
+          "summary": "Function definition lacks type annotations and does not have two preceding blank lines according to PEP 8 standards.",
+          "suggested_action": "Add type annotations to function parameters and return type (e.g., Callable for fetch), and ensure two blank lines precede top-level function definitions."
+        },
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "cache = {}",
+          "summary": "Global mutable dictionary lacks type annotations and module-level constant naming conventions if intended as module state.",
+          "suggested_action": "Add type annotation (e.g., `cache: dict = {}`) or encapsulate the cache inside a class or closure to avoid bare global state."
+        }
+      ],
+      "limitations": [
+        "No linter or formatter configuration files (e.g., flake8, black, ruff, mypy) were provided in the snapshot.",
+        "Style conventions evaluated based on standard PEP 8 recommendations."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 1,
+          "evidence": "cache = {}",
+          "summary": "Global dictionary cache grows without bounds or eviction, risking uncontrolled memory consumption.",
+          "suggested_action": "Use an eviction strategy such as an LRU cache or set a maximum size limit to bound memory usage."
+        }
+      ],
+      "limitations": [
+        "No execution metrics, memory profiles, or production traffic load statistics were provided."
+      ]
+    },
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 4,
+          "evidence": "    if key not in cache:",
+          "summary": "Shared cache uses only key without tenant isolation, causing cross-tenant data leakage or spoofing.",
+          "suggested_action": "Incorporate tenant identifier into the cache key, e.g., using (tenant, key) as the cache key."
+        }
+      ],
+      "limitations": [
+        "Static analysis conducted without runtime environment or deployment context.",
+        "Concurrency and cache eviction behaviors were not evaluated."
+      ]
+    }
+  },
+  "spans": {
+    "security": {
+      "start": 92638.937,
+      "end": 92653.687
+    },
+    "performance": {
+      "start": 92639.0,
+      "end": 92645.875
+    },
+    "style": {
+      "start": 92639.046,
+      "end": 92644.734
+    },
+    "test_gap": {
+      "start": 92639.109,
+      "end": 92644.046
+    }
+  },
+  "overlap": true
+}

@@ -1,0 +1,158 @@
+{
+  "model": "gemini-3.8-flash",
+  "source_sha256": "24927852db70f513260da1eb3d0461f05246620e7e2d9e8c4fbf5fe65c19fa42",
+  "source": "def lookup(connection, name):\n    return connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()\n",
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 175,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 326,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 326
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 501,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 283,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 332,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 332
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 615,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 48,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 326,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 326
+        }
+      ],
+      "thoughts_token_count": 295,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 669,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 49,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 326,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 326
+        }
+      ],
+      "thoughts_token_count": 124,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 499,
+      "traffic_type": null
+    }
+  ],
+  "reviews": {
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "def lookup(connection, name):",
+          "summary": "Function definition lacks type annotations and a docstring.",
+          "suggested_action": "Add type annotations (e.g. connection: sqlite3.Connection, name: str) -> list[tuple[Any, ...]] and a descriptive docstring per PEP 8 and PEP 257."
+        }
+      ],
+      "limitations": [
+        "No repository-wide linter or formatter configuration was provided.",
+        "Inspection is limited to the provided two lines of production code."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()",
+          "summary": "Missing test coverage for handling non-existent records, empty database, or non-matching names.",
+          "suggested_action": "Add a test case where a standard non-matching name (such as 'Bob') is queried against the database to confirm it returns an empty list."
+        },
+        {
+          "category": "test_gap",
+          "line": 1,
+          "evidence": "def lookup(connection, name):",
+          "summary": "Missing test coverage for unexpected or invalid argument types (e.g., None or non-string types for 'name').",
+          "suggested_action": "Add unit tests verifying behavior when 'name' is None or an unexpected type."
+        }
+      ],
+      "limitations": [
+        "Tests were evaluated based solely on the provided inline unit test snippet.",
+        "No dynamic execution environment is available to run coverage tools."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No database schema, indexing definitions, or production data volumes provided to assess query execution plans.",
+        "No benchmarks or profiling data available to measure performance impact."
+      ]
+    },
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "Static analysis conducted only on provided code snippet; database configuration, connection permissions, and schema constraints outside this function were not evaluated."
+      ]
+    }
+  },
+  "spans": {
+    "security": {
+      "start": 92688.265,
+      "end": 92698.515
+    },
+    "performance": {
+      "start": 92688.328,
+      "end": 92693.953
+    },
+    "style": {
+      "start": 92688.39,
+      "end": 92692.156
+    },
+    "test_gap": {
+      "start": 92688.437,
+      "end": 92693.265
+    }
+  },
+  "overlap": true
+}

@@ -1,0 +1,113 @@
+{
+  "frozen_commit": "6d3b31496ae9efe3047168e81bc0d95c9a6a7c26",
+  "author_model": "gpt-6-luna",
+  "case_runs": 12,
+  "failed_reviews": 0,
+  "modes": {
+    "raw": {
+      "categories": {
+        "security": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "performance": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "style": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "test_gap": {
+          "tp": 2,
+          "fp": 5,
+          "fn": 0,
+          "precision": 0.2857142857142857,
+          "recall": 1.0
+        }
+      },
+      "totals": {
+        "tp": 8,
+        "fp": 5,
+        "fn": 0
+      },
+      "micro_precision": 0.6153846153846154,
+      "micro_recall": 1.0,
+      "macro_precision": 0.8214285714285714,
+      "macro_recall": 1.0,
+      "clean_controls": 4,
+      "clean_controls_without_findings": 3,
+      "exact_case_outcomes": 8
+    },
+    "filtered": {
+      "categories": {
+        "security": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "performance": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "style": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "test_gap": {
+          "tp": 2,
+          "fp": 3,
+          "fn": 0,
+          "precision": 0.4,
+          "recall": 1.0
+        }
+      },
+      "totals": {
+        "tp": 8,
+        "fp": 3,
+        "fn": 0
+      },
+      "micro_precision": 0.7272727272727273,
+      "micro_recall": 1.0,
+      "macro_precision": 0.85,
+      "macro_recall": 1.0,
+      "clean_controls": 4,
+      "clean_controls_without_findings": 3,
+      "exact_case_outcomes": 9
+    }
+  },
+  "human_adjudication": "pending",
+  "repair_success_measured": false,
+  "input_isolation_audit": {
+    "cases_checked": 12,
+    "payload_mismatches": [],
+    "no_private_data_in_serialized_payloads": true,
+    "provider_usage_responses": 48,
+    "total_tokens": 42251,
+    "locked_outputs": 49
+  },
+  "interpretation": {
+    "label_completeness": "incomplete: post-score bounded checks support all three unmatched filtered coverage findings",
+    "official_scores_amended": false,
+    "independent_human_adjudication": "pending",
+    "holdout_used_for_tuning": false,
+    "repair_success_measured": false
+  }
+}

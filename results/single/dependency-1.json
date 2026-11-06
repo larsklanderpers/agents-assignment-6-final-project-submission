@@ -1,0 +1,76 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def checked(items, allowed):\n    \"\"\"Membership accepts nested lists; preserve their equality behavior.\"\"\"\n    return [item for item in items if item in allowed]\n",
+  "source_sha256": "eeb074ec8ee2d2831a7b9bc9365f8379ff00193f94eb607591c92f69b41deb74",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "Static review conducted without runtime context or deployment environment details."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 3,
+          "evidence": "    return [item for item in items if item in allowed]",
+          "summary": "Linear scan membership check inside a list comprehension causes O(N * M) time complexity if allowed is a list or sequence.",
+          "suggested_action": "If elements within allowed are hashable, convert allowed to a set before iterating. If unhashable types such as nested lists must be supported, document the quadratic complexity or consider alternative indexing strategies if performance becomes a bottleneck."
+        }
+      ],
+      "limitations": [
+        "Input size and expected data types for items and allowed were not provided."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No repository style configuration was provided."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 1,
+          "evidence": "def checked(items, allowed):",
+          "summary": "No unit tests are supplied to verify filtering behavior or equality handling for nested lists.",
+          "suggested_action": "Add unit tests covering typical cases, empty collections, nested lists in items/allowed, and element preservation."
+        }
+      ],
+      "limitations": [
+        "No test suite was supplied in the provided snapshot."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 449,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 188,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 188
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 637,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

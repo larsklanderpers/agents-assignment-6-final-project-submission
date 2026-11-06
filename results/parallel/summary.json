@@ -1,0 +1,113 @@
+{
+  "development": {
+    "fixtures": 6,
+    "runs": 18,
+    "failed_runs": 0,
+    "categories": {
+      "security": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "performance": {
+        "tp": 3,
+        "fp": 10,
+        "fn": 0,
+        "precision": 0.23076923076923078,
+        "recall": 1.0
+      },
+      "style": {
+        "tp": 3,
+        "fp": 21,
+        "fn": 0,
+        "precision": 0.125,
+        "recall": 1.0
+      },
+      "test_gap": {
+        "tp": 6,
+        "fp": 19,
+        "fn": 0,
+        "precision": 0.24,
+        "recall": 1.0
+      }
+    },
+    "macro_precision": 0.3989423076923077,
+    "macro_recall": 1.0
+  },
+  "held_out": {
+    "fixtures": 6,
+    "runs": 18,
+    "failed_runs": 0,
+    "categories": {
+      "security": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "performance": {
+        "tp": 3,
+        "fp": 9,
+        "fn": 0,
+        "precision": 0.25,
+        "recall": 1.0
+      },
+      "style": {
+        "tp": 3,
+        "fp": 22,
+        "fn": 0,
+        "precision": 0.12,
+        "recall": 1.0
+      },
+      "test_gap": {
+        "tp": 6,
+        "fp": 16,
+        "fn": 0,
+        "precision": 0.2727272727272727,
+        "recall": 1.0
+      }
+    },
+    "macro_precision": 0.41068181818181815,
+    "macro_recall": 1.0
+  },
+  "control": {
+    "fixtures": 4,
+    "runs": 12,
+    "failed_runs": 0,
+    "categories": {
+      "security": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null
+      },
+      "performance": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0,
+        "precision": 0.0,
+        "recall": null
+      },
+      "style": {
+        "tp": 0,
+        "fp": 13,
+        "fn": 0,
+        "precision": 0.0,
+        "recall": null
+      },
+      "test_gap": {
+        "tp": 0,
+        "fp": 17,
+        "fn": 0,
+        "precision": 0.0,
+        "recall": null
+      }
+    },
+    "macro_precision": 0.0,
+    "macro_recall": null
+  }
+}

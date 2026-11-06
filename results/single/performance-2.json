@@ -1,0 +1,76 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def overlap(left, right):\n    \"\"\"Both arguments are lists of integers; preserve left order and duplicates.\"\"\"\n    return [value for value in left if value in right]\n",
+  "source_sha256": "3e13aae7552e1f9beea22ba8676c327464097d1825bcfbf7f23dfd1b9ec62915",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "Static analysis only; no runtime taint analysis or external security tools available."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 3,
+          "evidence": "    return [value for value in left if value in right]",
+          "summary": "Linear search `value in right` inside list comprehension results in O(len(left) * len(right)) time complexity.",
+          "suggested_action": "Convert `right` to a `set` prior to the list comprehension (e.g. `right_set = set(right)`) to achieve O(len(left) + len(right)) average time complexity."
+        }
+      ],
+      "limitations": [
+        "Execution profiling was not performed; analysis is based on algorithmic complexity."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No repository style configuration (such as flake8, black, or PEP 8 overrides) was provided."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 1,
+          "evidence": "def overlap(left, right):",
+          "summary": "Existing tests do not verify behavior when `left` and `right` share no common elements or when `right` is empty while `left` is non-empty.",
+          "suggested_action": "Add unit tests testing non-empty disjoint lists (e.g. `overlap([1, 2], [3, 4]) == []`) and asymmetric empty lists (e.g. `overlap([1, 2], []) == []`)."
+        }
+      ],
+      "limitations": [
+        "Test coverage measurement tools were not executed; test gap evaluated by inspecting provided test cases."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 525,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 247,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 247
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 772,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

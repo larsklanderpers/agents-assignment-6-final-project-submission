@@ -1,0 +1,37 @@
+{
+  "date_local": "2026-11-04",
+  "timezone": "Australia/Sydney",
+  "actor": "Lars Klander",
+  "actor_role": "project author",
+  "decision_source": "Explicit user acceptance after code, visible-test and diagnostic walkthrough",
+  "scope": "Three previously unmatched filtered test-gap findings only",
+  "decisions": [
+    {
+      "case": "case-01",
+      "category": "test_gap",
+      "decision": "accepted",
+      "basis": "Missing negative tenant-isolation test; correct original code, visible test misses removal of tenant check."
+    },
+    {
+      "case": "case-05",
+      "category": "test_gap",
+      "decision": "accepted",
+      "basis": "Missing inactive-publisher regression test; original security defect passes visible tests."
+    },
+    {
+      "case": "case-10",
+      "category": "test_gap",
+      "decision": "accepted",
+      "basis": "Missing disabled-owner regression test; original security defect passes visible tests."
+    }
+  ],
+  "counts_as_additional_production_bugs": false,
+  "blinded_external_review": false,
+  "original_key_sha256": "e6c420b9ee36faf31e8a4ca7d5a658f78d283725c7d991b8924a58d9ff1c96b5",
+  "original_score_sha256": "ac513dd8c33ac6f39a9c8ccd5a29e12eeec98e66e02584388def0c90d8ee899d",
+  "original_key_outputs_and_scores_changed": false,
+  "limitations": [
+    "Does not adjudicate all original labels or semantic matches.",
+    "Not a claim of complete corpus coverage."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "manifest_sha256": "730e71e27e42ee349bf02185a608d4c2add52ac0f4d0c6507351ed01e1e3ad70",
+  "seed": 505,
+  "repeats": 3,
+  "mode": "single",
+  "approval_actor": "none; no patches attempted",
+  "python": "3.12.14",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "cpu": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+  "model": "gemini-3.8-flash",
+  "lock_sha256": "8a886ac41ffd912968176f7ad5dee312f0b700660fabef45f5e19085e9df19be",
+  "reviewer_code_and_prompt_sha256": "cea265e0b9ec94a512c2de89197b301ff5b6dc41d93aeb2b0267e6477e8c0710",
+  "harness_sha256": "93cd26eeb8ac92f66955eab56324d10ce0136241b744991d9a4e1cbf6c7c6505",
+  "single_baseline_code_sha256": "61af57c51f87f8a14a11bcd50b87e4efc6fe574eecdf9f00c1883efb064ee1c9",
+  "git_revision": "4c4ca0162559a9b142ed97897f4c42be8f6b46ad",
+  "sampling": {
+    "temperature": 0,
+    "max_output_tokens_per_specialist": 2048
+  },
+  "limitations": [
+    "Category/symbol matching is automatic; semantic evidence adjudication pending.",
+    "Labels are original machine-authored, frozen before evaluation; independent human label review pending.",
+    "Held-out variants are small renamed variants, not an independent external dataset.",
+    "No corpus patch/planning/baseline comparison is measured; behavior and approval metrics N/A.",
+    "Dependency/conflict are fixture families scored by test_gap/security finding category only.",
+    "No calibrated pricing: cost unknown; failures may incur unreported provider usage."
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def checked(items, allowed):\n    \"\"\"Membership accepts nested lists; preserve their equality behavior.\"\"\"\n    return [item for item in items if item in allowed]\n",
+  "source_sha256": "eeb074ec8ee2d2831a7b9bc9365f8379ff00193f94eb607591c92f69b41deb74",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "Static analysis without execution environment or call site context."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 3,
+          "evidence": "    return [item for item in items if item in allowed]",
+          "summary": "Linear search `item in allowed` within a list comprehension results in O(N*M) time complexity if `allowed` is a sequence.",
+          "suggested_action": "If `allowed` elements are hashable, convert `allowed` to a set for O(1) lookups; if nested unhashable collections must be supported as stated in the docstring, consider whether a specialized lookup structure or documentation of O(N*M) performance is appropriate."
+        }
+      ],
+      "limitations": [
+        "No runtime profiling available; input sizes and types of `items` and `allowed` are unknown."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "def checked(items, allowed):",
+          "summary": "Missing type annotations for function parameters and return type.",
+          "suggested_action": "Add type annotations (e.g., using typing.Iterable / typing.Container / typing.List) to document expected parameter and return types."
+        }
+      ],
+      "limitations": [
+        "No repository style guide or linter configuration provided."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 1,
+          "evidence": "def checked(items, allowed):",
+          "summary": "No unit tests are present to verify behavior, such as filtering elements or handling nested lists.",
+          "suggested_action": "Add unit tests covering standard cases, empty inputs, duplicate items, and nested list comparisons as described in the docstring."
+        }
+      ],
+      "limitations": [
+        "Only the bounded snapshot was inspected; no tests were supplied in this snapshot."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 579,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 188,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 188
+        }
+      ],
+      "thoughts_token_count": 151,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 918,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

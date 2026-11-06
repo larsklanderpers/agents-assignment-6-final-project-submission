@@ -1,0 +1,8 @@
+test_attack (test_collection_ops.Behavior.test_attack) ... ok
+test_normal (test_collection_ops.Behavior.test_normal) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK
+LEDGER_RESULT:{"tests": 2, "failures": 0, "errors": 0, "skipped": 0}

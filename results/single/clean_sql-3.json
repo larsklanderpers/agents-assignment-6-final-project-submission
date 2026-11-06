@@ -1,0 +1,68 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def lookup(connection, name):\n    return connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()\n",
+  "source_sha256": "24927852db70f513260da1eb3d0461f05246620e7e2d9e8c4fbf5fe65c19fa42",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "Parameterized queries with '?' are used, mitigating SQL injection; no other security issues detected in isolation."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No performance benchmarks or DB profiling tools available; fetching all matching names for a specific parameter without limit could consume memory if there are many duplicates, but schema context is minimal."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No repository style guide or linter configuration was provided."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 1,
+          "evidence": "def lookup(connection, name):",
+          "summary": "No tests verify behavior when name is not found or when name is None/empty.",
+          "suggested_action": "Add test cases for missing records (returning an empty list) and None/empty string inputs."
+        }
+      ],
+      "limitations": [
+        "Test suite is brief and inspected manually without running test runners."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 252,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 313,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 313
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 565,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

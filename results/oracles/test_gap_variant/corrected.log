@@ -1,0 +1,8 @@
+LEDGER_RESULT:{"tests": 2, "failures": 0, "errors": 0, "skipped": 0}
+test_empty (test_collection_ops.Behavior.test_empty) ... ok
+test_nonempty (test_collection_ops.Behavior.test_nonempty) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK

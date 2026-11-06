@@ -1,0 +1,76 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def overlap_variant(left, right):\n    \"\"\"Both arguments are lists of integers; preserve left order and duplicates.\"\"\"\n    return [value for value in left if value in right]\n",
+  "source_sha256": "dbb0b72cc60fe8e2a9a7b70f1cf96930143e568fc993c0639b8eb259aa87013b",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "Static analysis without runtime environment or tools."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 3,
+          "evidence": "    return [value for value in left if value in right]",
+          "summary": "Performing membership checks using 'if value in right' on a list takes O(len(right)) per check, leading to O(len(left) * len(right)) overall time complexity.",
+          "suggested_action": "Convert 'right' to a set (e.g. right_set = set(right)) before the list comprehension to achieve O(1) average-time lookups."
+        }
+      ],
+      "limitations": [
+        "No execution tools or benchmarks available to measure actual runtime impact."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No style configuration or linting tools supplied."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 1,
+          "evidence": "def overlap_variant(left, right):",
+          "summary": "Tests do not cover cases where elements from 'left' are completely absent in 'right', or where only one input list is empty.",
+          "suggested_action": "Add tests covering cases with disjoint lists (e.g., left=[1], right=[2]) and asymmetrical empty lists (e.g., left=[1], right=[] and left=[], right=[1])."
+        }
+      ],
+      "limitations": [
+        "Cannot execute tests to verify test suite coverage."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 487,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 255,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 255
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 742,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

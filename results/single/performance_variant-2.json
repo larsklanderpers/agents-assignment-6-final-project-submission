@@ -1,0 +1,76 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def overlap_variant(left, right):\n    \"\"\"Both arguments are lists of integers; preserve left order and duplicates.\"\"\"\n    return [value for value in left if value in right]\n",
+  "source_sha256": "dbb0b72cc60fe8e2a9a7b70f1cf96930143e568fc993c0639b8eb259aa87013b",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No dynamic analysis tools or static security scanners were run."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 3,
+          "evidence": "    return [value for value in left if value in right]",
+          "summary": "Linear membership lookup in `right` causes O(len(left) * len(right)) worst-case time complexity.",
+          "suggested_action": "Convert `right` to a set prior to the comprehension (e.g. `right_set = set(right)`) to enable O(1) membership checks, reducing overall complexity to O(len(left) + len(right))."
+        }
+      ],
+      "limitations": [
+        "No runtime profiling tools were executed; complexity analysis is based on standard Python list membership behavior."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No style configuration or linting rules were supplied."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 1,
+          "evidence": "def overlap_variant(left, right):",
+          "summary": "Tests do not cover non-overlapping lists or cases where elements in `left` are completely disjoint from `right`.",
+          "suggested_action": "Add unit tests verifying behavior when lists have no common elements (e.g., `overlap_variant([1, 2], [3, 4]) == []`)."
+        }
+      ],
+      "limitations": [
+        "Code coverage tools were not executed; test gap evaluation is based strictly on visual inspection of the supplied tests."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 500,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 255,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 255
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 755,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

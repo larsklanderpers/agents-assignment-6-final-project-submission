@@ -1,0 +1,76 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def lookup_variant(connection, requested):\n    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()\n",
+  "source_sha256": "19383c087adc2e18fb4a086f42345daf83c093c24fae3785b5c8d4b5e54935ff",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()",
+          "summary": "SQL query is constructed via raw string concatenation, introducing a SQL injection vulnerability.",
+          "suggested_action": "Use parameterized queries (e.g. `connection.execute(\"SELECT name FROM users WHERE name = ?\", (requested,)).fetchall()`) to safely pass user input."
+        }
+      ],
+      "limitations": [
+        "Dynamic analysis and penetration testing tools were not executed."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No profiling or performance measurement tools were available to evaluate runtime characteristics."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No repository style guide or configuration (e.g. PEP 8, flake8, black) was supplied."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()",
+          "summary": "Tests lack verification of behavior when records are not found or when handling inputs containing special characters like single quotes that cause syntax errors.",
+          "suggested_action": "Add unit tests verifying queries for non-existent users, empty inputs, and inputs containing characters like single quotes."
+        }
+      ],
+      "limitations": [
+        "Test coverage tools were not executed; test gap evaluation is based strictly on visual inspection of provided tests."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 494,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 322,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 322
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 816,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

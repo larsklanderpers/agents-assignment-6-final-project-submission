@@ -1,0 +1,92 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "cache = {}\ndef cached(tenant, key, fetch):\n    \"\"\"Different tenants may have different values for the same key.\"\"\"\n    if key not in cache:\n        cache[key] = fetch(tenant, key)\n    return cache[key]\n",
+  "source_sha256": "8c8c7f8d9a0ca3898de073c4e2efb16adde25560131d9fc8b9dc102735a53664",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 4,
+          "evidence": "    if key not in cache:",
+          "summary": "The cache lookup does not partition by tenant, exposing cached data across different tenants sharing the same key.",
+          "suggested_action": "Composite the cache key with tenant identifier, such as using (tenant, key) instead of key alone."
+        }
+      ],
+      "limitations": [
+        "Dynamic execution and threat modeling of caller authentication are not performed."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 1,
+          "evidence": "cache = {}",
+          "summary": "The global cache dictionary has no eviction policy or maximum size, potentially leading to unbounded memory consumption.",
+          "suggested_action": "Use an LRU cache or bounded cache data structure to prevent uncontrolled memory growth."
+        }
+      ],
+      "limitations": [
+        "Memory profiling cannot be executed in this static analysis context."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "cache = {}",
+          "summary": "Global state is used directly at module level instead of being scoped or encapsulated within an object or closure.",
+          "suggested_action": "Encapsulate the cache storage within a class instance or provide an injectable cache parameter."
+        }
+      ],
+      "limitations": [
+        "No repository style guide or linter configuration was provided."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 5,
+          "evidence": "        cache[key] = fetch(tenant, key)",
+          "summary": "Existing test suite does not cover cache hit verification across repeated calls with identical tenants or cache key collision handling.",
+          "suggested_action": "Add unit tests verifying that repeated calls with identical tenant and key return cached results without re-invoking fetch, and ensure tests assert correct isolation."
+        }
+      ],
+      "limitations": [
+        "Test execution is unavailable; observed existing tests fail against the current production implementation."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 609,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 280,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 280
+        }
+      ],
+      "thoughts_token_count": 226,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 1115,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

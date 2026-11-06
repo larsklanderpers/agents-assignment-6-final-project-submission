@@ -1,0 +1,68 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def lookup(connection, name):\n    return connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()\n",
+  "source_sha256": "24927852db70f513260da1eb3d0461f05246620e7e2d9e8c4fbf5fe65c19fa42",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "Static analysis only; dynamic analysis or execution of arbitrary payloads was not performed."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No benchmarks or query execution plans were run."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No repository style configuration was provided."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()",
+          "summary": "Tests cover existing matches and SQL injection attempts, but lack coverage for non-matching names or non-string inputs.",
+          "suggested_action": "Add test cases for absent records (expecting an empty list) and type edge cases."
+        }
+      ],
+      "limitations": [
+        "Only supplied tests were inspected."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 198,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 313,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 313
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 511,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

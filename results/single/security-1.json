@@ -1,0 +1,76 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def lookup(connection, name):\n    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()\n",
+  "source_sha256": "bed20cb04dd85cbb67d46bab155adf3b152073b87048e86ee268be6afc03fe8f",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "SQL injection vulnerability due to string concatenation in database query construction.",
+          "suggested_action": "Use parameterized queries with placeholders instead of manual string concatenation, such as passing parameters as a tuple in execute()."
+        }
+      ],
+      "limitations": [
+        "Static analysis conducted without dynamic verification tools."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No profiling measurements or benchmark data available."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No style configuration or linter rules supplied."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + name + \"'\").fetchall()",
+          "summary": "The test suite expects the injection attempt to return an empty list, but the current production code will actually return all records when injected.",
+          "suggested_action": "Add tests covering legitimate names containing quotes (e.g., O'Connor) and ensure tests assert against the parameterized behavior rather than relying on flawed assumptions."
+        }
+      ],
+      "limitations": [
+        "Only provided test suite inspectable; no test coverage or execution metrics available."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 296,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 314,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 314
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 610,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

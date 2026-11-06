@@ -1,0 +1,158 @@
+{
+  "model": "gemini-3.8-flash",
+  "source_sha256": "24927852db70f513260da1eb3d0461f05246620e7e2d9e8c4fbf5fe65c19fa42",
+  "source": "def lookup(connection, name):\n    return connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()\n",
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 162,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 326,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 326
+        }
+      ],
+      "thoughts_token_count": 138,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 626,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 55,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 326,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 326
+        }
+      ],
+      "thoughts_token_count": 334,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 715,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 59,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 326,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 326
+        }
+      ],
+      "thoughts_token_count": 201,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 586,
+      "traffic_type": null
+    },
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 277,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 332,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 332
+        }
+      ],
+      "thoughts_token_count": 375,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 984,
+      "traffic_type": null
+    }
+  ],
+  "reviews": {
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "style",
+          "line": 1,
+          "evidence": "def lookup(connection, name):",
+          "summary": "Function 'lookup' lacks type hints and a docstring describing its behavior, arguments, and return value (PEP 257/PEP 484).",
+          "suggested_action": "Add type annotations for 'connection' and 'name' and include a descriptive docstring."
+        }
+      ],
+      "limitations": [
+        "No project style guidelines, linter configurations, or formatting tool configs were provided."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No benchmarks or runtime profiling data were provided.",
+        "Database schema details, such as index existence on the 'name' column and expected row volumes, are not defined in the source code."
+      ]
+    },
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "Analysis is limited to the provided two-line snippet and visible tests.",
+        "The query uses parameterized binding preventing SQL injection, but caller-provided connection security, access control, and database configuration cannot be verified."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()",
+          "summary": "Tests do not verify behavior when querying for a name that yields multiple matching rows or duplicate records.",
+          "suggested_action": "Add a test case with multiple identical names inserted into the table to verify fetchall() returns all matching tuples."
+        },
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = ?\", (name,)).fetchall()",
+          "summary": "Tests do not verify behavior when name is None or a non-string type.",
+          "suggested_action": "Add a test case verifying the behavior when name=None is passed."
+        }
+      ],
+      "limitations": [
+        "No test execution environment was provided to measure test coverage directly.",
+        "Only tests included in the user snapshot were inspected."
+      ]
+    }
+  },
+  "spans": {
+    "security": {
+      "start": 92673.968,
+      "end": 92686.656
+    },
+    "performance": {
+      "start": 92674.031,
+      "end": 92680.234
+    },
+    "style": {
+      "start": 92674.078,
+      "end": 92678.843
+    },
+    "test_gap": {
+      "start": 92674.125,
+      "end": 92688.25
+    }
+  },
+  "overlap": true
+}

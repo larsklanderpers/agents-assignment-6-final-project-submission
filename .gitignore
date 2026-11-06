@@ -7,3 +7,10 @@ __pycache__/
 .pytest_cache/
 .coverage
 htmlcov/
+artifacts/
+
+# Office temporary lock files
+~$*
+
+# Local working documentation
+docs/

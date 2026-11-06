@@ -1,0 +1,17 @@
+test_empty (test_collection_ops.Behavior.test_empty) ... FAIL
+test_nonempty (test_collection_ops.Behavior.test_nonempty) ... ok
+LEDGER_RESULT:{"tests": 2, "failures": 1, "errors": 0, "skipped": 0}
+
+======================================================================
+FAIL: test_empty (test_collection_ops.Behavior.test_empty)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/tests/test_collection_ops.py", line 5, in test_empty
+    def test_empty(self): self.assertIsNone(first_variant([]))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 is not None
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+FAILED (failures=1)

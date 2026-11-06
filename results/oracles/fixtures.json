@@ -1,0 +1,452 @@
+[
+  {
+    "case": "security",
+    "change_kind": "intentional_fix",
+    "original_commit": "d0a2cc7981e130932fc2c4d4fd7749677daa5584",
+    "original_tree": "64a1bb7cd82fcf75b40d6cdcc3649c2e8f2e899a",
+    "original": {
+      "status": "failed",
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "a9eed9a7c1739d40039dd031708552dc51b811fbd03ba7a96fe17479bc0e757b"
+    },
+    "corrected_commit": "1d51d38a32f9f566dbff56b1df81effcb043edbe",
+    "corrected_tree": "6e21f1b5f19ab2e79566cf42f246c7760e2cc722",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "215f3be7f56b6fc29ee2f571e2492e48bfefba90d08d65d1b3604bb3f2ff8f5e"
+    },
+    "oracle_contract_pass": true
+  },
+  {
+    "case": "performance",
+    "change_kind": "behavior_preserving",
+    "original_commit": "6341e9495306890505b3b00c7d51e43afd9f8716",
+    "original_tree": "6f13d710c44c4ab1a24c9719bb658b3489f11a9c",
+    "original": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "36d3289cd456c8067495aaf43d2584ec6709108e6b7fa0a1feaf35738b8271b7"
+    },
+    "corrected_commit": "2fc953e244f49783131d6ef7cf1915dad6baa110",
+    "corrected_tree": "4ae7431e2d7841aad4677245a2d70032a605af74",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "36d3289cd456c8067495aaf43d2584ec6709108e6b7fa0a1feaf35738b8271b7"
+    },
+    "oracle_contract_pass": true
+  },
+  {
+    "case": "style",
+    "change_kind": "behavior_preserving",
+    "original_commit": "c2766ca14fe4839a327cc5af44d4f82246e36591",
+    "original_tree": "b9b7da9e2afeb286e78838fd669e4279e7004d60",
+    "original": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "f509d31872cc8608a10c0a94d61e51e7bcaf76991bd5a60348aeaffdad283cdb"
+    },
+    "corrected_commit": "5e1e26ce5b6d2dda24fee13f323106875e3e1a15",
+    "corrected_tree": "97a923c2aa171a3d19dc74595dde83e47193ec37",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "f509d31872cc8608a10c0a94d61e51e7bcaf76991bd5a60348aeaffdad283cdb"
+    },
+    "oracle_contract_pass": true
+  },
+  {
+    "case": "test_gap",
+    "change_kind": "behavior_preserving",
+    "original_commit": "8ca0e6b10d10eb629b7726078fc58b6fb496bb15",
+    "original_tree": "f90c21220d9d26e91d68ac29ffd557056ceaa529",
+    "original": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "e8d73d5f754b12e44552a49ccae380ea266bb7679dcd56d68d1820ec85966e4d"
+    },
+    "corrected_commit": "2d7983f8b31a66c8ea07ab78c0e3b176f1b3d43d",
+    "corrected_tree": "f90c21220d9d26e91d68ac29ffd557056ceaa529",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "e8d73d5f754b12e44552a49ccae380ea266bb7679dcd56d68d1820ec85966e4d"
+    },
+    "oracle_contract_pass": true,
+    "seeded_mutant": {
+      "status": "failed",
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "f2e9fd0708c2c5a1f2d928c7cb5cbba24797eeadc9abd2c0db91e01e12b89ccd"
+    }
+  },
+  {
+    "case": "dependency",
+    "change_kind": "behavior_preserving",
+    "original_commit": "e2f962a7d0efab3557393c27e3249843c31d9dd1",
+    "original_tree": "c147ed82a3273ec18dd19a3e1a8c8a011ba2d06d",
+    "original": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "22aa765d062a449d234ee8d150899780fdb80a7dc46032dfceae35054a52acd4"
+    },
+    "corrected_commit": "729201cfeea4037d8bb5356a410e79ba4f3b4523",
+    "corrected_tree": "c147ed82a3273ec18dd19a3e1a8c8a011ba2d06d",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "c3a56cf20e6044f032f94d9e71b81f81b397449eb88aa644ff6070e85c3438db"
+    },
+    "oracle_contract_pass": true
+  },
+  {
+    "case": "conflict",
+    "change_kind": "intentional_fix",
+    "original_commit": "8d446d8082757761944528400264e576c6f6b09a",
+    "original_tree": "f3dcae96580f93ff2ca3afe71b7117ad49e506d8",
+    "original": {
+      "status": "failed",
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "57baef655d1cd438436046aa4f90f50759345f2a000d738116cb6faf260ec0c7"
+    },
+    "corrected_commit": "221f930ba981281eef0ddd99ccbf3506732ff323",
+    "corrected_tree": "5e91cca1994435e32aa10987f5c5ccefc49adee7",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "6726b5e9299dbb17cc3fc36603e6b3f226ab57a8d5a03587b982f75fc98471ad"
+    },
+    "oracle_contract_pass": true
+  },
+  {
+    "case": "security_variant",
+    "change_kind": "intentional_fix",
+    "original_commit": "5cee88269c2a5a74db81aa2dfdee2f5b578f8201",
+    "original_tree": "e6894176f617c87f9587131c030a87bac153696f",
+    "original": {
+      "status": "failed",
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "82d7649c5584970965ca22a74c1150ff3f816713c86c22bd46f3f195661163bc"
+    },
+    "corrected_commit": "2d08e24eb23e45f58fb1ceade79728bc88d95b97",
+    "corrected_tree": "172e6bc06bda5bd5b2a76ae7758d1ade4116c603",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "056416a71efc3ad55deb72ddd5cbb0659c4da46d0c7ccfb4fcd9b460e6cc164d"
+    },
+    "oracle_contract_pass": true
+  },
+  {
+    "case": "performance_variant",
+    "change_kind": "behavior_preserving",
+    "original_commit": "3e08e8680c5f411c6e38b142c1a05bdf85cf16e9",
+    "original_tree": "1cce2f4adc57b7c48c06dea790e1e12e09ee3f56",
+    "original": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "36d3289cd456c8067495aaf43d2584ec6709108e6b7fa0a1feaf35738b8271b7"
+    },
+    "corrected_commit": "2135f5943a18e1156fbfb1c0d73737fba69dc5de",
+    "corrected_tree": "3c059cfd002ff5d272e9c57950e21008f4c07393",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "0ff13e631ba011683f8760b3297c8f71089cb68e6b900827a40d2a6b9bc5e891"
+    },
+    "oracle_contract_pass": true
+  },
+  {
+    "case": "style_variant",
+    "change_kind": "behavior_preserving",
+    "original_commit": "fad111ebf1a2b82df61da4a449098757b226a854",
+    "original_tree": "98ebf7ed726a248ebf02caa8d201d5b2adaa4d6b",
+    "original": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "f509d31872cc8608a10c0a94d61e51e7bcaf76991bd5a60348aeaffdad283cdb"
+    },
+    "corrected_commit": "352fa209c8a6123b7ab56b2abdd66a58b7d028c2",
+    "corrected_tree": "cf84ec6df202ea7006972d758db3cf932219f49f",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "38251233c600497662274c4e2c1c0c81779937496fa70b062ee50dd6fe5bd87b"
+    },
+    "oracle_contract_pass": true
+  },
+  {
+    "case": "test_gap_variant",
+    "change_kind": "behavior_preserving",
+    "original_commit": "2ba9132d848f125b7f6b3c09d51beab56cfc90cd",
+    "original_tree": "5413fd437d4d9fbadaa0413e9d808df69b78748c",
+    "original": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "f139044f8e4df72be76ab4140ba29ea3de5c81f13abeaef0cdb655bc8974ba81"
+    },
+    "corrected_commit": "434667b62df0e0195af1386a82f722502cfe6e0e",
+    "corrected_tree": "5413fd437d4d9fbadaa0413e9d808df69b78748c",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "5787cbc9c7e3a0fe2430e9f224bf59fe677df6e0ecafcf0a2a07b1120b1debfe"
+    },
+    "oracle_contract_pass": true,
+    "seeded_mutant": {
+      "status": "failed",
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "e44ead13f580f32553bb951cd65ce350eb4fbd7c8a62c294c733ba1e388742d1"
+    }
+  },
+  {
+    "case": "dependency_variant",
+    "change_kind": "behavior_preserving",
+    "original_commit": "da34cb1dcfe463403f57f7af855d05d639a92967",
+    "original_tree": "798a12289cfaec00a901bcca967a546bb79bbe58",
+    "original": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "c3a56cf20e6044f032f94d9e71b81f81b397449eb88aa644ff6070e85c3438db"
+    },
+    "corrected_commit": "b91e61b404cebb280c8a139d4d91d7e7bcd87dce",
+    "corrected_tree": "798a12289cfaec00a901bcca967a546bb79bbe58",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "c3a56cf20e6044f032f94d9e71b81f81b397449eb88aa644ff6070e85c3438db"
+    },
+    "oracle_contract_pass": true
+  },
+  {
+    "case": "conflict_variant",
+    "change_kind": "intentional_fix",
+    "original_commit": "2e6fe34eaf69ae7a898addb5a2d03d56c60946aa",
+    "original_tree": "2bc1fed1b65bcde73e78d590a48c0d3940037073",
+    "original": {
+      "status": "failed",
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "ff29dff03308d2ce48642e790fe54dfe53bfc9148e96414aa688d30d5a4aa3b0"
+    },
+    "corrected_commit": "5ba539f31b993f435a71935bdc6ce844af7061b3",
+    "corrected_tree": "a39340ffb201a0676b92ec2a31a2adfac02ed45a",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "6726b5e9299dbb17cc3fc36603e6b3f226ab57a8d5a03587b982f75fc98471ad"
+    },
+    "oracle_contract_pass": true
+  },
+  {
+    "case": "clean_sql",
+    "change_kind": "behavior_preserving",
+    "original_commit": "cb4d18c5472f96f34caf18aebf2ae81dec440746",
+    "original_tree": "6e21f1b5f19ab2e79566cf42f246c7760e2cc722",
+    "original": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "ac0597626c2a363a585dd56daadbe91f4c6786c10779fc7f7f7ec3fc2365c261"
+    },
+    "corrected_commit": "f9f9ac37e7109847df9bed328f2eccf6b6d86640",
+    "corrected_tree": "6e21f1b5f19ab2e79566cf42f246c7760e2cc722",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "215f3be7f56b6fc29ee2f571e2492e48bfefba90d08d65d1b3604bb3f2ff8f5e"
+    },
+    "oracle_contract_pass": true
+  },
+  {
+    "case": "clean_lookup",
+    "change_kind": "behavior_preserving",
+    "original_commit": "d28b631bb1baa6383a20de0a592c73c7d026c045",
+    "original_tree": "85af230355741bd8da18a44d496a00dc00d97546",
+    "original": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "19a560d6eb9c3bb495c5deed40bbe04e5a9b8e38bc288a151345427c1cd0446f"
+    },
+    "corrected_commit": "51c06f0423a0b050b17c16ebd57d6e665d2de35c",
+    "corrected_tree": "85af230355741bd8da18a44d496a00dc00d97546",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "0ff13e631ba011683f8760b3297c8f71089cb68e6b900827a40d2a6b9bc5e891"
+    },
+    "oracle_contract_pass": true
+  },
+  {
+    "case": "clean_style",
+    "change_kind": "behavior_preserving",
+    "original_commit": "e5c2a1eb914a8cbe854785d175b3103228c080a9",
+    "original_tree": "23cdf1a5785a495b4a786f683dbbc3af828139b5",
+    "original": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "0ff13e631ba011683f8760b3297c8f71089cb68e6b900827a40d2a6b9bc5e891"
+    },
+    "corrected_commit": "37cfb0cc8f34b01df63f34f07cf60e4930e55eb0",
+    "corrected_tree": "23cdf1a5785a495b4a786f683dbbc3af828139b5",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "0ff13e631ba011683f8760b3297c8f71089cb68e6b900827a40d2a6b9bc5e891"
+    },
+    "oracle_contract_pass": true
+  },
+  {
+    "case": "clean_boundary",
+    "change_kind": "behavior_preserving",
+    "original_commit": "588dd17e5ed62ad637ac7c23d90b4923d9e73b9c",
+    "original_tree": "50b9ab0aefb1708bc0ca936deb6638b364c50a27",
+    "original": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "f139044f8e4df72be76ab4140ba29ea3de5c81f13abeaef0cdb655bc8974ba81"
+    },
+    "corrected_commit": "781c60850c8c7357023e0e3b02e2317e82ab3eee",
+    "corrected_tree": "50b9ab0aefb1708bc0ca936deb6638b364c50a27",
+    "corrected": {
+      "status": "passed",
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log_sha256": "e8d73d5f754b12e44552a49ccae380ea266bb7679dcd56d68d1820ec85966e4d"
+    },
+    "oracle_contract_pass": true
+  }
+]

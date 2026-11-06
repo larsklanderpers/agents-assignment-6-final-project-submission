@@ -1,0 +1,208 @@
+{
+  "audit_date_local": "2026-11-03",
+  "mode": "read_only_saved_evidence_audit_no_execution",
+  "operations": [
+    {
+      "stage": "characterization",
+      "operation_id": "a27c01f604c34003a1bb1124713b81d3",
+      "state": "VERIFIED",
+      "approval_mode": "interactive",
+      "binding_matches": true,
+      "patch_hash_matches": true,
+      "both_log_hashes_match": true,
+      "workspace_bytes_match_recorded_tree": true,
+      "checkpoint_matches": true,
+      "core_evidence_files_unchanged_by_audit": true,
+      "post_tree": "354b8b75e4037b37167e4cbf531d0b24b2500e1e",
+      "result": {
+        "baseline": {
+          "status": "no_tests",
+          "exit_code": 0,
+          "tests": 0,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "log_sha256": "6fd2a1693faf00b0d0242eb3e42ec3bd5b3ed272b921ad37649173a20f5f23cc"
+        },
+        "candidate": {
+          "status": "passed",
+          "exit_code": 0,
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "log_sha256": "c2dc086a3c4ec3873a54437c1fbc5969af1176fb2729ab60b58eab58eadff40b"
+        },
+        "post_tree": "354b8b75e4037b37167e4cbf531d0b24b2500e1e",
+        "patch_sha256": "177fba7497b1b2d26c2f800790685240e9acfea46df7c7d832672e12bd815b01"
+      }
+    },
+    {
+      "stage": "optimization",
+      "operation_id": "14ba9fa431624649bfd5771169957cb3",
+      "state": "VERIFIED",
+      "approval_mode": "interactive",
+      "binding_matches": true,
+      "patch_hash_matches": true,
+      "both_log_hashes_match": true,
+      "workspace_bytes_match_recorded_tree": true,
+      "checkpoint_matches": true,
+      "core_evidence_files_unchanged_by_audit": true,
+      "post_tree": "6e0c4d72039a97064bf83f76ef0fb88563756ea3",
+      "result": {
+        "baseline": {
+          "status": "passed",
+          "exit_code": 0,
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "additional_behavior_checks": 13,
+          "benchmark": null,
+          "log_sha256": "98c928626fa1d3564a22a99b5858b1d6c796485c1774c676efad778e39948e94"
+        },
+        "candidate": {
+          "status": "passed",
+          "exit_code": 0,
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "additional_behavior_checks": 13,
+          "benchmark": {
+            "kind": "elapsed_time_not_operation_counts",
+            "size": 2500,
+            "warmups": 5,
+            "trials": 20,
+            "baseline_median_seconds": 0.09488940900000031,
+            "candidate_median_seconds": 0.0005264209999999991,
+            "baseline_range_seconds": [
+              0.04082281600000037,
+              0.10233434899999949
+            ],
+            "candidate_range_seconds": [
+              0.0004964530000002298,
+              0.001371289999999803
+            ]
+          },
+          "log_sha256": "db82f47f64dfc42f9e32ea5f4fee4816c9f66de7ad1ceb2077d36fd295eddf30"
+        },
+        "post_tree": "6e0c4d72039a97064bf83f76ef0fb88563756ea3",
+        "patch_sha256": "f98f895977a004fe64d55dd97aab3e37ec94c6ad199f92562fe9fa08589b3434"
+      }
+    },
+    {
+      "stage": "negative_case",
+      "operation_id": "22f6b9be80134420b4d64c92af8659d0",
+      "state": "FAILED",
+      "approval_mode": "interactive",
+      "binding_matches": true,
+      "patch_hash_matches": true,
+      "both_log_hashes_match": true,
+      "workspace_bytes_match_recorded_tree": true,
+      "checkpoint_matches": true,
+      "core_evidence_files_unchanged_by_audit": true,
+      "post_tree": "bc75be6db72f23f5425f64b70d4b716556c09518",
+      "result": {
+        "baseline": {
+          "status": "passed",
+          "exit_code": 0,
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "additional_behavior_checks": 13,
+          "demo_negative_case": true,
+          "log_sha256": "db6d6fc44f311ca4fd24d5803180ce2083d75136b9834b229d8f6a08a03cd752"
+        },
+        "candidate": {
+          "status": "failed",
+          "exit_code": 1,
+          "tests": 7,
+          "failures": 0,
+          "errors": 1,
+          "skipped": 0,
+          "additional_behavior_checks": 0,
+          "demo_negative_case": true,
+          "log_sha256": "f847e0b36b1102a8c33180c5193115eaa2394810ddfb0bc1a2599a8228ad1205"
+        },
+        "post_tree": "bc75be6db72f23f5425f64b70d4b716556c09518",
+        "patch_sha256": "99d40a18b4f6c4ec58f633b1951dc9ef3d95f98d55f2b9d625f40702fb55ecee"
+      }
+    },
+    {
+      "stage": "repair",
+      "operation_id": "bde81e424c184be6b33ecd79b92fec35",
+      "state": "VERIFIED",
+      "approval_mode": "interactive",
+      "binding_matches": true,
+      "patch_hash_matches": true,
+      "both_log_hashes_match": true,
+      "workspace_bytes_match_recorded_tree": true,
+      "checkpoint_matches": true,
+      "core_evidence_files_unchanged_by_audit": true,
+      "post_tree": "328a73f2634c3c68619ea79d3773c28e1e606a06",
+      "result": {
+        "baseline": {
+          "status": "passed",
+          "exit_code": 0,
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "additional_behavior_checks": 13,
+          "benchmark": null,
+          "log_sha256": "98c928626fa1d3564a22a99b5858b1d6c796485c1774c676efad778e39948e94"
+        },
+        "candidate": {
+          "status": "passed",
+          "exit_code": 0,
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "additional_behavior_checks": 13,
+          "benchmark": {
+            "kind": "elapsed_time_not_operation_counts",
+            "size": 2500,
+            "warmups": 5,
+            "trials": 20,
+            "baseline_median_seconds": 0.09736828500001593,
+            "candidate_median_seconds": 0.0005387850000033723,
+            "baseline_range_seconds": [
+              0.04050374199999851,
+              0.16183061300000645
+            ],
+            "candidate_range_seconds": [
+              0.0005023520000122517,
+              0.0008696749999899112
+            ]
+          },
+          "log_sha256": "c0a168c83c327628cd17a57c733f785a551bea047cac7a2d44d3d77bdc33250b"
+        },
+        "post_tree": "328a73f2634c3c68619ea79d3773c28e1e606a06",
+        "patch_sha256": "a0540b3e4776a612784fbfb2c424b6992660a911a2f528cfdee27694c8df47ef"
+      }
+    }
+  ],
+  "followup": {
+    "eligible_for_proposal": true,
+    "authorized": false,
+    "executed": false,
+    "readiness": {
+      "action_id": "demo-dependent-followup",
+      "ready_for_proposal": true,
+      "blockers": [],
+      "score_inputs": {
+        "impact": 6,
+        "evidence": 1,
+        "prerequisite_value": 0,
+        "risk_penalty": 0
+      },
+      "score": 7,
+      "approval_required": true,
+      "execution_authorized": false
+    }
+  },
+  "earlier_failed_attempt_files_unchanged": 79
+}

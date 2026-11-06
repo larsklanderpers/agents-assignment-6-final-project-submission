@@ -1,0 +1,76 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def lookup_variant(connection, requested):\n    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()\n",
+  "source_sha256": "19383c087adc2e18fb4a086f42345daf83c093c24fae3785b5c8d4b5e54935ff",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "security",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()",
+          "summary": "SQL query is constructed via raw string concatenation with untrusted input, introducing a SQL injection vulnerability.",
+          "suggested_action": "Use parameterized queries (e.g., `connection.execute(\"SELECT name FROM users WHERE name = ?\", (requested,)).fetchall()`) instead of concatenating strings."
+        }
+      ],
+      "limitations": [
+        "Analysis performed without dynamic execution or automated security scanning tools."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "Cannot benchmark database query execution or index availability without dynamic profiling tools."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No explicit style guide or linter configuration provided."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 2,
+          "evidence": "    return connection.execute(\"SELECT name FROM users WHERE name = '\" + requested + \"'\").fetchall()",
+          "summary": "The test suite's test_attack expects an empty list for injection input \"' OR 1=1 --\", which actually evaluates to true in SQL and would return all users rather than an empty list.",
+          "suggested_action": "Update tests to assert proper sanitization/parameterization behavior and test for names with single quotes (e.g., \"O'Connor\")."
+        }
+      ],
+      "limitations": [
+        "Test suite execution was not observed dynamically."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 500,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 322,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 322
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 822,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}

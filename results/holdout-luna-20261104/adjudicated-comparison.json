@@ -1,0 +1,108 @@
+{
+  "date_local": "2026-11-04",
+  "scope": "Filtered accepted defects; same frozen model outputs, adjudicated labels only",
+  "case_runs": 12,
+  "repeats": 1,
+  "original_known_findings": 8,
+  "adjudicated_known_findings": 11,
+  "original_filtered": {
+    "categories": {
+      "security": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "performance": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "style": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "test_gap": {
+        "tp": 2,
+        "fp": 3,
+        "fn": 0,
+        "precision": 0.4,
+        "recall": 1.0
+      }
+    },
+    "totals": {
+      "tp": 8,
+      "fp": 3,
+      "fn": 0
+    },
+    "micro_precision": 0.7272727272727273,
+    "micro_recall": 1.0,
+    "macro_precision": 0.85,
+    "macro_recall": 1.0,
+    "clean_controls": 4,
+    "clean_controls_without_findings": 3,
+    "exact_case_outcomes": 9
+  },
+  "adjudicated_filtered": {
+    "categories": {
+      "security": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "performance": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "style": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "test_gap": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      }
+    },
+    "totals": {
+      "tp": 11,
+      "fp": 0,
+      "fn": 0
+    },
+    "micro_precision": 1.0,
+    "micro_recall": 1.0,
+    "macro_precision": 1.0,
+    "macro_recall": 1.0
+  },
+  "adjudication_sha256": "1c9a08440df150e42a50cb8a6f110a6ff203379bd56107d241acc2ebb56a6a4d",
+  "original_summary_sha256": "272990234b6b44337cc28bdaad01495ecc5a17cbef7b4b3b3c2d44cb00e90817",
+  "original_score_sha256": "ac513dd8c33ac6f39a9c8ccd5a29e12eeec98e66e02584388def0c90d8ee899d",
+  "original_key_sha256": "e6c420b9ee36faf31e8a4ca7d5a658f78d283725c7d991b8924a58d9ff1c96b5",
+  "target": 0.8,
+  "numerical_target_met_on_adjudicated_set": true,
+  "limitations": [
+    "Small synthetic set with one repetition.",
+    "Three additional findings accepted by project author after seeing outputs; not blinded external adjudication.",
+    "Original eight labels and semantic matches not independently human-validated in this adjudication.",
+    "Recall is against 11 known findings, not proof of complete defect discovery.",
+    "Findings include test gaps and must not be counted as 11 production bugs.",
+    "No general repository accuracy or repair-success claim.",
+    "Original key, outputs and automatic summary unchanged."
+  ]
+}

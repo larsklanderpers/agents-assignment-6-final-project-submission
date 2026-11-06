@@ -1,32 +1,203 @@
-# Track 5 — Review Ledger: Code Review & Refactoring Pipeline
+# Review Ledger — Track 5: Code Review & Refactoring
 
-Personal-computer continuation: [CURRENT-STATE-HANDOFF.md](CURRENT-STATE-HANDOFF.md).
+## Submission files
 
-Status: **design complete for review; implementation has not started**. No runnable system, evaluation results or recording is claimed.
+- [Current presentation](Review-Ledger-Project-Flow-v2.pptx)
+- [Technical reflection PDF](<Review Ledger — Capstone Technical Reflection — Working Draft — Lars Klander.pdf>)
+- [Saved dashboard example](dashboard-sample.pdf) — static export, not a live execution.
+- [Original corpus comparison](results/COMPARISON.md)
 
-[Shared assignment requirements](CAPSTONE-REQUIREMENTS.md) preserve the technology, deliverable and submission obligations. This track uses **Google ADK and LangGraph with HITL** as its proposed architecture. Official documentation supports the selected capabilities; exact package/model compatibility requires the first implementation spike.
+Working Markdown documents are kept locally in `docs/` and are intentionally excluded from this repository publication and source ZIP. Commands below run from the repository root.
 
-## Design artifacts
+The 7 November untimed walkthrough completed real human-approved characterization, deliberate failure and separate repair. The repair passed seven tests and thirteen comparison checks; the failed workspace remains preserved locally. A complete timed recording remains pending.
 
-- [DESIGN-REVIEW.md](DESIGN-REVIEW.md): 27 October requirement audit, resolved gaps and remaining completion gates.
-- [IMPLEMENTATION-CONTRACT.md](IMPLEMENTATION-CONTRACT.md): concrete intake, CLI, authorization, replay, sandbox and first-slice acceptance rules.
-- [ARCHITECTURE.md](ARCHITECTURE.md): system diagram, six agent roles and contracts, state and approval lifecycle, adaptive dependency planning, integrations, evidence ledger, recovery and documented framework feasibility.
-- [TECHNICAL-REFLECTION.md](TECHNICAL-REFLECTION.md): planning paradigm, coordination alternatives, tradeoffs, limitations and future work; target 1–2 typeset pages.
-- [EVALUATION.md](EVALUATION.md): reproducible known-smell corpus specification, hidden controls, metrics, baselines and fault scenarios. Targets are not measured results.
-- [DELIVERY-PLAN.md](DELIVERY-PLAN.md): requirement mapping, milestones, submission controls, open choices and a 9:30 failure-inclusive presentation/demo script.
 
-The architecture targets 2–4 typeset pages; clarify whether reflection is included, then typeset and verify page counts. If submitted as a standalone repository, this directory becomes its root with ARCHITECTURE.md at that root. Work in the other capstone remains separate.
+Optional local read-only dashboard (local documentation): run
+`.venv\Scripts\python.exe dashboard.py` and open `http://127.0.0.1:8765`.
+Approvals remain in the terminal. The pre-dashboard implementation is preserved
+at tag `checkpoint/pre-dashboard-20261103`.
 
-## Key decisions
+Additional work on `hardening/python-intake-evaluation` is documented in
+hardening status (local documentation). The established rehearsal/primary
+recording remains the bounded baseline; hardening is not silently substituted
+for that evidence. See repository intake and evaluation (local documentation).
+The Luna-authored blinded holdout (local documentation) records the frozen
+review experiment separately, including provisional scores and incomplete labels.
 
-Specialists review security, performance, style and test gaps concurrently through ADK. LangGraph owns the persistent state machine and per-step human approval. An application adapter links them; a native cross-framework bridge is not assumed. Evidence-driven replanning updates a dependency DAG and invalidates affected approvals.
+A bounded Python capstone prototype using **Google ADK** for four parallel
+specialists, synthesis and patch authorship, and **LangGraph** for persistent
+human approval and execution state. Git and a pinned offline Docker runner
+provide the local tool integrations. Arbitrary repository/PR intake is unfinished.
 
-Every approval binds to an exact patch, parent tree and plan version. Code changes happen only in disposable workspaces after approval; untrusted tests require a separate sandbox. Outputs are patches and evidence for human review. There is no automatic merge, push or deployment.
+Four real human-approved historical operations are preserved: test prerequisite
+VERIFIED, optimization VERIFIED, disclosed negative case FAILED, and separate
+repair VERIFIED. See first operation (local documentation),
+optimization (local documentation), failure (local documentation),
+and repair (local documentation). Reopening them does not create a live run.
 
-GitHub/Git snapshot intake and local analysis/test tools provide at least two integrations. Local structured tracing is required; optional LangSmith is observability and does not count toward the two-framework requirement.
+New demonstrations use independent run directories and unique candidates.
+Historical approvals, SQLite ledgers, checkpoints, quarantines and logs are
+never deleted to create a demo. The implementation is local and has not yet
+been published to the GitHub remote; the remote design-only branch is not a
+fresh-clone proof of this implementation.
 
-## Next completion gates
+## Observed evaluation
 
-Follow the milestones in DELIVERY-PLAN.md: framework compatibility spike, intake/evidence, planning/HITL, isolated execution, evaluation, then submission rehearsal. Future setup instructions and recording links belong here when verified. The instructor must have access to the runnable GitHub repository; submit its link through Canvas and provide one presentation plus live-demo recording of at most 10 minutes including a failure. Confirm the actual deadline on Canvas and how two tracks may be submitted.
+[Corpus comparison and limitations](results/COMPARISON.md): 16 frozen fixtures,
+three repeats each, evaluated with parallel specialists and a single reviewer:
+**96/96 reviews completed**. Provisional held-out macro precision/recall:
+parallel **0.411 / 1.000**, single **0.510 / 1.000**. Both miss the precision
+acceptance target. Automatic category/symbol matching still needs human semantic
+adjudication; no corpus patch-success score is claimed. All 16 original/corrected
+oracle pairs passed their declared contracts in Docker; two authored test mutants
+were detected. These oracle tests are separate from agent-authored patch success.
 
-AI implementation assistance is permitted, but the student must explain every line. Cite any adapted code in comments and this README. The design's official documentation sources are linked beside the corresponding claims in ARCHITECTURE.md; no tutorial code has been copied into this project.
+Evaluation specification (local documentation) distinguishes implemented measures from
+remaining targets. Packaging validation (local documentation) records checks
+and their limits. On 7 November, 70 of 72 regression tests passed initially; the two Docker-dependent tests passed on rerun after starting Docker. All 72 tests have passed.
+
+## Setup (tested Windows / Python 3.12)
+
+Required: Python 3.12 with a working bootstrap pip, Git, Docker Desktop with its
+Linux engine, and a Gemini API key with access to the configured model.
+`requirements-spike.lock` pins the tested package snapshot (ADK 2.13.0,
+LangGraph 1.2.18, SQLite checkpointer 3.1.2). It is a version-pinned snapshot,
+not a hash-locked cross-platform distribution. Operator locking currently uses
+Windows `msvcrt`; Linux/macOS operation is not claimed.
+
+After obtaining the implementation source package or an implementation commit:
+
+```powershell
+.\setup.ps1 -Python python
+```
+
+If the installed interpreter is not named `python`, pass its full Python 3.12
+path. Setup creates a new environment, installs the pinned packages through the
+bootstrap interpreter, checks dependencies and creates `.env` from `.env.example`
+only if it is absent. Edit `.env` locally: set `GOOGLE_API_KEY` and
+`REVIEW_LEDGER_MODEL` (tested alias `gemini-3.8-flash`). Never commit credentials.
+An existing configured environment is preserved.
+
+Start Docker Desktop, then prepare the exact image explicitly if it is absent:
+
+```powershell
+& 'C:\Program Files\Docker\Docker\resources\bin\docker.exe' pull 'python@sha256:f77ac9e44ae96ef2c90b8053ea08c31f8be030f824196b0ae4db6d462c84e51f'
+.venv\Scripts\python.exe review_ledger.py doctor
+```
+
+Doctor reports only configuration booleans, not credentials. It exits nonzero
+for missing prerequisites. It does not make a model request or prove quota.
+No automatic image pull occurs during patch execution.
+
+## New demonstration without resetting history
+
+Run commands in this repository's PowerShell terminal:
+
+```powershell
+$demoRun = 'my-demo-1'
+.venv\Scripts\python.exe review_ledger.py new --run $demoRun
+.venv\Scripts\python.exe review_ledger.py reviews --run $demoRun
+.venv\Scripts\python.exe review_ledger.py plan --run $demoRun
+.venv\Scripts\python.exe review_ledger.py propose-tests --run $demoRun
+.venv\Scripts\python.exe review_ledger.py status --run $demoRun
+.venv\Scripts\python.exe review_ledger.py review-tests --run $demoRun
+```
+
+Creation refuses an existing ID. Without `--run`, `new` prints a generated ID;
+use that ID for all later commands. Every run has its own
+`artifacts/runs/<id>/run.json`, review/plan outputs and execution candidates.
+Status is read-only and never creates a missing ledger. New execution workspaces
+use short UUID paths under `artifacts/ws/`; operation evidence records their layout.
+
+The human endpoint displays the exact diff and asks `Your decision:`. Personally
+inspect it and type `approve <displayed 12-character patch hash>` only if you
+accept it. Alternatives: `reject`, `redirect`, `defer`, `cancel`. Approvals bind
+actor, run, exact patch, parent, plan, scope and policy; single use, 30-minute
+expiry. A generated candidate is not authorization. No agent/tool enters your
+approval. After VERIFIED tests, continue:
+
+```powershell
+.venv\Scripts\python.exe review_ledger.py prepare-optimization --run $demoRun
+.venv\Scripts\python.exe review_ledger.py review-optimization --run $demoRun
+.venv\Scripts\python.exe review_ledger.py prepare-failure --run $demoRun
+.venv\Scripts\python.exe review_ledger.py review-fault --run $demoRun
+.venv\Scripts\python.exe review_ledger.py replan --run $demoRun
+.venv\Scripts\python.exe review_ledger.py review-repair --run $demoRun
+```
+
+The deliberately incorrect negative-case patch is disclosed before its own
+approval. Its real failed test causes quarantine. Replanning uses actual logs,
+invalidates the old candidate and proposes a separately approved repair from the
+last VERIFIED parent. The successful optimization remains on its independent
+branch. Dependent readiness never means authorization.
+
+The initial fixture and collection-specific policies are intentionally bounded;
+this is not a general refactoring service. Failed model output can block a run.
+The first new human-approved attempt exposed a Windows path failure and was
+quarantined as AMBIGUOUS. The replacement then FAILED on an incorrect model-generated expected order.
+Corrected tests (local documentation) passed 7/7 in a separate simulated
+Docker verification and subsequently passed its real human-approved run.
+The optimization also reached real human-approved VERIFIED. The disclosed
+negative case then FAILED as expected and live replanning produced plan 4.
+The separately approved repair is now VERIFIED; all four real stages have
+matching saved bindings, logs, checkpoints and resulting files. No repair approval
+is pending in the completed run; see fresh progress (local documentation).
+Its full fresh chain still needs a human dress rehearsal. Original human-approved history remains separately verified.
+
+## Testing and reproducibility
+
+```powershell
+.venv\Scripts\python.exe -m unittest test_action_planning test_approval_executor test_optimization_step test_failure_demo test_spike_persistence test_container_boundary test_run_packaging test_long_path_execution test_proposal_checks -q
+.venv\Scripts\python.exe -m evaluation.verify_fixtures --output artifacts/evaluation/my-oracle-check
+.venv\Scripts\python.exe -m evaluation.run --manifest evaluation/manifest.json --seed 505 --repeats 3 --output artifacts/evaluation/my-parallel
+.venv\Scripts\python.exe -m evaluation.run --manifest evaluation/manifest.json --seed 505 --repeats 3 --mode single --output artifacts/evaluation/my-single
+```
+
+Use a new output directory for every attempt. Corpus labels/corrections/hidden
+assertions are in the frozen manifest, never in model snapshots; the model sees
+only source and visible tests. Do not rebuild or alter the labels after results.
+Model runs use the configured API and incur usage. Frozen outputs, per-run JSON,
+category counts, CSV, token metadata, latency and failure accounting are in
+`results/`; original local artifacts remain intact. Fixed-order non-replanning
+comparison and corpus repair evaluation remain unimplemented.
+
+For read-only local historical evidence:
+
+```powershell
+.venv\Scripts\python.exe saved_evidence.py
+```
+
+It checks recorded bindings/log hashes and labels everything SAVED. A fresh
+package has no historical ignored ledgers and reports their absence honestly.
+The historical approval launchers have been removed. Use the explicit `review_ledger.py` commands above with the intended run ID.
+
+## Packaging, presentation and submission
+
+```powershell
+.venv\Scripts\python.exe package_source.py --output artifacts/packaging/my-source.zip
+```
+
+This exports allowlisted source, documents and synthetic corpus results with a
+SHA256 file manifest. It excludes `.env`, `.venv`, `.git`, all `artifacts/` and
+historical private evidence. LF normalization plus `.gitattributes` keeps corpus
+hashes stable through Windows Git checkouts. See packaging proof (local documentation).
+A local source-only Git clone was used for validation; no remote publication or
+instructor access is implied by that test.
+
+Thursday checklist (local documentation) lists what remains.
+Thursday 5 November runbook (local documentation) gives commands, prompts, screen
+locations, live/prepared/saved labels, a 9:30 schedule and recovery routes. A full
+spoken <=10-minute rehearsal and final recording are **pending**. Recording link:
+**not yet available**. Confirm Canvas deadline, instructor access, page limits
+and two-track handling before submission.
+
+Design and delivery: architecture (local documentation),
+implementation contract (local documentation),
+reflection (local documentation), delivery plan (local documentation),
+requirements (local documentation), current handoff (local documentation).
+Confirm final submission page limits against the supplied reflection PDF; recording remains pending.
+
+AI implementation assistance is permitted; the student must explain every line.
+Original prototype code uses documented ADK structured-output and LangGraph
+interrupt patterns cited in source and architecture. No tutorial implementation
+was copied. No automatic merge, push or deployment is provided.

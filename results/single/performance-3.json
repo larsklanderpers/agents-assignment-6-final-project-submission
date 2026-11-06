@@ -1,0 +1,76 @@
+{
+  "model": "gemini-3.8-flash",
+  "source": "def overlap(left, right):\n    \"\"\"Both arguments are lists of integers; preserve left order and duplicates.\"\"\"\n    return [value for value in left if value in right]\n",
+  "source_sha256": "3e13aae7552e1f9beea22ba8676c327464097d1825bcfbf7f23dfd1b9ec62915",
+  "reviews": {
+    "security": {
+      "agent_id": "security",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No dynamic analysis or execution environment available."
+      ]
+    },
+    "performance": {
+      "agent_id": "performance",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "performance",
+          "line": 3,
+          "evidence": "    return [value for value in left if value in right]",
+          "summary": "Membership test 'value in right' takes O(len(right)) time per iteration on a list, leading to O(len(left) * len(right)) overall complexity.",
+          "suggested_action": "Convert 'right' to a set (e.g., 'right_set = set(right)') before the list comprehension to achieve O(len(left) + len(right)) average time complexity."
+        }
+      ],
+      "limitations": [
+        "No benchmarks or profiling measurements were run."
+      ]
+    },
+    "style": {
+      "agent_id": "style",
+      "status": "complete",
+      "findings": [],
+      "limitations": [
+        "No style configuration or linter was supplied."
+      ]
+    },
+    "test_gap": {
+      "agent_id": "test_gap",
+      "status": "complete",
+      "findings": [
+        {
+          "category": "test_gap",
+          "line": 1,
+          "evidence": "def overlap(left, right):",
+          "summary": "Tests do not verify cases where elements in 'left' have no match in 'right', or when 'left' is non-empty and 'right' is empty.",
+          "suggested_action": "Add test cases covering non-matching elements and asymmetric empty inputs, such as overlap([1, 2, 3], [4, 5]) and overlap([1, 2], [])."
+        }
+      ],
+      "limitations": [
+        "Inspection based solely on the provided visible unit tests."
+      ]
+    }
+  },
+  "usage_metadata": [
+    {
+      "cache_tokens_details": null,
+      "cached_content_token_count": null,
+      "candidates_token_count": 490,
+      "candidates_tokens_details": null,
+      "prompt_token_count": 247,
+      "prompt_tokens_details": [
+        {
+          "modality": "TEXT",
+          "token_count": 247
+        }
+      ],
+      "thoughts_token_count": null,
+      "tool_use_prompt_token_count": null,
+      "tool_use_prompt_tokens_details": null,
+      "total_token_count": 737,
+      "traffic_type": null
+    }
+  ],
+  "mode": "single_general_reviewer_baseline"
+}
